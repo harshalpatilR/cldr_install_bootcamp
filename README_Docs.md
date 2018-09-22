@@ -11,22 +11,21 @@ errors, but can also add new volumes or split materials to different
 volumes. There is currently no release notice that announces these
 updates.
 
-The C5.9 release comes with 16 different documents:
+The C6.0 release comes with 15 different documents:
 
 
-* [Introduction](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-introduction.pdf)
-* [Release Guide](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-releases.pdf)
-* [Installation](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-installation.pdf)
-* [Upgrade](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-upgrade.pdf)
-* [Quickstart Guides](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-quickstart.pdf)
+* [Introduction](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-introduction.pdf)
+* [Release Guide](https://www.cloudera.com/documentation/enterprise/6/release-notes/PDF/cloudera-releases.pdf)
+* [Installation](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-installation.pdf)
+* [Upgrade](https://www.cloudera.com/documentation/enterprise/upgrade/PDF/cloudera-ug_upgrade.pdf)
+* [Quickstart Guides](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-quickstart.pdf)
 * [Adminstration](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-administration.pdf)
 * [Data Management](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-datamgmt.pdf)
-* [Operation](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-operation.pdf)
 * [Security](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-security.pdf)
 * [Apache Impala Guide](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-impala.pdf)
-* [Apache Kudu Guide](https://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-kudu.pdf)
-* [Apache Spark Guide](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-spark.pdf)
-* [Apache Hive Guide](http://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-hive.pdf)
-* [Apache HBase Guide](https://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-hbase.pdf)
-* [Hue Guide](https://www.cloudera.com/content/www/en-us/documentation/enterprise/latest/PDF/cloudera-hue.pdf)
+* [Apache Kudu Guide](https://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-kudu.pdf)
+* [Apache Spark Guide](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-spark.pdf)
+* [Apache Hive Guide](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-hive.pdf)
+* [Apache HBase Guide](https://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-hbase.pdf)
+* [Hue Guide](https://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-hue.pdf)
 * [Cloudera Search](http://www.cloudera.com/documentation/enterprise/latest/PDF/cloudera-search.pdf)

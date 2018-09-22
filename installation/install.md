@@ -3,14 +3,14 @@
 <!-- set a:hover text-decoration to underline -->
 <!-- http://forums.markdownpad.com/discussion/143/include-pdf-pagebreak-instructions-in-markdown/p1 -->
 
----
+------
 
 ## <center> <a name="cm_cdh_installation_section"/>Cloudera Manager & CDH Installation
 
 * <a href="#install_methods">Installation Methods</a>
 * <a href="#parcels">Understanding Parcels</a>
 * <a href="#db_setup">Embedded vs. external database</a>
-* <a href="#cm_cdh_key_points">Supplemental CM/CDH Points</a>
+* <a href="#cm_cdh_key_points">Extra  CM/CDH Details</a>
 * <a href="#cm_ui_overview">Cloudera Manager UI Overview</a>
 
 ---
@@ -19,14 +19,14 @@
 ## <center> <a name="install_methods"/> CM/CDH Installation
 
 * We use Cloudera Manager in several capacities:
-  * Deploy EDH, Kafka, or Key Trustee clusters
-  * Monitor the health of managed nodes and Hadoop services
-  * Modify and monitor property settings
-  * Expedite complex tasks, including:
-    * Updating Cloudera Manager server and agent software
-    * Setting up HDFS NameNode for high availability
-    * Integrating security & LDAP-based services
-    * Configuring & enabling HDFS Encryption
+  * To deploy EDH, Kafka, or Key Trustee clusters
+  * To monitor the health of managed nodes and Hadoop services
+  * To monitor and modify property settings
+  * Expedite complex tasks, such as:
+    * Upgrading Cloudera Manager server and agent software
+    * Configuring HDFS NameNode HA
+    * Integrating Kerberos & LDAP services
+    * Enabling HDFS Encryption
 
 ---
 <div style="page-break-after: always;"></div>
@@ -52,16 +52,17 @@
 
 ## <center> <a name="cm_install_paths"/>Cloudera's supported installation paths
 
-* [Path A: One-stop binary installer](http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_ig_install_path_a.html)
+* [Installing a PoC cluster](http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_non_production.html) (f.k.a. "Path A" installation)
     * Useful for short-term, throwaway projects
     * Use an embedded PostgreSQL server
-* [Path B: Manual setup for CM and its database](http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_ig_install_path_b.html)
+* [Manual setup for CM and its database](http://www.cloudera.com/documentation/enterprise/latest/topics/install_cm_cdh.html) (f.k.a. "Path B" installation)
     * Any cluster that will stand for more than 3-6 months
     * Supports Oracle, MySQL/MariaDB, and PostgreSQL servers
     * Uses Linux packages or [CM parcels](http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_parcels.html)
-* [Path C: Tarballs](http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_ig_install_path_c.html)
+* [Tarball installation](https://www.cloudera.com/documentation/enterprise/5-15-x/topics/cm_ig_install_path_c.html) (f.k.a. "Path C" installation)
     * DIY-oriented
     * Useful for development work, other preferred deployment tools (Chef, Puppet)
+    * **Deprecated in C6!**
 
 ---
 <div style="page-break-after: always;"></div>
@@ -76,15 +77,15 @@
 ## <center> <a name="cm_install_logging"/>Installation Steps with Path A []()
 
 * Exits if SELinux is enabled
-* Installs YUM repos for [CM packages:](http://archive.cloudera.com/cm5/redhat/5/x86_64/cm/5/RPMS/x86_64/)
+* Installs YUM repos for [CM packages:](http://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5/RPMS/x86_64/)
  * Cloudera-packaged PostgreSQL server
  * Oracle JDK -- OpenJDK is not supported
  * Cloudera Manager server and agents
 * Install packages
 * Configures & starts Cloudera Manager
 * Provides a wizard to create a cluster, deploy CDH services 
-  * Some 'smart' configuration is baked in 
-    * e.g., HDFS block limit default set to 128 MiB
+  * Some "smart" configuration is baked in
+    * E.g., HDFS block limit default set to 128 MiB
     * Directories for various services and log files
 
 ---
@@ -95,13 +96,13 @@
 * Verifying the platform can reveal many potential bugs
 * Review key hardware, OS, disk, and network/kernel settings
 * Install a supported Oracle JDK
-* Install and configure a [database server](https://www.cloudera.com/documentation/enterprise/5-9-x/topics/cm_ig_installing_configuring_dbs.html)
+* Install and configure a [database server](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_installing_configuring_dbs.html)
 * Create databases & grant CDH users access to them
     * For MySQL/MariaDB or Oracle, you need a JDBC connector
 * Once CM is up and running, it automates
   * Distributing agent software
   * Distributing CDH software
-  * Deploying and activating CDH services<p>
+  * Deploying and activating CDH services
 
 ---
 <div style="page-break-after: always;"></div>
@@ -114,14 +115,14 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
   * CM can track a list of add-on parcel locations
   * Parcels are served over http
 * Easier to manage than per-product Linux packages
-  * Default installation path is <code>/opt/cloudera</code>
+  * Default installation path is `/opt/cloudera`
 * Most CDH components bind to CM through a [custom service descriptor](https://github.com/cloudera/cm_ext/wiki/CSD-Overview)
 * A parcel is just a tarball with its own [manifest and layout](https://github.com/cloudera/cm_ext/wiki/Building-a-parcel)
-  * Content list: <code>meta/parcel.json</code>
-  * CM verifies a parcel's signature via a <code>manifest.json</code>
+  * Content list: `meta/parcel.json`
+  * CM verifies a parcel's signature via a `manifest.json`
     * Ignores parcel if the signature doesn't match
     * `manifest.json` is only stored on the repo server 
-    * Each parcel file is [specific to a Linux distribution and major release](http://archive.cloudera.com/cdh5/parcels/5.9.1/)
+    * Each parcel file is [specific to a Linux distribution and major release](http://archive.cloudera.com/cdh5/parcels/5/)
 
 ---
 <div style="page-break-after: always;"></div>
@@ -130,7 +131,7 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
 
 <center> <img src="http://blog.cloudera.com/wp-content/uploads/2013/05/parcels1.png"> </center>
 
-* [How to manage parcels](http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Installation-Guide/cm5ig_parcels.html)
+* [How to manage parcels](https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_parcels.html)
 
 ---
 <div style="page-break-after: always;"></div>
@@ -142,8 +143,8 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
     * Distribute
     * Activate/deactivate
     * Remove
-    * Delete<p/>
-* The path <code>/opt/cloudera/parcels/CDH</code> always points to the active CDH version
+    * Delete
+* The path `/opt/cloudera/parcels/CDH` will point to the active CDH version
 
 ---
 <div style="page-break-after: always;"></div>
@@ -159,7 +160,7 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
     * [Sentry service](https://www.cloudera.com/documentation/enterprise/latest/topics/sg_sentry_overview.html)
     * [Oozie](http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_mc_oozie_service.html#cmig_topic_14_unique_1)
     * [Hue](http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_mc_hue_service.html#cmig_topic_15_unique_1)
-    * [Sqoop Server](http://www.cloudera.com/documentation/enterprise/5-6-x/topics/install_sqoop_ext_db.html#concept_y53_jyf_4r), aka Sqoop2 (not discussed)
+    * [Sqoop Server](https://www.cloudera.com/documentation/enterprise/latest/topics/install_sqoop_ext_db.html), a.k.a. Sqoop2 (not discussed)
 
 ---
 <div style="page-break-after: always;"></div>
@@ -167,7 +168,7 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
 ## <center> <a name="cm_replicate_db"/> MySQL/MariaDB Replication for HA </a></p>
 
 * A complete HA solution for Cloudera Manager is complex and expensive
-* [Public documentation is here](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_cm_ha_overview.html#concept_bhl_cvc_pr)
+* [Public documentation is here](https://www.cloudera.com/documentation/enterprise/latest/topics/admin_cm_ha_overview.html)
 * The full solution requires
   * A load balancer between CM servers (one active, one passive)
   * Redundant network-accessible storage 
@@ -182,7 +183,7 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
 
 * [Follow instructions here](../README.md) and [here](../README_GitHub.md) if you haven't already
 * Remember to submit text-based work in Markdown and screenshots as PNG files 
-    * Use code formatting (`<code>...</code>`) at a minimum
+    * Use code formatting (``...``) at a minimum
 * Create an Issue in your repo called `Installation Lab`
      * Add it to the `Labs` milestone
      * Assign the label `started`
@@ -196,14 +197,14 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
 
 ## <center> CM Install Lab - Prepare your instances
 
-* Create five `m3.xlarge` nodes
+* For AWS, create five `m3.xlarge` nodes
   * Do not use spot instances
   * **Set your volume space to the maximum free amount**
     * The AWS default per instance (8 GB) is not enough.
 * For GCE, use `n1-highmen-2` nodes
   * Do not use preemptible instances
 * Make sure the AMI you choose is a Cloudera-supported OS
-  * These platforms are supported for [CM 5.9.0](http://www.cloudera.com/downloads/manager/5-9-0.html)
+  * [Check the supported platforms](https://www.cloudera.com/documentation/enterprise/release-notes/topics/rn_consolidated_pcm.html#concept_jpd_hpz_jdb) for the CM/CDH version you are using
 * Use one instance to host Cloudera Manager server and edge/client-facing services
   * This includes Hue and Apache Oozie
 
@@ -213,7 +214,7 @@ Parcels are [CM-specific code blobs](https://github.com/cloudera/cm_ext/wiki/Par
 ## <center> CM Install Lab
 ## <center> <a name="linux_config_lab"/>System Configuration Checks
 
-Using the steps below, verify all instances are ready. You must modify
+Using the steps below, verify that all instances are ready. You must modify
 them when necessary, which includes installing missing packages and changing
 kernel tunables or other system settings.
 
@@ -234,8 +235,10 @@ command that produces each output.
 5. Show that forward and reverse host lookups are correctly resolved
   * For `/etc/hosts`, use `getent`
   * For DNS, use `nslookup`
-6. Show the <code>nscd</code> service is running
-7. Show the <code>ntpd</code> service is running<br>
+6. Show the `nscd` service is running
+7. Show the `ntpd` service is running<br>
+
+**NOTE**: For this lab, stick to the checks above. When performing pre-reqs check for customers, though, use the [comprehensive list compiled by the FCE folks](https://cloudera.box.com/s/b5vk5ltu9t2inotc0pv32hekgns8e9k2).
 
 ---
 <div style="page-break-after: always;"></div>
@@ -258,46 +261,50 @@ or [here for MySQL](http://www.cloudera.com/documentation/enterprise/latest/topi
 
 1. Download and implement the [official MySQL repo](http://dev.mysql.com/downloads/repo/yum/)
     * Enable the repo to install MySQL 5.5
-    * Install the <code>mysql</code> package on all nodes
-    * Install <code>mysql-server</code> on the server and replica nodes
+    * Install the `mysql` package on all nodes
+    * Install `mysql-server` on the server and replica nodes
     * Download and copy [the JDBC connector](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-binary-installation.html) to all nodes.
-2. You should not need to build a <code>/etc/my.cnf</code> file to start your MySQL server
-    * You will have to modify it to support replication. Check MySQL documentation.<p>
-3. Start the <code>mysqld</code> service.
-4. Use <code>/usr/bin/mysql_secure_installation</code> to:<br>
+2. You should not need to build a `/etc/my.cnf` file to start your MySQL server
+    * You will have to modify it to support replication. Check MySQL documentation.
+3. Start the `mysqld` service.
+4. Use `/usr/bin/mysql_secure_installation` to:<br>
     a. Set password protection for the server<br>
     b. Revoke permissions for anonymous users<br>
     c. Permit remote privileged login<br>
     d. Remove test databases<br>
     e. Refresh privileges in memory<br>
-    f. Refreshes the <code>mysqld</code> service<p>
+    f. Refreshes the `mysqld` service
+
 5. On the master MySQL node, grant replication privileges for your replica node:<br>
-    a. Log in with <code>mysql -u ... -p</code> <br>
+    a. Log in with `mysql -u ... -p` <br>
     b. Note the FQDN of your replica host.<br>
-    c. <code>mysql> **GRANT REPLICATION SLAVE ON \*.\* TO '*user*'@'*FQDN*' IDENTIFIED BY '*password*';**</code><br>
-    d. <code>mysql> **SET GLOBAL binlog_format = 'ROW';** </code><br>
-    e. <code>mysql> **FLUSH TABLES WITH READ LOCK;</code>**<p>
+    c. `mysql> **GRANT REPLICATION SLAVE ON \*.\* TO '*user*'@'*FQDN*' IDENTIFIED BY '*password*';**`<br>
+    d. `mysql> **SET GLOBAL binlog_format = 'ROW';** `<br>
+    e. `mysql> **FLUSH TABLES WITH READ LOCK;`**
+
 6. In a second terminal session, log into the MySQL master and show its  status:<br>
-    a. <code>mysql> **SHOW MASTER STATUS;**</code><br>
+    a. `mysql> **SHOW MASTER STATUS;**`<br>
     b. Make note of the file name and byte offset. The replica needs this info to sync to the master.<br>
-    c. Logout of the second session; remove the lock on the first with <code>mysql> **UNLOCK TABLES;**</code><p>
+    c. Logout of the second session; remove the lock on the first with `mysql> **UNLOCK TABLES;**`
+
 7. Login to the replica server and configure a connection to the master:<br>
-    <code>mysql> **CHANGE MASTER TO**<br> **MASTER_HOST='*master host*',**<br> **MASTER_USER='*replica user*',**<br> **MASTER_PASSWORD='*replica password*',**<br> **MASTER_LOG_FILE='*master file name*',**<br> **MASTER_LOG_POS=*master file offset*;**</code><p>
+    `mysql> **CHANGE MASTER TO**<br> **MASTER_HOST='*master host*',**<br> **MASTER_USER='*replica user*',**<br> **MASTER_PASSWORD='*replica password*',**<br> **MASTER_LOG_FILE='*master file name*',**<br> **MASTER_LOG_POS=*master file offset*;**`
+
 8. Initiate slave operations on the replica<br>
-    a. <code>mysql> **START SLAVE;**</code><br>
-    b. <code>mysql> **SHOW SLAVE STATUS \G**</code><br>
-    c. If successful, the <code>Slave_IO_State</code> field will read <code>Waiting for master to send event</code><br>
-    d. Once successful, capture this output and store it in <code>labs/2_replica_working.md</code><br>
-    e. Review your log (<code>/var/log/mysqld.log</code>) for errors. If stuck, consult with a colleague or instructor.<p>
+    a. `mysql> **START SLAVE;**`<br>
+    b. `mysql> **SHOW SLAVE STATUS \G**`<br>
+    c. If successful, the `Slave_IO_State` field will read `Waiting for master to send event`<br>
+    d. Once successful, capture this output and store it in `labs/2_replica_working.md`<br>
+    e. Review your log (`/var/log/mysqld.log`) for errors. If stuck, consult with a colleague or instructor.<p>
 
 ---
 <div style="page-break-after: always;"></div>
 
 ## <center> Cloudera Manager Install Lab
-## <center> Path B install using CM 5.9.x
+## <center> Path B install using CM 5.15.x
 
 [The full rundown is
-here](https://www.cloudera.com/documentation/enterprise/5-9-x/topics/cm_ig_install_path_b.html).
+here](https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_cdh.html).
 You will have to modify your package repo to get the right release.
 The default repo download always points to the latest version.
 
@@ -323,7 +330,7 @@ Adhere to the following requirements while creating your cluster:
 * Install the Data Hub Edition
 * Install CDH using parcels
 * **Rename your cluster** using your GitHub account name
-* Deploy **only** the `Coreset` of CDH services.
+* Deploy **only** the `Core set` of CDH services.
 * Deploy **three** ZooKeeper instances.
     * CM does not tell you to do this but complains if you don't
 * Once you've renamed your cluster and services are green healthy, take a screenshot of the CM home page

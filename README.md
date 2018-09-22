@@ -11,7 +11,7 @@ your GitHub repo Private if you wish, but it is not a free option.
 For that reason, most students choose to make their GitHub repository
 public.
 
-<strong>NOTE</strong>: DO NOT add files to your repository through
+**NOTE**: DO NOT add files to your repository through
 the GitHub browser interface.
 
 Use GitHub only to receive your lab work by pushing from your local
@@ -23,11 +23,10 @@ to your GitHub copy are Issues and Milestones, which are described in
 
 Add your instructors as Collaborators to your GitHub repo. Because
 we have 25 students and 4 people to facilitate labs, we'll give you
-all the GitHub names you need at the beginning of class. The lead
-instructor's GitHub name is `mfernest`.
+all the GitHub names you need at the beginning of class. The instructors' GitHub name are: `araujo`, `alexciobanu` and `kiran`.
 
-Adding your instructors as Collaborators will let them create <i>pull
-requests</i> on your work. This is a way of editing your submissions
+Adding your instructors as Collaborators will let them create _pull
+requests_ on your work. This is a way of editing your submissions
 without changing them directly.  When you review instructor edits,
 you can choose to reject them. Perhaps you would like to correct
 problems a different way or ignore them for a while. The pull request
@@ -37,7 +36,7 @@ We use GitHub's Issues feature to establish a workflow around your
 lab submissions.
 
 For each lab section, such as Installation or Storage, you will use
-an Issue to track your progress. You will also use GitHub labels
+an _Issue_ to track your progress. You will also use GitHub _labels_
 to mark the current state of each lab (e.g., `submitted`, `stuck`,
 `review`). Your instructors will use labels to evaluate your work
 once you have marked it for review (such as `complete` or 'incomplete`).

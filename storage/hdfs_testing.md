@@ -19,6 +19,7 @@
 
 ## <center>Notes on Service Deployment</center>
 
+<!-- introduce reference architecture documentation here -->
 * [Practical advice on field deployment](https://blog.cloudera.com/blog/2017/11/deploy-cloudera-edh-clusters-like-a-boss-revamped-part-1/)
 * Design principles for deployment
     * Separation of concerns (administration, end users, security integration)
@@ -60,8 +61,10 @@
 ## <center> <a name="hdfs_smoke_testing"/> HDFS Smoke Testing
 
 * Following software installation, test hardware and network for failure
-* [The terasort suite](http://www.michael-noll.com/blog/2011/04/09/smoke-testing-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/#terasort-benchmark-suite) is ideal for this: easy to apply and simple to monitor.
-    * Some people recommend [TestDFSIO, nnbench, mrbench](http://www.michael-noll.com/blog/2011/04/09/smoke-testing-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/#testdfsio) -- you have choices.
+* [The terasort suite](
+http://www.michael-noll.com/blog/2011/04/09/benchmarking-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/#terasort-benchmark-suite) is ideal for this: easy to apply and simple to monitor.
+    * Some people recommend [TestDFSIO, nnbench, mrbench](
+    http://www.michael-noll.com/blog/2011/04/09/benchmarking-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/#testdfsio) -- you have choices.
 * Most important: corroborate performance with system tools, such as `iostat`.
 
 ---
