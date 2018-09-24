@@ -31,7 +31,7 @@
 
 ## <center> Current Version & Resources
 
-* C5.9 ==> [Hue 3.11](http://gethue.com/category/3-11/)
+* C5.15 ==> [Hue 4.1](http://gethue.com/)
     * Apache-licensed, not an ASF project
     * Ported to HDP, MapR, Pivotal, IBM Big Insights
 * [Online demo available](http://demo.gethue.com/)

@@ -23,9 +23,9 @@
 
 ## <center> <a name="instructor"/> Instructor & Students
 
-* André Araújo (Principal Solutions Architect) - araujo
-* Alex Ciobanu (Senior Solution Architect) - alexciobanu
-* Kiran Anand (Senior Solution Architect) - kiran
+* André Araújo (Principal Solutions Architect) - `araujo`
+* Alex Ciobanu (Senior Solution Architect) - `alexciobanu`
+* Kiran Anand (Senior Solution Architect) - `kiran`
 * Please introduce yourselves:
   * Name
   * Role & Location
@@ -62,7 +62,7 @@ The course material assumes you have knowledge or experience to:
     * <a href="../storage/hdfs_testing.md">Storage</a>
     * <a href="../resources/yarn_rm.md">Resource Management</a>
     * <a href="../enterprise/cm.md">Using Cloudera Manager</a>
-    * <a href="../security/overview_kerberos_sentry.md">Enterprise Security</a>
+    * <a href="../security/overview-kerberos-sentry.md">Enterprise Security</a>
     * <a href="../clients/hue.md">Supporting Hadoop Clients</a>
     * <a href="../troubleshooting/tech_support.md">Technical Resources</a>
 
