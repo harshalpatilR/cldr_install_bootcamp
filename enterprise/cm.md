@@ -211,7 +211,9 @@ Enter an object type in the search bar
 
 ## <center> <a name="cm_api_sampler">Sample CM API calls</a>
 
-* [Quick-start guide](http://cloudera.github.io/cm_api/docs/quick-start/) available
+* [Tutorials for each version](http://cloudera.github.io/cm_api/apidocs/v19/tutorial.html) available
+  * V30 tutorial not available publicly yet
+  * All API documentation, including tutorial, is hosted locally by CM at `http://cm_host:7180/static/apidocs/tutorial.html`
   * CM versions are [mapped to API versions here](http://cloudera.github.io/cm_api/docs/releases/)
 * Plenty of examples
   * [With curl](http://cloudera.github.io/cm_api/docs/quick-start/)
@@ -272,7 +274,7 @@ _Use CM to answer the following questions. For some questions, search will help 
 * Browse or use `curl` on the endpoint `./api/v2/cm/deployment`
   * Store the output in `enterprise/labs/2_cluster_deployment.md`
   * Code-format this output for readability
-* Follow the [tutorial for API v12](http://cloudera.github.io/cm_api/apidocs/v12/tutorial.html)
+* Follow the [tutorial for API v19](http://cloudera.github.io/cm_api/apidocs/v19/tutorial.html)
 * Write `curl` statements that stop, start, and check the current state of your Hive service.
   * Add these statements and their output to `enterprise/labs/3_api_hive_state.md`
 
@@ -282,8 +284,8 @@ _Use CM to answer the following questions. For some questions, search will help 
 ## <center> CM Lab
 ## <center> Upgrade Cloudera Manager
 
-* Upgrade to the latest **C5.9** release
-  * Use the [documentation here](http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ag_ug_cm5.html)
+* Upgrade to the latest **C5.x** release
+  * Use the [documentation here](https://www.cloudera.com/documentation/enterprise/upgrade/topics/ug_overview.html)
 * Use the API on the command line to:
   * Report the latest available version of the API
   * Report the CM version 
