@@ -6,7 +6,7 @@
 ---
 <div style="page-break-after: always;"></div>
 
-# <center> Challenges - May 18, 2018 - FCE New Hire
+# <center> Challenges - September 24, 2018 - FCE New Hire
 
 * Overview
   * Build a CM-managed CDH cluster and secure it
@@ -14,6 +14,8 @@
   * All text files require  Markdown (`.md`) extension and formatting
   * All screenshots must be in PNG format
   * You will create each required file yourself
+  * Please document you process carefully. We can only mark what we understand.
+  * **Please follow instructions CAREFULLY**
 * You may consult with each other and research online
   * Submit only your own work
 * Push to GitHub often -- don't wait until the end
