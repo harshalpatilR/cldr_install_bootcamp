@@ -31,22 +31,25 @@
 * Make sure `araujo`, `alexciobanu` and `kiran` are Collaborators
 * Make sure your GitHub labels have been configured
 * Assign the Issue to yourself and label it `started`
+* Add the following Linux accounts to all nodes
+  * User `rocky` with a UID of `3800`
+  * User `denali` with a UID of `3900`
+  * Create the group `alaska` and add `denali` to it
+  * Create the group `colorado` and add `rocky` to it
 * In the file `challenges/labs/0_setup.md`:
   * List the cloud provider you are using (AWS, GCE, Azure, CloudCat, other)
   * List your instances by IP address and DNS name (don't use `/etc/hosts` for this)
   * List the Linux release you are using 
   * List the file system capacity for the first node 
   * List the command and output for `yum repolist enabled` 
-* Add the following Linux accounts to all nodes
-  * User `oakland` with a UID of `2800`
-  * User `sanfran` with a UID of `2900`
-  * Create the group `national` and add `sanfran` to it
-  * Create the group `american` and add `oakland` to it
-* List the `/etc/passwd` entries for `oakland` and `sanfran` 
-  * Do not list the entire file
-* List the `/etc/group` entries for `national` and `american` 
-  * Do not list the entire file
-* Push these updates to GitHub 
+  * List the `/etc/passwd` entries for `rocky` and `denali`
+    * Do not list the entire file
+  * List the `/etc/group` entries for `alaska` and `colorado`
+    * Do not list the entire file
+  * List the output of the following commands:
+    * `getent group alaska`
+    * `getent passwd rocky`
+* Push these updates to GitHub
 * Label your Issue `review` 
 * Assign the Issue to an instructor
 
@@ -104,9 +107,10 @@
 
 * Create the Issue `Install CDH`
 * Assign yourself and label it `started`
-* Deploy Coreset services + Spark
+* Deploy Core set services + Impala
   * Rename your cluster after your GitHub handle
-* Create user directories in HDFS for `oakland` and `sanfran`
+* Create user directories in HDFS for `rocky` and `denali`
+  * Ensure the owner and group for each directory is the corresponding user and group
 * Add the following to `3_cm.md`:
     * The command and output for `hdfs dfs -ls /user`
     * The command and output from the CM API call `../api/v14/hosts` 
@@ -125,17 +129,17 @@
 
 * Create the Issue `Test HDFS`
 * Assign yourself and label it `started`
-* As user `oakland`, use `teragen` to generate a 65,536,000-record dataset
-  * Write the output to 12 files 
-  * Set the block size to 32 MB
-  * Set the mapper container size to 1000 MiB
+* As user `rocky`, use `teragen` to generate a 12,345,000-record dataset
+  * Write the output to 8 files
+  * Set the block size to 64 MB
+  * Set the mapper container size to 768 MiB
   * Name the target directory `tgen`
   * Use the `time` command to capture job duration
 * Put the following in `challenges/labs/4_teragen.md`
   * The full `teragen` command and output 
   * The result of the `time` command
-  * The command and output of `hdfs dfs -ls /user/oakland/tgen`
-  * The command and output of `hadoop fsck -blocks /user/oakland`
+  * The command and output of `hdfs dfs -ls /user/rocky/tgen`
+  * The command and output of `hadoop fsck -blocks /user/rocky`
 * Push this work to GitHub and label the Issue `review`
 * Assign the issue to an instructor
 
@@ -148,15 +152,15 @@
 * Assign the issue to yourself and label it `started`
 * Install an MIT KDC on the last node in your cluster
   * Name your realm after your GitHub handle
-  * Use `NH` as a suffix
-  * For example: `MFERNEST.NH`
-* Create Kerberos user principals for `oakland`, `sanfran`, and `cloudera-scm`
+  * Use `ABC` as a suffix
+  * For example: `MFERNEST.ABC`
+* Create Kerberos user principals for `rocky`, `denali`, and `cloudera-scm`
   * Assign `cloudera-scm` the privileges needed to create service principals and keytab files
 * Kerberize the cluster
-* Run the `terasort` program as user `oakland` with the output target `/user/oakland/tsort`
+* Run the `terasort` program as user `rocky` with the output target `/user/rocky/tsort`
   * Copy the command and full output to `challenges/labs/5_terasort.md`
-* Run the Hadoop `pi` program as user `sanfran`
-  * Use the task parameters to `50` and `100` 
+* Run the Hadoop `pi` program as user `denali`
+  * Use the task parameters `50` and `100`
   * Copy the command and full output to `challenges/labs/5_pi.md`
 *  Copy the configuration files in `/var/kerberos/krb5kdc/` to your repo:
     * Add the prefix `5_` and the suffix `.md` to the original file name
@@ -174,9 +178,9 @@
 * Use Cloudera Manager to install and enable Sentry
 * Configure both Hive & Impala to use Sentry
 * Create a role for `HttpViewer` that can read the `web_logs` database
-  * Assign the `american` group to this role
+  * Assign the `colorado` group to this role
 * Create a role for `ServiceViewer` that can read the `customers` databases
-  * Assign the `national` group to this role
+  * Assign the `alaska` group to this role
 * Use `beeline` to select ten records from `web_logs`
 * Use `beeswax` to select ten records from `customers`
 * Capture each outcome as a screenshot, `6_beeline.png` and `6_beeswax.png`
@@ -190,10 +194,10 @@
 ## <center> When time runs out:
 
 * Commit any outstanding changes from your repo to GitHub
-* Notify `mfe@cloudera.com` once you have stopped pushing to your repo
+* Notify `araujo@cloudera.com`, `alex.ciobanu@cloudera.com` and `kiran@cloudera.com` once you have stopped pushing to your repo
 * In-class candidates only:
-  * Please fill out [this survey form](https://goo.gl/forms/pmHeHx03zRu3cnlc2)
-  * Add your comments to `labs/7_feedback_final.md` -- remember to commit them!
+  * Please fill out [this survey form](https://goo.gl/forms/1PvoLdzGjOVh1leb2)
+  * Add your final comments to `labs/7_feedback_final.md` -- remember to commit them!
 
 ---
 <div style="page-break-after: always;"></div>
