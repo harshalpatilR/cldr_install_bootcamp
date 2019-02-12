@@ -45,7 +45,7 @@ to your repository until the setup is right.
 Once this is done:
 
 * Create an empty repository called `install-bootcamp` on your GitHub account.
-** Do *not* create a `README.md` file to initialize it.
+** Do *not* create a `README.adoc` file to initialize it.
 * Next, right-click the `Clone or download` button to copy your repo's URL.
 * In the `install-bootcamp` directory on your laptop, invoke the following:
 ** `git init`

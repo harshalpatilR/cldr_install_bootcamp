@@ -41,13 +41,13 @@ The course material assumes you have knowledge or experience to:
 == Course Plan
 
 * Seven general topics with specific, up-to-date content
-** link:../installation/install.md[Installation]
-** link:../storage/hdfs_testing.md[Storage]
-** link:../resources/yarn_rm.md[Resource Management]
-** link:../enterprise/cm.md[Using Cloudera Manager]
-** link:../security/overview-kerberos-sentry.md[Enterprise Security]
-** link:../clients/hue.md[Supporting Hadoop Clients]
-** link:../troubleshooting/tech_support.md[Technical Resources]
+** link:../installation/install.adoc[Installation]
+** link:../storage/hdfs_testing.adoc[Storage]
+** link:../resources/yarn_rm.adoc[Resource Management]
+** link:../enterprise/cm.adoc[Using Cloudera Manager]
+** link:../security/overview-kerberos-sentry.adoc[Enterprise Security]
+** link:../clients/hue.adoc[Supporting Hadoop Clients]
+** link:../troubleshooting/tech_support.adoc[Technical Resources]
 
 [[scored_challenges]]
 == Friday Morning: Challenge Phase

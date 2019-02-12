@@ -1,0 +1,241 @@
+[[cm_monitor_customize_section]]
+= CM Monitoring & Customizing
+
+* <<cm_overview, CM's vocabulary>>
+* <<cm_search_bar, CM search bar features>>
+* <<cm_users_roles, CM users and roles>>
+* <<cm_commands_history, Recent commands and history>>
+* <<cm_monitors, Monitoring services and resources>>
+* <<cm_alerts, Adding Alerts>>
+* <<cm_health_checks, Health checks>>
+* <<cm_charting_time_series, Charting time-series data>>
+* <<cm_property_settings, Managing property settings>>
+* <<cm_api_sampler, Sample CM API calls>>
+
+<!-- material to add
+* Wizards include
+** Express Install
+** Add Service/Role
+** Upgrade CDH
+** Enable HA (NameNode, Oozie, YARN RM)
+* Some useful things are less visible
+** `Service -> Instances -> Add Role Instances -> View By Host` (button)
+-->
+
+[[cm_overview]]
+== CM Overview
+
+ <img src="http://blog.cloudera.com/wp-content/uploads/2013/07/ClouderaManagerVocabulary.png" height="390" width="600">
+
+== Cloudera Manager Server Implementation
+
+* Written in Java
+* Closed-source
+** Hooks & client APIs are link:https://cloudera.github.io/cm_api/[published here]
+* Resources:
+** C5: `/usr/share/cmf`
+** C6: `/opt/cloudera/cm`
+* Database initialization scripts:
+** C5: `/usr/share/cmf/schema`
+** C6: `/opt/cloudera/cm/schema`
+* Command-line start parameters: `/etc/default/cloudera-scm-server`
+
+== Cloudera Manager Agent Implementation
+
+* Written in Python
+* Configuration file: `/etc/cloudera-scm-agent/config.ini`
+* Resources:
+** C5: `/usr/lib64/cmf/agent`
+** C6: `/opt/cloudera/cm-agent`
+* Process control: `/var/run/cloudera-scm-agent`
+** Configuration files for CDH services are located under `process/`
+* Uses link:http://supervisord.org/[supervisord] for process control
+
+== Notes on Cloudera Manager vocabulary<p>
+
+* link:http://blog.cloudera.com/blog/2013/07/how-does-cloudera-manager-work/[Philip Zeyliger's blog article on CM's design and operation]  
+* CM uses link:https://github.com/cloudera/cm_ext/wiki/CSD-Overview[service descriptors] that evolve as features are added
+* API resources: link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_intro_api.html[C6.0] (V30)
+* Example terms:
+** Canary: a smoke test for predictive failure
+** Safety valve: edit window to hack in missing/misspelled configuration properties
+
+[[cm_search_bar]]
+== CM Search Bar Features
+
+* Search bar in the upper right expands when selected
+* Searching a property name (or colloquial term) returns a `config` link
+** Try `dfs.datanode.max.xciever`
+** Then try `Transceiver`
+* The Configuration tab for a service limits the search context
+** Type `locked` into the HDFS Configuration search bar
+* Each search result has an object type
+
+== Search object types
+
+* CM types are also searchable
+** `chart`
+** `command`
+** `config`
+** `global`
+** `host`
+** `link`
+** `role`
+** `service`
+
+Enter an object type in the search bar
+
+[[cm_users_roles]]
+== Users and roles
+
+* `Administration -> Users`
+** Adding users recommended to differentiate admins
+** Supports role-based access limits
+* CM defines link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_user_roles.html[twelve roles]
+* `Administration -> Users -> Add Users` button
+** Select a role to see a description of its scope
+** Privileges per role are shown in documentation
+
+[[cm_commands_history]]
+== Recent commands and history
+
+* `Home -> All Recent Commands`
+** Up to 250 current/finished commands per display
+** Reports context (service), command status, start and finish times.
+* Use the Audits tab to find past events
+** Available in home, service, role, and host instance pages
+** Time range filter from last 30m to last 30d 
+** link:https://www.cloudera.com/documentation/enterprise/latest/topics/cn_iu_audits.html[Several filters available]
+* Logs can also be downloaded
+
+[[cm_monitors]]
+== Monitoring services and resources
+
+* Type `monitor` (or select `Category -> Monitoring`) in the Configuration tab search of any service
+* link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_dg_monitoring_settings.html[Serveral types of monitoring settings]
+** Health tests - canary and threshold-based
+** Free space - threshold-based
+** YARN Applications - visibility settings
+** Impala Queries - visibility and query data storage
+** Alerts
+** Log Events
+
+[[cm_alerts]]
+== link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_dg_monitoring_settings.html[Adding Alerts]
+
+* `Administration -> Alerts`
+* Delivers to email or as SNMP traps
+* May be associated with
+** Activity Monitor
+** Configuration changes (enable/disable only)
+** HBase (errors, poor region health)
+** Health metric thresholds (<font color="red">Bad</font> or <font color="orange">Concerning</font> result)
+** Log messages (regex matching)
+
+[[cm_health_checks]]
+== link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_dg_health.html[Health checks]
+
+* Cover services, roles, and hosts
+* Two types
+** Pass-fail
+** link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_metrics.html[Metric] - set to some numeric threshold
+** link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ht.html[Complete health tests list for CM6]
+* Condition may be <font color="green">Good</font>, <font color="orange">Concerning</font>, or <font color="red">Bad</font>
+** Service results may be "rolled up" from subordinate tests (roles, instances)
+*** A single Bad or Concerning result affects the whole
+** Some metric tests can also be <<cm_charting_time_series, charted>>
+
+[[cm_charting_time_series]]
+== Charting metrics (time-series data)
+
+* Charts are searchable by type or name
+** Try `canary duration`
+* Chart builder and dashboard editor: `CM -> Charts`
+** link:https://www.cloudera.com/documentation/enterprise/6/6.0/topics/cm_dg_chart_time_series_data.html[Documentation]
+** A user's collection of charts is called a link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_dg_dashboards.html[dashboard]
+* link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_dg_metric_aggregation.html[Metric aggregations]
+** metric-timestamp pair + aggregating function (min, max, avg, and stddev)
+** Sampling interval is fixed by the monitor (Service or Host)
+* Some 'cross-entity' aggregations are available
+** E.g., all datanodes in the cluster, all datanodes in one rack
+** Aggregate version: `fd_open_across_datanodes, total_fd_open_across_datanodes`
+
+[[cm_property_settings]]
+== Managing property settings
+
+* link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_props_top.html[CDH properties by version]
+** Organized by service
+* link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_props_top.html[Host configuration properties]
+** System services, directory free space, etc.
+* link:https://www.cloudera.com/documentation/enterprise/6/properties/6.0/topics/cm_props_cmserver.html[CM Server properties]
+
+[[cm_api_sampler]]
+== Sample CM API calls
+
+* link:http://cloudera.github.io/cm_api/apidocs/v19/tutorial.html[Tutorials for each version] available
+** V30 tutorial not available publicly yet
+** All API documentation, including tutorial, is hosted locally by CM at `http://cm_host:7180/static/apidocs/tutorial.html`
+** CM versions are link:http://cloudera.github.io/cm_api/docs/releases/[mapped to API versions here]
+* Plenty of examples
+** link:http://cloudera.github.io/cm_api/docs/quick-start/[With curl]
+** link:http://cloudera.github.io/cm_api/docs/python-client/[Using Python]
+** link:http://cloudera.github.io/cm_api/docs/java-client/[Java]
+* Mark Brooks's script for link:https://github.com/onefoursix/cm-get-ports[listing cluster service ports]
+* Other long-range goals with the API
+** Scripted CDH install
+** Predictive multi-tenancy monitoring, utilization and tuning
+
+== Note on link:https://github.com/cloudera/cm_ext/wiki/CSD-Overview[Custom Service Descriptors]
+
+* Cloudera uses parcels to simply adding services via CM 
+* CSDs integrate the software with Cloudera Manager's feature set
+** Monitoring and charting
+** Managing resources (Static Service Pools)
+** Service lifecycle control
+** Publishing service properties 
+** Assigning services and roles to hosts 
+** link:http://blog.cloudera.com/blog/2014/04/how-to-extend-cloudera-manager-with-custom-service-descriptors/[Useful for creating gateway roles]
+** link:http://github.mtv.cloudera.com/araujo/keyhsm-csd[Example of a customer CSD for KeyHSM]
+
+== CM Monitoring Lab
+
+_Use CM to answer the following questions. For some questions, search will help you. Watch out for trick questions! (Some of these questions have been asked by customers.)  Put the questions and their answers in the file_ `enterprise/labs/0_CM_treasure_hunt.adoc`
+
+* What is ubertask optimization?
+* Where in CM is the Kerberos Security Realm value displayed?
+* Which CDH service(s) host a property for enabling Kerberos authentication?
+* How do you upgrade the CM agents?
+* Give the `tsquery` statement used to chart Hue's CPU utilization?
+* Name all the roles that make up the Hive service
+* What steps must be completed before integrating Cloudera Manager with Kerberos?
+
+== CM Lab
+== Create a Custom Dashboard
+
+* Create a new CM user `minotaur` in your cluster
+* Assign the Configurator role  to `minotaur`
+* Create a dashboard for `minotaur` and add any four charts  
+* Put a screenshot of the new dashboard in the file `enterprise/labs/1_user_dashboard.png`
+
+== CM Lab
+== Use the API 
+
+* Browse or use `curl` on the endpoint `./api/v2/cm/deployment`
+** Store the output in `enterprise/labs/2_cluster_deployment.adoc`
+** Code-format this output for readability
+* Follow the link:http://cloudera.github.io/cm_api/apidocs/v19/tutorial.html[tutorial for API v19]
+* Write `curl` statements that stop, start, and check the current state of your Hive service.
+** Add these statements and their output to `enterprise/labs/3_api_hive_state.adoc`
+
+== CM Lab
+== Upgrade Cloudera Manager
+
+* Upgrade to the latest **C5.x** release
+** Use the link:https://www.cloudera.com/documentation/enterprise/upgrade/topics/ug_overview.html[documentation here]
+* Use the API on the command line to:
+** Report the latest available version of the API
+** Report the CM version 
+** List all CM users
+** Report the database server in use by CM
+* Add these API calls and their output to `enterprise/labs/4_API_upgrade_calls.adoc`
+* Label the Issue `review`

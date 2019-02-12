@@ -1,0 +1,108 @@
+[[hue_services_admin_section]]
+= HUE Services & Administration
+
+* <<hue_design_goals, HUE Design and Goals>>
+* <<hue_services, Services>>
+* <<hue_deployment_tools, Deployment Tools>>
+* <<hue_admin_features, Admin features>>
+
+[[hue_design_goals]]
+== HUE Design & Goals
+
+* Customizable service portal
+** Customer success story: link:http://rainstor.com/rainstor-embraces-hue/[RainStor Embraces HUE]
+* Three client authentication modes
+* Graphical browsing and reporting
+* Application UIs
+* LDAP/Kerberos support
+* Index for support, tutorials, demos
+
+== Current Version & Resources
+
+* C5.15 ==> link:http://gethue.com/[Hue 4.1]
+** Apache-licensed, not an ASF project
+** Ported to HDP, MapR, Pivotal, IBM Big Insights
+* link:http://demo.gethue.com/[Online demo available]
+* Drives link:http://www.cloudera.com/content/cloudera/en/products-and-services/cloudera-live.html[Cloudera Live]
+* Active blogging on new developments: link:http://gethue.com[gethue.com]
+* Some link:http://vimeo.com/search?q=gethue[screencasts available]
+
+[[hue_services]]
+== HUE's Services
+
+* <<hue_query_editors, Query editors>>
+* <<hue_data_browsers, Data browsers>>
+* <<hue_workflow_tools, Workflow tools>>
+* <<hue_search_console, Cloudera Search console>>
+
+[[hue_query_editors]]
+== Query Support
+
+* link:http://demo.gethue.com/beeswax/#query[Beeswax editor demo]
+** Uses HiveServer2; Beeswaxd (Hue's own Hive query service) is deprecated.
+* Supports link:http://gethue.com/hadoop-tutorial-how-to-distribute-impala-query-load/[Impala load-balancing]
+* Multiple link:http://gethue.com/hadoop-tutorial-how-to-distribute-impala-query-load/[query editors]
+** MySQL, Oracle,, PostgreSQL, sqlite3
+* link:http://gethue.com/how-to-use-hcatalog-with-pig-in-a-secured-cluster/[UI support for Pig]
+* Evolving support for link:http://gethue.com/use-the-spark-action-in-oozie/[Spark UI]
+
+[[hue_data_browsers]]
+== Data & Metadata Browsers
+
+* link:http://demo.gethue.com/metastore/tables/[Hive Metastore]
+* link:http://demo.gethue.com/hbase/#Cluster[HBase]
+* link:http://demo.gethue.com/sqoop/#jobs[Sqoop Transfer]
+* link:http://demo.gethue.com/zookeeper/[ZooKeeper]
+
+[[hue_workflow_editors]]
+== Workflow Tools
+
+* Apache Oozie's UI tools
+** Use ExtJS libraries (not Apache-licensed)
+** Mostly support for browsing jobs  
+* Hue offers link:http://demo.gethue.com/oozie/[Oozie dashboards]
+** And link:http://demo.gethue.com/oozie/list_workflows/[Workflow Managers]
+
+[[hue_search_console]]
+== Demos for Cloudera Search
+
+* link:http://demo.gethue.com/search/?collection=13[Twitter Demo]
+* link:http://demo.gethue.com/search/?collection=10000002[Yelp Demo]
+* link:http://demo.gethue.com/search/?collection=10000003[Logfiles Demo]
+
+[[hue_deployment_tools]]
+== Deployment Tools
+
+* Just a client portal, not a core Hadoop service
+** Hue link:http://cloudera.github.io/hue/docs-3.9.0/manual.html[can be set up by anyone]
+** In a parcel: `/opt/cloudera/parcels/CDH/lib/hue`
+* A cluster can have multiple instances if desired
+* Hue does ~~not~~ scale very well, not recommended for >10-15 concurrent users
+** You may need multiple instances to support tens of Hue users for one cluster
+
+[[hue_admin_features]]
+== HUE Administrative Features
+
+* Hue's database stores user accounts, Hive queries, job submissions
+* Embedded database is `SQLite`
+* Also supported: link:http://www.cloudera.com/content/cloudera-content/cloudera-docs/CDH5/latest/CDH5-Requirements-and-Supported-Versions/cdhrsv_db.html[MySQL, PostgreSQL, Oracle]
+* Inspectable: `sqlite3 /var/lib/hue/desktop.db`
+
+== HUE Lab: Authenticate using Linux users/groups
+
+* Use a Linux account with login capability
+** Make sure the account has the same UID/GID on all cluster nodes
+* link:http://gethue.com/hadoop-tutorial-how-to-integrate-unix-users-and-groups/[Follow this guide]
+** You'll need link:http://gethue.com/storing-passwords-in-script-rather-than-hue-ini-files/[these notes] to authenticate to Hue from the command line
+* Get a screenshot that shows this user is logged into Hue
+** Name the file `client/labs/0_unix_login.png`
+
+== HUE Lab: Security or Availability?
+
+* link:http://gethue.com/apache-sentry-made-easy-with-the-new-hue-security-app/[Integrate Hue and Sentry]
+** Watch out for red herring instructions or missing steps
+* Install a link:http://gethue.com/automatic-high-availability-and-load-balancing-of-hue-in-cloudera-manager-with-monitoring/[second Hue instance and load balancer]
+
+* Consult with an instructor to get a meaningful screenshot
+* Name the screenshot `1_hue_sentry.png` or `1_hue_lb.png`, as appropriate
+* If you do both, number the screenshots to show the order you did them.

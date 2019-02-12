@@ -1,0 +1,108 @@
+[[troubleshooting_practices_section]]
+= Troubleshooting
+
+* <<troubleshooting_enabling_partners, Enabling field partners>>
+* <<troubleshooting_docs_assistance, Using documentation, getting assistance>>
+* <<troubleshooting_problems_bugs_issues, Defining problems, bugs, and customer issues>>
+* <<troubleshooting_methodology, Troubleshooting methodology>> 
+* <<troubleshooting_challenges, Preparing for Friday challenges>>
+
+[[troubleshooting_enabling_partners]]
+== General Resources to Have
+
+* link:https://issues.apache.org/jira/secure/Dashboard.jspa[ASF account for reporting/reviewing bugs]
+* link:http://www.cloudera.com/content/cloudera/en/partners.html[Cloudera Connect - partner portal]
+* Most of our consultants use link:https://github.com/[Github] to share code.
+
+<!-- Other partner resources I'm not aware of --> 
+
+[[troubleshooting_docs_assistance]]
+== Documentation & Support
+
+* We must review all materials customers can access
+* Follow and participate in link:http://community.cloudera.com[Cloudera's forums]
+* Always ask which CM/CDH versions are in use?
+* link:http://www.cloudera.com/content/support/en/documentation.html[Documentation starts here] 
+* Review all Technical Service Bulletins
+* Learn to use the link:http://www.cloudera.com/content/support/en/support-info/cluster-statistics.html[Diagnostic Bundle Collector]
+
+[[troubleshooting_problems_bugs_issues]]
+== Defining Problems, Bugs, Customer Issues
+
+[[troubleshooting_methodology]]
+== Troubleshooting Wisdom
+
+*Potential measures by how much you lost* -- my college track coach
+
+* Fixing a recurring or well-known problem quickly is a common pitfall 
+* You need a method you can recite when you encounter new/unfamiliar territory
+* To remind yourself what you know
+* To recall tools that can tell you what you don't know
+* To remember tools don't solve problems, they help reveal them
+* To write down what you've learned so you can share it
+
+== Methodology: Guidance<p>
+
+We have many technologies to consider. A good general-purpose book for articulating your practice is *Debugging*, by David J. Agans. These nine points are the focus:
+
+. Understand the System
+. Check the Plug
+. Divide and Conquer
+. Make It Fail
+. Quit Thinking and Look
+. Change One Thing at a Time
+. Keep an Audit Trail
+. Get a Fresh View
+. If You Didn't Fix It, It Ain't Fixed
+
+Note: Apply #7 to **documenting your fix**, and adding it to the community's knowledge
+
+== Pro Tip: Find Patches by Release
+
+* Review the link:http://archive-primary.cloudera.com/cdh5/cdh/5/[change log]
+* Search by link:http://jira.cloudera.com[CDH project] -- put JIRA identifier in double quotes
+* Grep the code! For example, to find FLUME-2245 in CDH 5.1.x:
+** `$ **git clone https://github.com/cloudera/flume-ng** `
+** `$ **cd flume-ng** `
+** `$ **git branch -a** `
+** `$ **git log origin/cdh5-1.4.0_5.0.2 | grep 'FLUME-2245'** `
+** `$ **git log origin/cdh5-1.4.0_5.0.3 | grep 'FLUME-2245'** `<br>`FLUME-2245. Pre-close flush failure can cause HDFS Sinks to not process events`
+* Getting patch updates: `$ **git fetch origin** `
+
+== Pro Action: Finding Patches with Better Tools
+
+* Fork/review Jarcec Cecho's link:https://github.com/jarcec/cmd-tools/blob/master/gb-grep[gb-grep tool]
+** Doesn't require branch-specific search
+* Example usage:
+** `$ **git clone http://github.com/apache/hadoop.git`**
+** `$ **cd hadoop/`**
+** `$ **gb-grep "HDFS-7575"`**
+* Sample output line:
+`<br>
+Searching for HDFS-7575
+hadoop-hdfs-project: f1a2fce5b3c21e3335f99fe210edbb1f9c7bb29f
+HDFS-7575. Upgrade should generate a unique storage ID for each
+volume. (Contributed by Arpit Agarwal)`
+
+[[troubleshooting_challenges]]
+== Friday Challenges
+
+* Read through the challenges in this document
+** These challenges were part of the last delivery 
+* Notice the following
+** The focus of each challenge
+** The details in the instructions
+** The submission requirements
+** The deadlines
+
+== Lab: Review time
+
+* You should:
+** Review the challenges. 
+** Review your class notes
+** Repeat or continue lab work
+** Prepare new instances for tomorrow's challenges 
+* You should not:
+** Write scripts to automate tomorrow's work -- waste of time
+** Install software to your new instances
+
