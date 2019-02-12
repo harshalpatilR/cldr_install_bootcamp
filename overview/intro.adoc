@@ -1,0 +1,71 @@
+= FCE Install/Operations Boot Camp
+
+September 24-28, 2018 - Palo Alto, California
+
+== Introductions & Overview
+
+:toc:
+
+* <<instructor, Instructors & Students>>
+* <<audience, Audience Assumptions>>
+* <<design_layout, Course design>>
+
+[[instructor]]
+== Instructor & Students
+
+* Alex Ciobanu (Senior Solution Architect) - `alexciobanu`
+* André Araújo (Principal Solutions Architect) - `araujo`
+* Please introduce yourselves:
+** Name
+** Role & Location
+** Your experience with Hadoop to date
+
+[[audience]]
+== Audience Assumptions
+
+The course material assumes you have knowledge or experience to:
+
+* Complete all labs in Cloudera's Hadoop for Administrators Course
+* Certify as a Hadoop Administrator
+* Install & operate CDH on a multi-node cluster 
+* Prepare a Linux platform for production use
+
+[[course_objectives]]
+== Course Objectives
+
+* Prepare you to install an EDH cluster for production use
+* Evaluate your readiness for a service engagement
+* Identify next steps in your own skills development for EDH
+
+[[design_layout]]
+== Course Plan
+
+* Seven general topics with specific, up-to-date content
+** link:../installation/install.md[Installation]
+** link:../storage/hdfs_testing.md[Storage]
+** link:../resources/yarn_rm.md[Resource Management]
+** link:../enterprise/cm.md[Using Cloudera Manager]
+** link:../security/overview-kerberos-sentry.md[Enterprise Security]
+** link:../clients/hue.md[Supporting Hadoop Clients]
+** link:../troubleshooting/tech_support.md[Technical Resources]
+
+[[scored_challenges]]
+== Friday Morning: Challenge Phase
+
+* Six stages, three-hour test period
+** Install and secure a cluster according to given requirements
+* The previous challenge is available for review
+
+[[scored_labs]]
+== Submitting Work
+
+* All work is submitted to your GitHub repo
+** Add your instructors as Collaborators
+** We'll review git/GitHub tools in class
+** Use AsciiDoc for text and PNG format for screenshots
+* We score each lab/challenge as `Complete`, `Incomplete`, or `Did Not Submit`
+* The final evaluation is `Pass`, `Provisional Pass`, or `No Pass`
+* We evaluate your labs for
+** Completing tasks as directed
+** Documenting your progress on a regular basis
+** Showing your work
