@@ -1,3 +1,4 @@
+[[a_quick_sentry_tutorial]]
 == A Quick Sentry Tutorial
 
 * This tutorial assumes:
@@ -10,16 +11,16 @@
 ** It should not be necessary to restart HDFS or YARN
 
 === Verify user privileges
-* Authenticate your user as a Kerberos principal 
+* Authenticate your user as a Kerberos principal
 * Use `beeline` to confirm your principal sees no tables
 ** `!connect jdbc:hive2://localhost:10000/default;principal=hive/fdqn@REALM.COM`
-*** Replace `fqdn` with your host's fully-qualified domain name 
+*** Replace `fqdn` with your host's fully-qualified domain name
 ** Use your Linux account/password to authenticate when prompted
 ** Enter `SHOW TABLES;`
 ** The statement should return an empty set because no authorizations are in place
-* Copy the transcript of this section to `security/labs/sentry-test.adoc`
+* Copy the transcript of this section to `06-security/labs/sentry-test.adoc`
 
-=== Create a Sentry role with full authorization 
+=== Create a Sentry role with full authorization
 * In `beeline`:
 ** `CREATE ROLE sentry_admin;`
 ** `GRANT ALL ON SERVER server1 TO ROLE sentry_admin;`
@@ -54,5 +55,5 @@
 * `kinit` as `george`, login to beeline, and use `SHOW TABLES;`
 ** `george` should be able to see all tables
 * Repeat the process as `ferdinand`
-** `ferdinand` should see `sample_07` 
-* Add the transcripts of these sessions to `security/labs/sentry-test.adoc`
+** `ferdinand` should see `sample_07`
+* Add the transcripts of these sessions to `06-security/labs/sentry-test.adoc`

@@ -4,7 +4,7 @@ September 24, 2018
 
 * Overview
 ** Build a CM-managed CDH cluster and secure it
-* Place your work in the `challenges/labs` folder
+* Place your work in the `07-challenges/labs` folder
 ** All text files require AsciiDoc (`.adoc`) extension and formatting
 ** All screenshots must be in PNG format
 ** You will create each required file yourself
@@ -29,12 +29,12 @@ September 24, 2018
 ** User `denali` with a UID of `3900`
 ** Create the group `alaska` and add `denali` to it
 ** Create the group `colorado` and add `rocky` to it
-* In the file `challenges/labs/0_setup.adoc`:
+* In the file `07-challenges/labs/0_setup.adoc`:
 ** List the cloud provider you are using (AWS, GCE, Azure, CloudCat, other)
 ** List your instances by IP address and DNS name (don't use `/etc/hosts` for this)
-** List the Linux release you are using 
-** List the file system capacity for the first node 
-** List the command and output for `yum repolist enabled` 
+** List the Linux release you are using
+** List the file system capacity for the first node
+** List the command and output for `yum repolist enabled`
 ** List the `/etc/passwd` entries for `rocky` and `denali`
 *** Do not list the entire file
 ** List the `/etc/group` entries for `alaska` and `colorado`
@@ -43,7 +43,7 @@ September 24, 2018
 *** `getent group alaska`
 *** `getent passwd rocky`
 * Push these updates to GitHub
-* Label your Issue `review` 
+* Label your Issue `review`
 * Assign the Issue to an instructor
 
 == Challenge 1: Install a MySQL server
@@ -53,7 +53,7 @@ September 24, 2018
 * Assign the Issue to yourself and label it `started`
 * Install MySQL 5.5 or MariaDB 5.5 server on the first node listed in `0_setup.adoc`
 ** Use a YUM repository to install the package
-** Copy the repo configuration you used to `challenges/labs/1_my-database-server.repo.adoc`
+** Copy the repo configuration you used to `07-challenges/labs/1_my-database-server.repo.adoc`
 * On all cluster nodes
 ** Install the database client package and JDBC connector jar on all nodes
 * Start the database service and create these databases
@@ -62,28 +62,28 @@ September 24, 2018
 ** `hive`
 ** `oozie`
 ** `hue`
-* Record the following in `challenges/labs/1_db-server.adoc`
-** A command and output that shows the hostname of your database server 
+* Record the following in `07-challenges/labs/1_db-server.adoc`
+** A command and output that shows the hostname of your database server
 ** A command and output that reports the database server version
 ** A command and output that lists all the databases in the server
 * Push this work to GitHub
 * Label the Issue `review` and assign it to an instructor
 
-== Challenge 2: Install Cloudera Manager 
+== Challenge 2: Install Cloudera Manager
 
 * Create the Issue `Install CM`
 * Assign yourself and label it `started`
 * Install Cloudera Manager on the second node listed in `0_setup.adoc`
-* List the command and output for `ls /etc/yum.repos.d` in `challenges/labs/2_cm.adoc`
-** Copy `cloudera-manager.repo` to `challenges/labs/2_cloudera-manager.repo.adoc`
+* List the command and output for `ls /etc/yum.repos.d` in `07-challenges/labs/2_cm.adoc`
+** Copy `cloudera-manager.repo` to `07-challenges/labs/2_cloudera-manager.repo.adoc`
 * Connect Cloudera Manager Server to its database
-** Use the `scm_prepare_database.sh` script to create the `db.properties` file 
+** Use the `scm_prepare_database.sh` script to create the `db.properties` file
 *** List the full command and its output in `2_cm.adoc`
 * Start the Cloudera Manager server
-* In `challenges/labs/2_db.properties.adoc` add:
+* In `07-challenges/labs/2_db.properties.adoc` add:
 ** The first line of the server log
 ** The line(s) that contain the phrase "Started Jetty server"
-** The content of the `db.properties` file 
+** The content of the `db.properties` file
 * Push these changes to GitHub and label the Issue `review`
 * Assign the issue to an instructor
 
@@ -97,11 +97,11 @@ September 24, 2018
 ** Ensure the owner and group for each directory is the corresponding user and group
 * Add the following to `3_cm.adoc`:
 ** The command and output for `hdfs dfs -ls /user`
-** The command and output from the CM API call `../api/v14/hosts` 
+** The command and output from the CM API call `../api/v14/hosts`
 ** The command and output from the CM API call `../api/v8/clusters/<githubName>/services`
-* Login to Hue and install the Hive sample data 
+* Login to Hue and install the Hive sample data
 ** Use `beeline` to display the `default` database tables
-** Copy the output to `challenges/labs/3_beeline.png`
+** Copy the output to `07-challenges/labs/3_beeline.png`
 
 * Push this work to GitHub and label the Issue `review`
 * Assign the issue to an instructor
@@ -116,8 +116,8 @@ September 24, 2018
 ** Set the mapper container size to 768 MiB
 ** Name the target directory `tgen`
 ** Use the `time` command to capture job duration
-* Put the following in `challenges/labs/4_teragen.adoc`
-** The full `teragen` command and output 
+* Put the following in `07-challenges/labs/4_teragen.adoc`
+** The full `teragen` command and output
 ** The result of the `time` command
 ** The command and output of `hdfs dfs -ls /user/rocky/tgen`
 ** The command and output of `hadoop fsck -blocks /user/rocky`
@@ -136,10 +136,10 @@ September 24, 2018
 ** Assign `cloudera-scm` the privileges needed to create service principals and keytab files
 * Kerberize the cluster
 * Run the `terasort` program as user `rocky` with the output target `/user/rocky/tsort`
-** Copy the command and full output to `challenges/labs/5_terasort.adoc`
+** Copy the command and full output to `07-challenges/labs/5_terasort.adoc`
 * Run the Hadoop `pi` program as user `denali`
 ** Use the task parameters `50` and `100`
-** Copy the command and full output to `challenges/labs/5_pi.adoc`
+** Copy the command and full output to `07-challenges/labs/5_pi.adoc`
 *  Copy the configuration files in `/var/kerberos/krb5kdc/` to your repo:
 ** Add the prefix `5_` and the suffix `.adoc` to the original file name
 ** Example: `5_kdc.conf.adoc`
@@ -166,7 +166,7 @@ September 24, 2018
 == When time runs out:
 
 * Commit any outstanding changes from your repo to GitHub
-* Notify `araujo@cloudera.com`, `alex.ciobanu@cloudera.com` and `kiran@cloudera.com` once you have stopped pushing to your repo
+* Notify `araujo@cloudera.com` and `alex.ciobanu@cloudera.com` once you have stopped pushing to your repo
 * In-class candidates only:
 ** Please fill out link:https://goo.gl/forms/1PvoLdzGjOVh1leb2[this survey form]
 ** Add your final comments to `labs/7_feedback_final.adoc` -- remember to commit them!

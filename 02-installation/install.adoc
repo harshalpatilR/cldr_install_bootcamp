@@ -1,13 +1,20 @@
-[[cm_cdh_installation_section]]
 = Cloudera Manager & CDH Installation
 
-* <<install_methods, Installation Methods>>
-* <<parcels, Understanding Parcels>>
-* <<db_setup, Embedded vs. external database>>
-* <<cm_cdh_key_points, Extra  CM/CDH Details>>
-* <<cm_ui_overview, Cloudera Manager UI Overview>>
+* <<cm_cdh_installation, CM/CDH Installation>>
+* <<cm_high_level_architecture, CM high-level architecture>>
+* <<cm_features, CM features>>
+* <<cloudera_s_supported_installation_paths, Cloudera's supported installation paths>>
+* <<installation_steps_with_path_b, Installation Steps with Path B>>
+* <<installing_cdh_with_parcels, Installing CDH with Parcels>>
+* <<parcel_lifecycle, Parcel Lifecycle>>
+* <<database_support, Database Support>>
+* <<mysql_mariadb_replication_for_ha, MySQL/MariaDB Replication for HA>>
+* <<cm_install_lab, CM Install Lab>>
+* <<mysql_mariadb_installation_lab, MySQL/MariaDB Installation Lab>>
+* <<cloudera_manager_install_lab, Cloudera Manager Install Lab>>
+* <<final_points, Final Points>>
 
-[[install_methods]]
+[[cm_cdh_installation]]
 == CM/CDH Installation
 
 * We use Cloudera Manager in several capacities:
@@ -20,10 +27,12 @@
 *** Integrating Kerberos & LDAP services
 *** Enabling HDFS Encryption
 
+[[cm_high_level_architecture]]
 == CM high-level architecture
 
- <img src="png/cm_arch.png"/>
+image::png/cm_arch.png[width=600]
 
+[[cm_features]]
 == CM features
 
 * The Cloudera Manager server provides
@@ -33,7 +42,7 @@
 *** A database server is needed to support some of these functions
 ** Host and Service monitoring
 
-[[cm_install_paths]]
+[[cloudera_s_supported_installation_paths]]
 == Cloudera's supported installation paths
 
 * link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_non_production.html[Installing a PoC cluster] (f.k.a. "Path A" installation)
@@ -48,27 +57,7 @@
 ** Useful for development work, other preferred deployment tools (Chef, Puppet)
 ** **Deprecated in C6!**
 
-[[cm_ui_overview]]
-== For future reference: Path A Install Screen
-
- <img src="png/CM5_Installer_Screen.png"/>
-
-[[cm_install_logging]]
-== Installation Steps with Path A
-
-* Exits if SELinux is enabled
-* Installs YUM repos for link:http://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5/RPMS/x86_64/[CM packages:]
-** Cloudera-packaged PostgreSQL server
-** Oracle JDK -- OpenJDK is not supported
-** Cloudera Manager server and agents
-* Install packages
-* Configures & starts Cloudera Manager
-* Provides a wizard to create a cluster, deploy CDH services 
-** Some "smart" configuration is baked in
-*** E.g., HDFS block limit default set to 128 MiB
-*** Directories for various services and log files
-
-[[cm_install_milestones]]
+[[installation_steps_with_path_b]]
 == Installation Steps with Path B
 
 * Verifying the platform can reveal many potential bugs
@@ -82,7 +71,7 @@
 ** Distributing CDH software
 ** Deploying and activating CDH services
 
-[[parcels]]
+[[installing_cdh_with_parcels]]
 == Installing CDH with Parcels
 
 Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3F[CM-specific code blobs]
@@ -100,13 +89,14 @@ Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3
 *** `manifest.json` is only stored on the repo server
 *** Each parcel file is link:http://archive.cloudera.com/cdh5/parcels/5/[specific to a Linux distribution and major release]
 
+[[parcel_lifecycle]]
 == Parcel Lifecycle
 
- <img src="http://blog.cloudera.com/wp-content/uploads/2013/05/parcels1.png">
+image::png/parcels1.png[width=600]
+
+_Source: link:https://blog.cloudera.com/blog/2013/05/faq-understanding-the-parcel-binary-distribution-format/[Blog: FAQ: Understanding the Parcel Binary Distribution Format]_
 
 * link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_parcels.html[How to manage parcels]
-
-== Parcels Lifecycle
 
 * Lifecycle actions
 ** Download
@@ -116,7 +106,7 @@ Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3
 ** Delete
 * The path `/opt/cloudera/parcels/CDH` will point to the active CDH version
 
-[[cm_service_dbs]]
+[[database_support]]
 == link:http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_ig_installing_configuring_dbs.html[Database Support]
 * Management Services
 ** Reports Manager
@@ -130,22 +120,25 @@ Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3
 ** link:http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/cm_mc_hue_service.html#cmig_topic_15_unique_1[Hue]
 ** link:https://www.cloudera.com/documentation/enterprise/latest/topics/install_sqoop_ext_db.html[Sqoop Server], a.k.a. Sqoop2 (not discussed)
 
-[[cm_replicate_db"]]
+[[mysql_mariadb_replication_for_ha]]
 == MySQL/MariaDB Replication for HA
 
 * A complete HA solution for Cloudera Manager is complex and expensive
 * link:https://www.cloudera.com/documentation/enterprise/latest/topics/admin_cm_ha_overview.html[Public documentation is here]
 * The full solution requires
 ** A load balancer between CM servers (one active, one passive)
-** Redundant network-accessible storage 
+** Redundant network-accessible storage
 ** Redundant database servers
 ** Heartbeat Demon software (Cloudera-supported only)
 * For today's lab, we'll just implement link:http://dev.mysql.com/doc/refman/5.5/en/replication-howto.html[MySQL]/link:https://mariadb.com/kb/en/mariadb/setting-up-replication/[MariaDB]
 
-== CM Install Labs - *Before* You Start
+[[cm_install_lab]]
+== CM Install Lab
+
+=== *Before* You Start
 
 * link:../README.adoc[Follow instructions here] and link:../README_GitHub.adoc[here] if you haven't already
-* Remember to submit text-based work in AsciiDoc and screenshots as PNG files 
+* Remember to submit text-based work in AsciiDoc and screenshots as PNG files
 ** Use code formatting (``...``) at a minimum
 * Create an Issue in your repo called `Installation Lab`
 ** Add it to the `Labs` milestone
@@ -155,7 +148,7 @@ Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3
 ** Add a comment if you run into a puzzling error or other blocker
 ** If you also fix it a problem, comment on the cause and solution
 
-== CM Install Lab - Prepare your instances
+=== Prepare your instances
 
 * For AWS, create five `m3.xlarge` nodes
 ** Do not use spot instances
@@ -168,9 +161,7 @@ Parcels are link:https://github.com/cloudera/cm_ext/wiki/Parcels:-What-and-Why%3
 * Use one instance to host Cloudera Manager server and edge/client-facing services
 ** This includes Hue and Apache Oozie
 
-== CM Install Lab
-[[linux_config_lab]]
-== System Configuration Checks
+=== System Configuration Checks
 
 Using the steps below, verify that all instances are ready. You must modify
 them when necessary, which includes installing missing packages and changing
@@ -198,9 +189,10 @@ command that produces each output.
 
 **NOTE**: For this lab, stick to the checks above. When performing pre-reqs check for customers, though, use the link:https://cloudera.box.com/s/b5vk5ltu9t2inotc0pv32hekgns8e9k2[comprehensive list compiled by the FCE folks].
 
+[[mysql_mariadb_installation_lab]]
 == MySQL/MariaDB Installation Lab
-[[mysql_replication_lab]]
-== Configure MySQL with a replica server
+
+=== Configure MySQL with a replica server
 
 Choose one of these plans to follow:
 
@@ -211,7 +203,7 @@ or link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mys
 * The steps below are MySQL-specific.
 **  If you are using RHEL/CentOS 7.x, **use MariaDB**.
 
-== MySQL installation - Plan Two Detail
+=== MySQL installation - Plan Two Detail
 
 . Download and implement the link:http://dev.mysql.com/downloads/repo/yum/[official MySQL repo]
 ** Enable the repo to install MySQL 5.5
@@ -249,10 +241,12 @@ mysql> **CHANGE MASTER TO**<br> **MASTER_HOST='*master host*',**<br> **MASTER_US
 .. `mysql> **SHOW SLAVE STATUS \G**`<br>
 .. If successful, the `Slave_IO_State` field will read `Waiting for master to send event`<br>
 .. Once successful, capture this output and store it in `labs/2_replica_working.adoc`<br>
-.. Review your log (`/var/log/mysqld.log`) for errors. If stuck, consult with a colleague or instructor.<p>
+.. Review your log (`/var/log/mysqld.log`) for errors. If stuck, consult with a colleague or instructor
 
+[[cloudera_manager_install_lab]]
 == Cloudera Manager Install Lab
-== Path B install using CM 5.15.x
+
+=== Path B install using CM 5.15.x
 
 link:https://www.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_cdh.html[The full rundown is here].
 You will have to modify your package repo to get the right release.
@@ -267,8 +261,7 @@ Use the documentation to complete the following objectives:
 * Start your Cloudera Manager server -- debug as necessary
 * Do not continue until you can browse your CM instance at port 7180
 
-== Cloudera Manager Install Lab
-== Install a cluster and deploy CDH
+=== Install a cluster and deploy CDH
 
 Adhere to the following requirements while creating your cluster:
 
@@ -284,9 +277,7 @@ Adhere to the following requirements while creating your cluster:
 ** Name this file `labs/3_cm_installed.png`.
 * Label your Issue 'review' unless you go on to the Bonus Lab.
 
-== Cluster install: Bonus Lab
-[[parcels_repo_lab]]
-== Create a local parcel repo (manual)
+=== Bonus Lab: Create a local parcel repo (manual)
 
 * Click the parcel icon in CM's navigation bar
 ** Note the `Remote Parcel Repository URL` values
@@ -295,20 +286,18 @@ Adhere to the following requirements while creating your cluster:
 * Show the parcel repo registers in CM as available
 * Label your Issue `review`
 
-== Cluster install: For Further Reading
-[[scripted_install_lab]]
-== Auto-deployment
+=== For Further Reading: Auto-deployment
 
 * If you are interested to learn about automating installs:
 ** Fork/clone link:https://github.com/justinhayes/cm_api/tree/master/python/examples/auto-deploy[Justin Hayes' auto-deploy project]
 * No submissions are needed; you can browse this repository as you wish.
 
-[[cm_cdh_key_points]]
+[[final_points]]
 == Final Points
 
 * See the graphic of install paths in the `tools/` subdirectory.
 * You can review a full CM HA link:http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/admin_cm_ha_overview.html[configuration here]
-* Note that CDH operation does not depend on Cloudera Manager's state 
+* Note that CDH operation does not depend on Cloudera Manager's state
 * CM supports a REST API
 ** Each API version is a superset of all prior versions
 ** Try `http://_your_cm_host_:7180/api/version` in your browser

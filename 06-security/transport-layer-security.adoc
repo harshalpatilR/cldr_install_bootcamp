@@ -1,6 +1,6 @@
 === TLS - Transport Layer Security
 
-* Provides over-the-wire protection 
+* Provides over-the-wire protection
 ** Authentication
 ** Message integrity
 ** Data encryption
@@ -20,14 +20,14 @@
 * A certificate is signed by its issuer
 ** Can be self-signed
 ** Can be a well-known Certificate Authority (CA)
-* Certificates rely on link:https://en.wikipedia.org/wiki/Public-key_cryptography[asymmetric encryption] 
+* Certificates rely on link:https://en.wikipedia.org/wiki/Public-key_cryptography[asymmetric encryption]
 
 === You Need A Certificate Authority (CA)
 
 * A trusted third party between client programs and a service
 ** A CA maintains its own certificate
 ** A CA acts as guarantor for issuing and signing other certificates
-* There are well-known public CAs such as VeriSign 
+* There are well-known public CAs such as VeriSign
 ** Expensive for casual use
 * In-house certificate servers are common in large enterprises
 ** MS Active Directory includes Certificate Services
@@ -49,7 +49,7 @@
 === Certificate Chaining
 
 * CA1 (root) issues a certificate to CA2 (intermediary)
-* Service B gets its certificate from CA2 
+* Service B gets its certificate from CA2
 * CA1 cannot verify Service B's certificate for client A
 ** But Client A only has CA1 in its trust store
 ** CA2 must present Client A with a chain that leads to CA1
@@ -63,20 +63,20 @@
 * You can encode a certificate multiple ways
 ** Binary: DER (link:http://www.planetlarg.net/encyclopedia/ssl-secure-sockets-layer/der-distinguished-encoding-rules-certificate-encoding[Distinguished Encoding Rules])
 ** Text: Privacy Enhanced Email (PEM): Base64 counterpart to DER
-*** Exchange-friendly format 
+*** Exchange-friendly format
 * In EDH, Java-based services use a Java keystore (DER)
 ** Default location `jre/lib/security/cacerts`
 ** Other EDH services use PEM format
 * The `openssl` library supports conversion between these formats
 ** Java `keytool` utility works with Keystore objects
 
-=== Getting a Certificate 
+=== Getting a Certificate
 
 * Prepare a certificate signing request (CSR) for your chosen CA
 ** Requires your private key (RSA) and identifying information
 * CSR's must be Base64-encoded and must include
 ** The public key associated with your private key
-** Your identifying information 
+** Your identifying information
 * You can self-sign your CSR (for testing and other casual use)
 * The response will include your public key and the authorization attributes for your certifcate
 ** `Client Auth` and `Server Auth` are expected at a minimum
@@ -111,9 +111,9 @@
 ** TLS uses AES for encryption
 * Use the command `hadoop checknative` to see which `openssl` libraries you have
 * Strong encryption relies on system-generated entropy
-** Bare metal servers probably have the entropy power you need 
+** Bare metal servers probably have the entropy power you need
 ** Install `rng-tools` if the CPU supports Intel RDRAND
-** Otherwise, install `haveged` from the EPEL repo 
+** Otherwise, install `haveged` from the EPEL repo
 
 === Putting It All To Use
 
@@ -150,4 +150,3 @@
 * Enable spill encryption for Impala
 * Enable Sentry and configure roles for Alice and Bob
 * Enable HDFS RPC Encryption and DataNode transfer encryption
-

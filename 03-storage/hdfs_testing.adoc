@@ -1,15 +1,21 @@
-[[hdfs_section]]
-= HDFS<p>
+= HDFS
 
-* Cluster deployment guidelines
-* HDFS Basics
-** <<hdfs_namenode_ha, NameNode HA>>
-** <<hdfs_smoke_testing, Smoke-testing a cluster>>
-** <<hdfs_c5, HDFS & C5>>    
+* <<notes_on_service_deployment, Notes on Service Deployment>>
+* <<layout_changes_with_node_count, Layout changes with node count>>
+* <<namenode_ha, NameNode HA>>
+* <<hdfs_smoke_testing, HDFS Smoke Testing>>
+* <<goals_for_hdfs, Goals for HDFS>>
+* <<key_hdfs_features_in, Key HDFS Features>>
+* <<directory_caching_use_case, Directory caching: Use case>>
+* <<hdfs_snapshots, HDFS Snapshots>>
+* <<hdfs_backups, HDFS Backups>>
+* <<hdfs_lab, HDFS Lab>>
 
+[[notes_on_service_deployment]]
 == Notes on Service Deployment
 
-<!-- introduce reference architecture documentation here -->
+// introduce reference architecture documentation here
+
 * link:https://blog.cloudera.com/blog/2017/11/deploy-cloudera-edh-clusters-like-a-boss-revamped-part-1/[Practical advice on field deployment]
 * Design principles for deployment
 ** Separation of concerns (administration, end users, security integration)
@@ -20,25 +26,25 @@
 ** Worker: storage and processing
 ** Edge: Client access, ingestion, security perimeter
 
-== Layout changes with node count 
+[[layout_changes_with_node_count]]
+== Layout changes with node count
 
 * 10 nodes or fewer: combine master & worker roles, utility & edge roles
 * 20-100 nodes: separate masters and workers, use dedicated utility & edge nodes
 * 100+ nodes: add utility, master, and edge roles according to use case
 * Once a machine is assigned to a role, adjust the resource requirements
-** Master: four disks, mirror the OS volume 
+** Master: four disks, mirror the OS volume
 *** One disk for logging and other storage requirements
 *** One disk for Zookeeper*
-** Worker: More disks and RAM 
+** Worker: More disks and RAM
 ** Edge/Utility: VMs or older hardware can be sufficient
 
-[[hdfs_namenode_ha]]
+[[namenode_ha]]
 == NameNode HA
 
-* CM 5 offers a link:http://www.cloudera.com/content/cloudera-content/cloudera-docs/CM5/latest/Cloudera-Manager-Managing-Clusters/cm5mc_hdfs_hi_avail.html[NameNode HA wizard]
+* Clodera Manager offers a link:http://tiny.cloudera.com/hdfs-ha[NameNode HA wizard]
 ** `HDFS -> Actions -> Enable High Availability`
-** link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_hag_hdfs_ha_enabling.html#cmug_topic_5_12_1[Locate the JournalNodes]
-** [Know what the Quorum Journal Manager and Zookeeper do] (https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html)
+** link:https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html[Know what the Quorum Journal Manager and Zookeeper do]
 
 [[hdfs_smoke_testing]]
 == HDFS Smoke Testing
@@ -50,76 +56,84 @@ is ideal for this: easy to apply and simple to monitor.
 link:http://www.michael-noll.com/blog/2011/04/09/benchmarking-and-stress-testing-an-hadoop-cluster-with-terasort-testdfsio-nnbench-mrbench/#testdfsio[TestDFSIO, nnbench, mrbench] -- you have choices.
 * Most important: corroborate performance with system tools, such as `iostat`.
 
-[[hdfs_c5]]
-== C5 Goals for HDFS
+[[goals_for_hdfs]]
+== Goals for HDFS
 
-Strategy for storage use cases in C5:
+Strategy for storage use cases:
 
 * Plan for systems with larger RAM complements
 * Customers need faster, more comprehensive backup tools
 * Customers want more data recovery options
 * Customers want more (open source) client access options
 
-== Key HDFS Features in C5
+[[key_hdfs_features_in]]
+== Key HDFS Features
 
 * <<hdfs_dir_caching, Directory caching >>
-* <<hdfs_dir_snapshots,  Directory snapshots >>
-* <<nfs_gateway,  NFS Gateway>>
+* <<hdfs_snapshots,  Directory snapshots >>
 * <<hdfs_backups, Backups>>
 
 [[hdfs_dir_caching]]
 == Directory caching: Use case
+
 === Repeated joins on a small table (cache effect)
 
-<img src="http://blog.cloudera.com/wp-content/uploads/2014/08/hdfs-cache-f1.jpg">
+image::png/hdfs-cache-f1.png[width=600]
 
-== Problem: Performance on Repeated Joins
+_Source: link:https://blog.cloudera.com/blog/2014/08/new-in-cdh-5-1-hdfs-read-caching/[Blog: HDFS Read Caching]_
+
+=== Problem: Performance on Repeated Joins
 
 * The NameNode links a file's path to block storage on the DataNodes
 ** Locality is therefore defined by link:https://issues.apache.org/jira/browse/HDFS-4949[disk storage]
-** This is sufficient for batch-processing architecture 
+** This is sufficient for batch-processing architecture
 ** Job setup and data shuffling costs cancel out efficient NRT retrieval
 * Consider repeated joins with a need for quick responses
-** A repeated query could go to another DataNode 
-** You'd like to prefer a node with in-memory 
+** A repeated query could go to another DataNode
+** You'd like to prefer a node with in-memory
 
-== Solution: link:http://blog.cloudera.com/blog/2014/08/new-in-cdh-5-1-hdfs-read-caching/[HDFS Read Caching]
+=== Solution: link:http://blog.cloudera.com/blog/2014/08/new-in-cdh-5-1-hdfs-read-caching/[HDFS Read Caching]
 
-Adds cache locality to NN reports<p>
+Adds cache locality to NN reports
 
 * An admin can specify an HDFS file/directory to be 'cached'
 ** Eviction policy is TTL-based
 ** No hit ratio metrics
-* DataNodes with associated blocks receive a cache-on-read instruction 
+* DataNodes with associated blocks receive a cache-on-read instruction
 ** In-memory storage is off-heap: no heavy impact on DataNodes
 ** The admin can also limit the number of replicas for caching
-* Local clients, such as `impalad`, can read caches locally 
+* Local clients, such as `impalad`, can read caches locally
 ** Short-circuit read (SCR) API
 ** Zero-copy read (ZCR) API
 
-== Directory caching: Implementation<p>
+=== Directory caching: Implementation
 
-<img src="http://www.cloudera.com/documentation/enterprise/latest/images/caching.png" height="325" width="400">
+image::png/caching.png[width=500]
 
-== Directory caching example
+_Source: link:https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hdfs_caching.html[Configuring Centralized Cache Management in HDFS]_
 
-```
+=== Directory caching example
+
+[source]
+----
 $ hadoop fs -put myfile /user/mfernest/commons
 $ sudo -u hdfs hdfs cacheadmin -addPool mfe
 Successfully added cache pool mfe.
 $ sudo -u hdfs cacheadmin -addDirective -path /user/mfernest/commons  -pool mfe
 Added cache directive 1
 $ sleep 180
-```
+----
+
 DataNodes track blocks and report cache state to the NameNode
-```
+[source]
+----
 $ hdfs cacheadmin -listPools -stats mfe
 ...
 $ sudo -u hdfs hdfs dfsadmin -report
 ...
-```
+----
 
-== Directory caching: Other notes
+=== Directory caching: Other notes
 
 * [Caching documentation is here] (http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hdfs_caching.html)
 * We do have to balance memory demand for caching with other memory-based features
@@ -127,8 +141,7 @@ $ sudo -u hdfs hdfs dfsadmin -report
 ** So do HBase and Search applications
 ** We'll discuss this further with YARN and resource management
 
-[[scr_and_zcr]]
-== Technical Notes on SCR and ZCR
+=== Technical Notes on SCR and ZCR
 
 * General advice: take time to map key upstream features to their [JIRAs] (https://issues.apache.org/jira)
 * [Short-circuit Reads] (https://issues.apache.org/jira/browse/HDFS-2246)
@@ -138,10 +151,10 @@ $ sudo -u hdfs hdfs dfsadmin -report
 * There is also zero-copy Read
 ** link:https://issues.apache.org/jira/browse/HDFS-4953[Uses `mmap()` to read system page$]
 ** Clients can implement the link:https://issues.apache.org/jira/browse/HDFS-5191[API]
-* Upstream JIRAs 
+* Upstream JIRAs
 ** Write caching: link:https://issues.apache.org/jira/browse/HDFS-5851[HDFS-5851]
 
-[[hdfs_dir_snapshots]]
+[[hdfs_snapshots]]
 == HDFS Snapshots
 
 * Users with write permissions on a directory may retrieve a deleted file
@@ -161,7 +174,8 @@ $ sudo -u hdfs hdfs dfsadmin -report
 ** Includes configuration, monitoring, and alerting services
 ** Preserves file attributes and service metadata such as HMS
 
-=== HDFS Labs Overview
+[[hdfs_lab]]
+== HDFS Lab Overview
 
 * Create an Issue called `Storage labs`
 ** Add it to the Lab milestone
@@ -173,7 +187,7 @@ $ sudo -u hdfs hdfs dfsadmin -report
 ** Test HDFS Snapshots
 ** Enable NameNode HA configuration
 
-== HDFS Lab: Replicate to another cluster
+=== HDFS Lab: Replicate to another cluster
 
 Node: Data replication in the cloud depends on peers that can see each
 other's nodes.
@@ -182,55 +196,55 @@ other's nodes.
 * Name a source directory after your GitHub handle
 * Name a target directory after your partner's GitHub handle
 * Use `teragen` to create a 500 MB file
-* Copy your partner's file to your target directory 
+* Copy your partner's file to your target directory
 ** Let one partner use `distCp` on the command line
 ** Let the other use BDR
-* Browse the results 
+* Browse the results
 ** Use `hdfs fsck <path> -files -blocks` on your source and target directories
-** Copy the work for this lab into `storage/labs/0_replication.adoc`
+** Copy the work for this lab into `03-storage/labs/0_replication.adoc`
 
-== HDFS Lab: Test HDFS throughput
+=== HDFS Lab: Test HDFS throughput
 
 * Create an end-user Linux account named with your GitHub handle
 ** Make sure this Linux account is added to all cluster nodes
-** Create an HDFS directory under `/user` 
+** Create an HDFS directory under `/user`
 ** Run the following exercises under this user account
 * Create a 10 GB file using `teragen`
 ** Set the number of mappers to four
-** Limit the block size to 32 MB 
+** Limit the block size to 32 MB
 ** Land the output in your user's home directory
 ** Use the `time` command to report the job's duration
-* Run the `terasort` command on this file 
+* Run the `terasort` command on this file
 ** Use the `time` command to report the job's duration
 ** Land the result under your user's home directory
-* Report your work in `storage/labs/1_terasort_tests.adoc`, including:
+* Report your work in `03-storage/labs/1_terasort_tests.adoc`, including:
 ** The full `teragen` and command you used and the job output
 ** The same for `terasort`
-** Include the `time` result of each job 
+** Include the `time` result of each job
 
-== HDFS Lab: Test HDFS Snapshots
+=== HDFS Lab: Test HDFS Snapshots
 
-List the commands and output for each step below in `storage/labs/2_snapshot_test.adoc`.
+List the commands and output for each step below in `03-storage/labs/2_snapshot_test.adoc`.
 
 * Create a `precious` directory in HDFS; copy the ZIP course file into it.
 * Enable snapshots for `precious`
 * Create a snapshot called `sebc-hdfs-test`
 * Delete the directory
 * Delete the ZIP file
-* Restore the deleted file 
+* Restore the deleted file
 
-* Capture the NameNode web UI screen that lists snapshots in `storage/labs/2_snapshot_list.png`.
+* Capture the NameNode web UI screen that lists snapshots in `03-storage/labs/2_snapshot_list.png`.
 
-== HDFS Lab: Enable HDFS HA
+=== HDFS Lab: Enable HDFS HA
 
 * Use the Cloudera Manager wizard to enable HA
 ** Once configured, get a screenshot of the HDFS Instances tab
 *** Hint: Follow closely the link:https://www.cloudera.com/documentation/enterprise/latest/topics/cdh_hag_hdfs_ha_enabling.html[Enabling HDFS HA Using Cloudera Manager] instructions. There's more work that needs to be done besides running the wizard.
-*** Name the file `storage/3_HDFS_HA.png`
+*** Name the file `03-storage/3_HDFS_HA.png`
 * Add a CM user and name it with your GitHub handle
 ** Assign the `Full Administrator` role to this user
 ** Assign the password `cloudera` to this user
 ** Re-assign the `admin` user to the `Limited Operator` role
-** Take a screenshot of your users page; save it to `storage/labs/4_CM_users.png`
+** Take a screenshot of your users page; save it to `03-storage/labs/4_CM_users.png`
 ** In an Issue comment, post the URL to your Cloudera Manager instance
 * Label your Issue `review`

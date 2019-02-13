@@ -1,11 +1,20 @@
 = Git/Github Tips
 
+* <<accepting_changes_to_the_course_material, Accepting Changes to the Course Material>>
+* <<updating_your_repository, Updating your repository>>
+* <<configuring_default_user, Configuring default user>>
+* <<extracting_the_repo_from_a_zip_file, Extracting the repo from a zip file>>
+* <<tl_dr_why_use_github, tl;dr: Why Use GitHub?>>
+* <<ok_but_why_should_i_have_to_use_github, Ok, but why should I have to use GitHub?>>
+
+[[accepting_changes_to_the_course_material]]
 == Accepting Changes to the Course Material
 
 Your instructors may update the course material
 to address typos or other errors. To keep things simple, we'll send
 you the file(s) we want you to change by email. Replace the current file, add and commit the change, and all is good.
 
+[[updating_your_repository]]
 == Updating your repository
 
 **Do not** add new or changed files directly to your GitHub repository.
@@ -24,6 +33,7 @@ _syncing their forks_.
 
 The process for doing this with GitHub is link:https://help.github.com/articles/syncing-a-fork/[described here].
 
+[[configuring_default_user]]
 == Configuring default user
 
 Before you start pushing changes to your GitHub repository, ensure you have configured git on your laptop with your user details. If you don't do this your contributions in GitHub may appear with the wrong user name. To configure the user details, run the following commands:
@@ -31,6 +41,7 @@ Before you start pushing changes to your GitHub repository, ensure you have conf
 * `git config --global user.name "<your name>"`
 * `git config --global user.email "<your email address>"`
 
+[[extracting_the_repo_from_a_zip_file]]
 == Extracting the repo from a zip file
 
 If you unpacked your repo from a ZIP file provided by your instructor, please make sure:
@@ -71,6 +82,7 @@ This routine will avoid synchronization problems that can occur
 when both copies have been edited in a different way at the same
 time.
 
+[[tl_dr_why_use_github]]
 == tl;dr: Why Use GitHub?
 
 You probably have not used a source-code control system with a training course before. We've incorporated
@@ -119,6 +131,7 @@ These labs tend to show the software works as described. By design
 they may sidestep showing how the software can be applied to a
 reasonable use case that has not been factored into lab design.
 
+[[ok_but_why_should_i_have_to_use_github]]
 == Ok, but why should I have to use GitHub?
 
 In short, so we can create a dialog for your learning.

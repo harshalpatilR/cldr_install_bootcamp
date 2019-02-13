@@ -3,6 +3,7 @@ and vcores per working node. Settings for the NodeManager govern
 per-node limits, while settings for the ResourceManager (scheduler)
 govern limits for any container request.
 
+
 | YARN property                              | Basic description                             | How it affects MR or Spark jobs
 |--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `yarn.nodemanager.resource.memory-mb`      | Total RAM available for containers (MB) | Max RAM per node available for MR tasks or Spark executors                                                                                          |

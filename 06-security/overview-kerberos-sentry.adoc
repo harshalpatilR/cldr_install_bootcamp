@@ -1,14 +1,22 @@
-[[cdh_security_section]]
 = CDH Security
 
-* <<security_review, Quick basics overview>>
-* <<security_authentication, Strong Authentication>>
-* <<security_authorization, Better Authorization>>
-* <<security_encryption, Encryption>>
-* <<security_visibility, Auditing &amp; Visibility>>
-* <<security_cm_configuration, CM-based Configuration>>
+* <<quick_basics_overview, Quick basics overview>>
+* <<strong_authentication_kerberos, Strong Authentication: Kerberos>>
+* <<fine_grained_authorization, Fine-grained Authorization>>
+* <<hdfs_permissions, HDFS Permissions>>
+* <<sentry, Apache Sentry>>
+* <<in_flight_encryption, In-flight Encryption>>
+* <<at_rest_encryption, At-rest encryption>>
+* <<auditing, Auditing>>
+* <<preparing_a_kerberos_configuration, Preparing a Kerberos Configuration>>
+* <<potential_problems, Potential problems>>
+* <<common_misconceptions, Common misconceptions>>
+* <<security_labs_preparation, Security Labs Preparation>>
+* <<lab_integrating_kerberos_with_cloudera_manager, Lab: Integrating Kerberos with Cloudera Manager>>
+* <<sentry_lab, Sentry Lab>>
+* <<double_bonus_security_lab_implement_tls_level_1_security, Double-bonus Security Lab: Implement TLS Level 1 Security>>
 
-[[security_review]]
+[[quick_basics_overview]]
 == Quick basics overview
 
 * **Perimeter**
@@ -26,7 +34,7 @@
 ** Auditing data practices without exposing content
 ** Separation of concerns: storage management vs. data stewardship
 
-[[security_authentication]]
+[[strong_authentication_kerberos]]
 == Strong Authentication: Kerberos
 
 * The Apache document link:http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-common/SecureMode.html["Hadoop in Secure Mode"] lists four needs for strong authentication:
@@ -40,9 +48,9 @@
 ** Browser authentication supported by link:http://en.wikipedia.org/wiki/SPNEGO[HTTP SPNEGO]
 * LDAP/Active Directory integration is supported
 ** Applying existing user databases to Hadoop cluster is a common ask
-* link:http://www.roguelynn.com/words/explain-like-im-5-kerberos/[ELI5: Kerberos]: Great introduction / refresher to Kerberos concepts.        
+* link:http://www.roguelynn.com/words/explain-like-im-5-kerberos/[ELI5: Kerberos]: Great introduction / refresher to Kerberos concepts.
 
-== Active Directory Integration
+=== Active Directory Integration
 
 * Cloudera PS recommends Direct-to-AD integration as preferred practice.
 * The alternative: a link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_sg_hadoop_security_active_directory_integrate.html[one-way cross-realm trust to AD]
@@ -53,7 +61,7 @@
 ** Version / feature incompatibility
 ** AD configurations that shouldn't be a problem
 
-== Common Direct-to-AD Issues
+=== Common Direct-to-AD Issues
 
 * Incorrect `/etc/krb5.conf` configuration
 ** Test with `kinit` before integrating
@@ -65,17 +73,17 @@
 ** `export HADOOP_OPTS="-Dsun.security.krb5.debug=true"`
 ** `export HADOOP_ROOT_LOGGER="DEBUG,console"`
 
-[[security_authorization]]
+[[fine_grained_authorization]]
 == Fine-grained Authorization
 
-* <<hdfs_perms_acls, HDFS permissions & ACLs>>
+* <<hdfs_permissions, HDFS permissions & ACLs>>
 ** File permissions for user-group-world may be too simple
 ** You must support a list of groups, not just one
 * link:https://sentry.incubator.apache.org/[Apache Sentry (incubating)]
 ** Protects data objects (`server, database, table, URI`) that are projected onto file content
 ** Maps Linux/LDAP groups to roles that are configured with access privileges
 
-[[hdfs_perms_acls]]
+[[hdfs_permissions]]
 == link:http://hadoop.apache.org/docs/r2.6.0/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html[HDFS Permissions]
 
 * HDFS permissions are mostly POSIX
@@ -89,7 +97,8 @@
 ** ACLs are best used to refine -- not replace -- file permissions
 *** There is a measurable cost to storing and processing them
 
-== link:http://blog.cloudera.com/blog/2013/07/with-sentry-cloudera-fills-hadoops-enterprise-security-gap/[Apache Sentry Basics]
+[[sentry]]
+== link:http://blog.cloudera.com/blog/2013/07/with-sentry-cloudera-fills-hadoops-enterprise-security-gap/[Apache Sentry]
 
 * Originally a Cloudera project, now an link:http://sentry.apache.org/[Apache-governed project]
 ** Documentation not fully migrated to ASF
@@ -97,37 +106,33 @@
 ** Objects: server, database, table, view, URI
 ** Authorization privileges: `SELECT`, `INSERT`, `ALL`
 * Sentry policies defines a role with privileges to an object
-** Ex. `GRANT SELECT ON default.table_07 TO ROLE analyst;`  
+** Ex. `GRANT SELECT ON default.table_07 TO ROLE analyst;`
 ** You can then assign a group (LDAP or Linux) to that role
 ** `GRANT ROLE analyst to GROUP bi_team;`
 ** Add or remove users in the group at any time
 * Sentry can be enforced for Hive, Impala and/or Search
 ** HiveServer2 is wired for Sentry
 ** Search has a legacy form of implementation
+* Cloudera Manager has High Availability support for Sentry
 
-== Sentry Design
+=== Sentry Design
 
-=== Graphic overview
-
-<img src="http://blog.cloudera.com/wp-content/uploads/2013/07/Untitled.png">
-
-== Sentry Design Notes
+image::png/sentry_design.png[width=400]
 
 * Each service binds to a policy engine
 ** `impalad` and `HiveServer2` have separate hooks
-** Cloudera Search uses `policy.ini` files
 * Initial Sentry behavior: all access is denied
 ** Rules are exceptions to default behavior
-* Next step: synchronizing Sentry & HDFS
-** Goal: automate writing ACLs for grants and revocations
-* A fully-formed link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_sg_sentry.html#concept_iw1_5dp_wk_unique_1[config example is here]
-* You can also watch a short link:http://vimeo.com/79936560[video overview here]
+* link:https://www.cloudera.com/documentation/enterprise/latest/topics/sg_hdfs_sentry_sync.html[Sentry HDFS Synchronization]
+** Automatically maps policies to HDFS ACLs
 
-== Sentry and link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hiveserver2_configure.html[HiveServer2]
+=== Sentry and link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hiveserver2_configure.html[HiveServer2]
 
-<img src="https://blogs.apache.org/sentry/mediaresource/1554e24d-1365-4feb-9d0d-5832ecb90628">
+image::png/sentry_and_hs2.png[width=400]
 
-== link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_sentry_service.html[The Sentry Service]
+_Source: https://blogs.apache.org/sentry/_
+
+=== link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_sentry_service.html[The Sentry Service]
 
 * Introduced in C5.1
 * Uses database storage
@@ -136,7 +141,7 @@
 * Impala & Hive can use the db or policy files
 * Cloudera Search can only use policy files
 
-[[security_encryption]]
+[[in_flight_encryption]]
 == In-flight Encryption
 
 * How-to is link:http://blog.cloudera.com/blog/2013/03/how-to-set-up-a-hadoop-cluster-with-network-encryption/[documented here]
@@ -150,6 +155,7 @@
 ** HTTP-based UIs
 ** NameNode data and `fsimage` transfers
 
+[[at_rest_encryption]]
 == At-rest encryption
 
 * Must be transparent to Hadoop clients and services
@@ -161,8 +167,8 @@
 ** Key Trustee (KTS) & Key Management Server (KMS) provide off-cluster storage
 * Navigator Encrypt supports Linux volume or file encryption
 
-[[security_visibility]]
-== Auditing &amp; Visibility
+[[auditing]]
+== Auditing
 
 * Provided by Cloudera Navigator
 * Used to audit data access (filesystem, databases, log of queries run)
@@ -170,7 +176,7 @@
 ** Example: list all failed access attempts each month
 * Supports redaction of sensitive fields
 
-[[security_cm_configuration]]
+[[preparing_a_kerberos_configuration]]
 == Preparing a Kerberos Configuration
 
 * Know the link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_ports_cdh5.html[network ports that CDH and third-party software use]
@@ -179,6 +185,7 @@
 * Cloudera link:https://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_intro_kerb.html[slightly higher-level instructions are here]
 * Or you can use link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Managing_Smart_Cards/installing-kerberos.html[RedHat's documentation]
 
+[[potential_problems]]
 == Potential problems
 
 * Does your KDC allows *renewable tickets*?
@@ -189,6 +196,7 @@
 **. Trash your KDB and make a new one
 * Your Cloudera Manager user (`cloudera-scm`) will need administrative privileges to generate a principal for each Hadoop service.
 
+[[common_misconceptions]]
 == Common misconceptions
 
 * Your Kerberos realm name depends on your FQDN (it doesn't)
@@ -196,22 +204,24 @@
 * The `/admin` suffix has admin privileges
 ** Only if you define them in `/var/kerberos/krb5kdc/kadm5.acl`
 
+[[security_labs_preparation]]
 == Security Labs Preparation
 
 Before you start:
 
 * Load sample data for Hive/Impala
 ** Login to HUE using your GitHub name and the password `cloudera`
-** The first login to Hue becomes the admin account 
+** The first login to Hue becomes the admin account
 * Follow the setup wizard to load sample tables for Hive and Impala
 ** You'll need this data to support the Sentry lab
 
+[[lab_integrating_kerberos_with_cloudera_manager]]
 == Lab: Integrating Kerberos with Cloudera Manager
 
-* Plan one: follow the link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_s4_kerb_wizard.html[documentation here]
-* Plan two: Launch the Kerberos wizard and complete the checklist.
-** Set up an MIT KDC
-* Once integration is sucessful, add these files to `security/labs`:
+* Follow the link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_sg_s4_kerb_wizard.html[documentation here]
+** Use *Active Directory* (AD) integration
+** Your instructor will provide the necessary information for the AD server
+* Once integration is sucessful, add these files to `06-security/labs`:
 ** `/etc/krb5.conf` as `krb5.conf.adoc`
 ** `/var/kerberos/krb5kdc/kdc.conf` as `kfc.conf.adoc`
 ** `/var/kerberos/krb5kdc/kadm5.acl` as `kadm5.acl.adoc`
@@ -219,17 +229,9 @@ Before you start:
 ** The `kinit` command you use to authenticate your test user
 ** The output from a `klist` command listing your credentials and ticket lifetime
 
-== Sentry Lab 
+[[sentry_lab]]
+== Sentry Lab
 
 * Install link:http://www.cloudera.com/documentation/enterprise/latest/topics/sg_sentry_service_config.html[Sentry as a Service]
 * Follow this link:./sentry-tutorial.adoc[Sentry tutorial]
 * Label the Issue `review` once you are finished
-
-== Double-bonus Security Lab: Implement TLS Level 1 Security
-
-* This is a link:http://www.cloudera.com/documentation/enterprise/latest/topics/how_to_configure_cm_tls.html[straightforward procedure]
-* Copy the `config.ini` file of the agent on any host to `security/labs/config.ini.adoc`
-** Code-format the contents
-* Use a screen capture of CM to show TLS level 1 is enabled
-** Put the capture in `security/labs/tls-level-one.png`
-
