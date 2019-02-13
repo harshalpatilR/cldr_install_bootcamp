@@ -89,13 +89,13 @@
 <p>_Managing resources cluster-wide is divided into three areas_</p>
 
 . <<rm_service_isolation, Service-level isolation>>
-.* Sets minimum resources for all cluster services, including YARN
-.* E.g., HDFS, HBase, Impala, Search, MRv1
+** Sets minimum resources for all cluster services, including YARN
+** E.g., HDFS, HBase, Impala, Search, MRv1
 . <<admission_control, Admission Control for Impala>>
-.* Resource priority based on request, service type
-.* Prevent memory overruns
+** Resource priority based on request, service type
+** Prevent memory overruns
 . <<dynamic_prioritization, Dynamic Resource Pools for YARN>>
-.* Weight resources among pools by scheduling rules
+** Weight resources among pools by scheduling rules
 
 [[rm_service_isolation]]
 == Service-level Isolation (cgroups)

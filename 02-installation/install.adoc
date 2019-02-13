@@ -184,15 +184,15 @@ Put your work in `labs/1_preinstall.adoc`. Make sure to includes the
 command that produces each output.
 
 . Check `vm.swappiness` on all your nodes
-.* Set the value to `1` if necessary
+** Set the value to `1` if necessary
 . Show the mount attributes of your volume(s)
 . If you have `ext`-based volumes, list the reserve space setting
-.* XFS volumes do not support reserve space
+** XFS volumes do not support reserve space
 . Disable transparent hugepage support
 . List your network interface configuration
 . Show that forward and reverse host lookups are correctly resolved
-.* For `/etc/hosts`, use `getent`
-.* For DNS, use `nslookup`
+** For `/etc/hosts`, use `getent`
+** For DNS, use `nslookup`
 . Show the `nscd` service is running
 . Show the `ntpd` service is running<br>
 
@@ -214,12 +214,12 @@ or link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mys
 == MySQL installation - Plan Two Detail
 
 . Download and implement the link:http://dev.mysql.com/downloads/repo/yum/[official MySQL repo]
-.* Enable the repo to install MySQL 5.5
-.* Install the `mysql` package on all nodes
-.* Install `mysql-server` on the server and replica nodes
-.* Download and copy link:https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-binary-installation.html[the JDBC connector] to all nodes.
+** Enable the repo to install MySQL 5.5
+** Install the `mysql` package on all nodes
+** Install `mysql-server` on the server and replica nodes
+** Download and copy link:https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-binary-installation.html[the JDBC connector] to all nodes.
 . You should not need to build a `/etc/my.cnf` file to start your MySQL server
-.* You will have to modify it to support replication. Check MySQL documentation.
+** You will have to modify it to support replication. Check MySQL documentation.
 . Start the `mysqld` service.
 . Use `/usr/bin/mysql_secure_installation` to:<br>
 .. Set password protection for the server<br>
