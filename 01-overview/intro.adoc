@@ -1,6 +1,6 @@
 = FCE Install/Operations Boot Camp
 
-March 11-15, 2019 - Palo Alto, California
+May 20-24, 2019 - Paris, France
 
 * <<introductions_overview, Introductions & Overview>>
 * <<audience_assumptions, Audience Assumptions>>
@@ -12,8 +12,7 @@ March 11-15, 2019 - Palo Alto, California
 [[introductions_overview]]
 == Introductions & Overview
 
-* Alex Ciobanu (Senior Solution Architect) - `alexciobanu`
-* André Araújo (Principal Solutions Architect) - `araujo`
+* Massimo Rubagotti (Senior Solutions Architect) - `massimo`
 * Please introduce yourselves:
 ** Name
 ** Role & Location
