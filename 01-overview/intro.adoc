@@ -48,7 +48,7 @@ The course material assumes you have knowledge or experience to:
 == Course Plan
 
 * Seven general topics with specific, up-to-date content
-.. link:../02-installation/install.adoc[Installation]
+.. link:../02-installation-cdh/install.adoc[Installation]
 .. link:../03-storage/hdfs_testing.adoc[Storage]
 .. link:../04-resources/yarn_rm.adoc[Resource Management]
 .. link:../05-enterprise/cm.adoc[Using Cloudera Manager]
