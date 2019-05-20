@@ -6,6 +6,7 @@ May 20-24, 2019 - Paris, France
 * <<audience_assumptions, Audience Assumptions>>
 * <<course_objectives, Course Objectives>>
 * <<course_plan, Course Plan>>
+* <<expected, Expected From You!>>
 * <<friday_morning_challenge_phase, Friday Morning: Challenge Phase>>
 * <<submitting_work, Submitting Work>>
 
@@ -34,6 +35,14 @@ The course material assumes you have knowledge or experience to:
 * Prepare you to install an EDH cluster for production use
 * Evaluate your readiness for a service engagement
 * Identify next steps in your own skills development for EDH
+
+[[expected]]
+== Expected From You!
+
+* If you find something very easy, help someone else figure it out
+* Try to solve blockers as a group before reaching out
+* Also don’t get bogged down with an error for too long
+* Capture information about what you achieved, what worked well, what was challenging, and metrics such as performance
 
 [[course_plan]]
 == Course Plan
