@@ -13,7 +13,8 @@ May 20-24, 2019 - Paris, France
 [[introductions_overview]]
 == Introductions & Overview
 
-* Massimo Rubagotti (Senior Solutions Architect) - `massimo`
+* Alex Ciobanu (Senior Solutions Architect) - `alexciobanu`
+* André Araújo (Principal Solutions Architect) - `araujo`
 * Please introduce yourselves:
 ** Name
 ** Role & Location
