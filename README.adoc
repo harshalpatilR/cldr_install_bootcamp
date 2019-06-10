@@ -24,7 +24,7 @@ below.
 * Add your instructors as Collaborators to your GitHub repo. Because
 we have 25 students and only a few people to facilitate labs, we'll give
 you all the GitHub names you need at the beginning of class.
-The instructors' GitHub names are: `massimo`.
+The instructors' GitHub names are: `alexciobanu` and `araujo`.
 +
 Adding your instructors as Collaborators will let them create _pull
 requests_ on your work. This is a way of editing your submissions
