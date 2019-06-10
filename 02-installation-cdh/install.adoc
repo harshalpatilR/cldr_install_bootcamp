@@ -185,7 +185,7 @@ command that produces each output.
 ** For `/etc/hosts`, use `getent`
 ** For DNS, use `nslookup`
 . Show the `nscd` service is running
-. Show the `ntpd` service is running<br>
+. Show the `ntpd` service is running
 
 **NOTE**: For this lab, stick to the checks above. When performing pre-reqs check for customers, though, use the link:https://cloudera.box.com/s/b5vk5ltu9t2inotc0pv32hekgns8e9k2[comprehensive list compiled by the FCE folks].
 
@@ -199,7 +199,7 @@ Choose one of these plans to follow:
 * You can use the steps
 link:http://www.cloudera.com/documentation/enterprise/latest/topics/install_cm_mariadb.html[documented here for
 MariaDB]
-or link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mysql.html[here for MySQL].<br>
+or link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mysql.html[here for MySQL].
 * The steps below are MySQL-specific.
 **  If you are using RHEL/CentOS 7.x, **use MariaDB**.
 
@@ -213,35 +213,40 @@ or link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mys
 . You should not need to build a `/etc/my.cnf` file to start your MySQL server
 ** You will have to modify it to support replication. Check MySQL documentation.
 . Start the `mysqld` service.
-. Use `/usr/bin/mysql_secure_installation` to:<br>
-.. Set password protection for the server<br>
-.. Revoke permissions for anonymous users<br>
-.. Permit remote privileged login<br>
-.. Remove test databases<br>
-.. Refresh privileges in memory<br>
+. Use `/usr/bin/mysql_secure_installation` to:
+.. Set password protection for the server
+.. Revoke permissions for anonymous users
+.. Permit remote privileged login
+.. Remove test databases
+.. Refresh privileges in memory
 .. Refreshes the `mysqld` service
-. On the master MySQL node, grant replication privileges for your replica node:<br>
-.. Log in with `mysql -u ... -p` <br>
-.. Note the FQDN of your replica host.<br>
-.. `mysql> **GRANT REPLICATION SLAVE ON \*.\* TO '*user*'@'*FQDN*' IDENTIFIED BY '*password*';**`<br>
-.. `mysql> **SET GLOBAL binlog_format = 'ROW';** `<br>
-.. `mysql> **FLUSH TABLES WITH READ LOCK;`**
-. In a second terminal session, log into the MySQL master and show its  status:<br>
-.. `mysql> **SHOW MASTER STATUS;**`<br>
-.. Make note of the file name and byte offset. The replica needs this info to sync to the master.<br>
-.. Logout of the second session; remove the lock on the first with `mysql> **UNLOCK TABLES;**`
-. Login to the replica server and configure a connection to the master:<br>
+. On the master MySQL node, grant replication privileges for your replica node:
+.. Log in with `mysql -u ... -p`
+.. Note the FQDN of your replica host.
+.. `mysql> GRANT REPLICATION SLAVE ON \*.* TO '<user>'@'<FQDN>' IDENTIFIED BY '<password>';`
+.. `mysql> SET GLOBAL binlog_format = 'ROW';`
+.. `mysql> FLUSH TABLES WITH READ LOCK;`
+. In a second terminal session, log into the MySQL master and show its  status:
+.. `mysql> SHOW MASTER STATUS;`
+.. Make note of the file name and byte offset. The replica needs this info to sync to the master.
+.. Logout of the second session; remove the lock on the first with `mysql> UNLOCK TABLES;`
+. Login to the replica server and configure a connection to the master:
 +
 [source]
 ----
-mysql> **CHANGE MASTER TO**<br> **MASTER_HOST='*master host*',**<br> **MASTER_USER='*replica user*',**<br> **MASTER_PASSWORD='*replica password*',**<br> **MASTER_LOG_FILE='*master file name*',**<br> **MASTER_LOG_POS=*master file offset*;**
+mysql> CHANGE MASTER TO
+         MASTER_HOST='<master_host>',
+         MASTER_USER='<replica_user>',
+         MASTER_PASSWORD='<replica_password>',
+         MASTER_LOG_FILE='<master_file_name>',
+         MASTER_LOG_POS=<master_file_offset>;
 ----
-. Initiate slave operations on the replica<br>
-.. `mysql> **START SLAVE;**`<br>
-.. `mysql> **SHOW SLAVE STATUS \G**`<br>
-.. If successful, the `Slave_IO_State` field will read `Waiting for master to send event`<br>
-.. Once successful, capture this output and store it in `labs/2_replica_working.adoc`<br>
-.. Review your log (`/var/log/mysqld.log`) for errors. If stuck, consult with a colleague or instructor
+. Initiate slave operations on the replica
+.. `mysql> START SLAVE;`
+.. `mysql> SHOW SLAVE STATUS \G`
+. If successful, the `Slave_IO_State` field will read `Waiting for master to send event`
+. Once successful, capture this output and store it in `labs/2_replica_working.adoc`
+. Review your log (`/var/log/mysqld.log`) for errors. If stuck, consult with a colleague or instructor
 
 [[cloudera_manager_install_lab]]
 == Cloudera Manager Install Lab
