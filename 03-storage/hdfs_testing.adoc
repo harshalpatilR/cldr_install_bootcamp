@@ -135,7 +135,7 @@ $ sudo -u hdfs hdfs dfsadmin -report
 
 === Directory caching: Other notes
 
-* [Caching documentation is here] (http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hdfs_caching.html)
+* Caching documentation is link:http://www.cloudera.com/documentation/enterprise/latest/topics/cdh_ig_hdfs_caching.html[here]
 * We do have to balance memory demand for caching with other memory-based features
 ** Impala users have link:http://stackoverflow.com/questions/5267231/what-is-the-definition-of-realtime-near-realtime-and-batch-give-examples-of-ea["NRT" expectations]
 ** So do HBase and Search applications
@@ -143,8 +143,8 @@ $ sudo -u hdfs hdfs dfsadmin -report
 
 === Technical Notes on SCR and ZCR
 
-* General advice: take time to map key upstream features to their [JIRAs] (https://issues.apache.org/jira)
-* [Short-circuit Reads] (https://issues.apache.org/jira/browse/HDFS-2246)
+* General advice: take time to map key upstream features to their  link:https://issues.apache.org/jira[JIRAs]
+* link:https://issues.apache.org/jira/browse/HDFS-2246[Short-circuit Reads]
 ** Clients can examine a DataNode's process map to find cached blocks
 ** Based on link:http://poincare.matf.bg.ac.rs/~ivana/courses/tos/sistemi_knjige/pomocno/apue/APUE/0201433079/ch17lev1sec4.html[file descriptor passing], AKA short-circuit reads.
 ** link:http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/admin_hdfs_short_circuit_reads.html[Enabled in CM by default]
@@ -164,7 +164,7 @@ $ sudo -u hdfs hdfs dfsadmin -report
 ** Recover deleted files from a versioned folder
 ** Like `.Trash` folder but without an automatic purge
 * link:http://archive.cloudera.com/cdh5/cdh/5/hadoop/hadoop-project-dist/hadoop-hdfs/HdfsSnapshots.html[Apache docs on the CLI]
-* [Using Cloudera Manager] (http://www.cloudera.com/documentation/enterprise/latest/topics/cm_bdr_snapshot_intro.html) requires an active trial or Enterprise license
+* link:http://www.cloudera.com/documentation/enterprise/latest/topics/cm_bdr_snapshot_intro.html[Using Cloudera Manager] requires an active trial or Enterprise license
 
 [[hdfs_backups]]
 == HDFS Backups
