@@ -77,8 +77,8 @@ image::png/ambari_arch.png[width=600]
 
 In this lab you will complete the installation of the following:
 
-* Ambari 2.7
-* HDP 3.0
+* Ambari 2.7.x
+* HDP 3.x
 
 By the end of the lab you should have a running Ambari server and Hadoop cluster installed as per Cloudera's best practices.
 
@@ -91,7 +91,7 @@ By the end of the lab you should have a running Ambari server and Hadoop cluster
 * For GCE, use `n1-highmen-2` nodes
 ** Do not use preemptible instances
 * Make sure the AMI you choose is a Cloudera-supported OS
-** link:https://www.cloudera.com/documentation/enterprise/release-notes/topics/rn_consolidated_pcm.html#concept_jpd_hpz_jdb[Check the supported platforms] for the Ambari/HDP version you are using
+** link:https://supportmatrix.hortonworks.com/[Check the supported platforms] for the Ambari/HDP version you are using
 * Use one instance to host Ambari server and edge/client-facing services
 
 === System Configuration Checks
@@ -141,7 +141,7 @@ Use passwords that satisfy the following requirements:
 
 === Install and configure a MariaDB instance
 
-In this lab you will setup MariaDB *without* HA. HA configuration was already practice in a previous lab so we'll skip HA configuration now for the sake of time.
+In this lab you will setup MariaDB *without* HA. HA configuration was already practiced in a previous lab so we'll skip HA configuration now for the sake of time.
 
 * Check Ambari and HDP compatibility with MariaDB versions and ensure an appropriate version is installed
 * Follow the appropriate instructions:
@@ -187,7 +187,7 @@ Adhere to the requirements below while creating your cluster. Detailed instructi
 * Do *not* include the Ambari host in the list of *Target Hosts*
 * Deploy **only** the following HDP services:
 ** YARN, Tez, Hive, HBase, Sqoop, Oozie, Zookeeper
-** Infra Solr, Ambari Metrics, Atlas, Kafka, Log Stash
+** Infra Solr, Ambari Metrics, Atlas, Kafka, Log Search
 ** Ranger, Spark2, Zeppelin Notebook
 * Assign Slaves and Clients to *hosts 3, 4 and 5*
 * Once your cluster is deployed and services are healthy (green), take a screenshot of the Ambari home page

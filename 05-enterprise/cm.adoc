@@ -13,15 +13,7 @@
 * <<sample_cm_api_calls, Sample CM API calls>>
 * <<custom_service_descriptors, Custom Service Descriptors>>
 * <<cm_lab, CM Lab>>
-
-// material to add:
-// * Wizards include
-// ** Express Install
-// ** Add Service/Role
-// ** Upgrade CDH
-// ** Enable HA (NameNode, Oozie, YARN RM)
-// * Some useful things are less visible
-// ** `Service -> Instances -> Add Role Instances -> View By Host` (button)
+* <<ambari_lab, Ambari Lab>>
 
 [[cm_overview]]
 == CM Overview
@@ -243,3 +235,18 @@ _Use CM to answer the following questions. For some questions, search will help 
 ** Report the database server in use by CM
 * Add these API calls and their output to `05-enterprise/labs/4_API_upgrade_calls.adoc`
 * Label the Issue `review`
+
+[[ambari_lab]]
+== Ambari Lab
+
+=== Ambari Quiz
+
+_Use Ambari to answer the following questions. For some questions, *the online documentation* will help you. Watch out for trick questions! (Some of these questions have been asked by customers.)  Put the questions and their answers in the file_ `05-enterprise/labs/0_AMBARI_treasure_hunt.adoc`
+
+* What other services/components need also to be upgraded when we upgrade the Ambari server?
+* How do you enable an Ambari experimental functionality?
+* Use `curl` to get name of the HDP cluster, using Ambari REST API
+* Where do you go in Ambari to enable Kerberos?
+* Save to the file `labs/1_heatmap.png` a screenshot of a _heatmap_ of the percentage of memory used across all the hosts.
+* If you forget the administrator password for Ambari, how to you reset it?
+* If the hostname of the Ambari Server is changed, all the hosts in the cluster will stop sending heartbeats to Ambari. What are the steps you need to take to restore the heartbeats.
