@@ -1,0 +1,64 @@
+Note to instructor: Copy & paste the message below in the bootcamp Slack channel. PIN the message for easy reference.
+------------------------------------------------------------------------------------------------
+:info: *BOOTCAMP PREP CHECKLIST* :info:
+
+_Note: This message is pinned to the channel :info: page. Look for the :pushpin: for an easy shortcut._
+
+:point_right: *_Logistics_* :point_left:
+
+1. Read the logistics doc carefully: http://tiny.cloudera.com/bootcamp-logistics
+2. Book your flights and hotel as per instructions!
+
+:point_right: *_Accounts and Software_* :point_left:
+
+1. Get an internal GitHub Account
+> • Sign-up at http://github.infra.cloudera.com
+
+2. Get a CloudCat account
+> • Sign-up at http://cloudcat.infra.cloudera.com/
+
+3. Install Intellij IDEA (Community Edition) on your laptop
+> • Install IntelliJ IDEA (CE) on your laptop.
+
+:point_right: *_Technical preparation_* :point_left:
+
+1. Git and GitHub basics
+> *GitHub*
+> • Get familiar with the GitHub workflow: https://guides.github.com/
+>
+> *Git - Beginners*
+> • What is version control: https://www.atlassian.com/git/tutorials/what-is-version-control
+> • What is Git: https://www.atlassian.com/git/tutorials/what-is-git
+> • Why Git: https://www.atlassian.com/git/tutorials/why-git
+> • Install Git: https://www.atlassian.com/git/tutorials/install-git
+> • Git Cheatsheet: https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet
+>
+> *Git - Getting Started*
+> • Setting up a repository: https://www.atlassian.com/git/tutorials/setting-up-a-repository
+> • Saving changes: https://www.atlassian.com/git/tutorials/saving-changes
+> • Inspecting a repository: https://www.atlassian.com/git/tutorials/inspecting-a-repository
+>
+> *Collaborating*
+> • Syncing: https://www.atlassian.com/git/tutorials/syncing
+> • Making a Pull Request: https://www.atlassian.com/git/tutorials/making-a-pull-request
+
+2. CloudCat basics
+> • Read these:
+> - CloudCat: https://cloudera.atlassian.net/wiki/spaces/ENG/pages/100829134/CloudCat
+> - Creating EC2 VM using CloudCat: https://cloudera.atlassian.net/wiki/spaces/ENG/pages/100830466/Creating+EC2+VM+using+CloudCat
+> • Practice spinning up and configuring some nodes on CloudCat: http://cloudcat.infra.cloudera.com/
+> • *Be sure to delete everything you create!*
+
+3. Intellij IDEA basics
+> • If you haven't used this IDE before, google for a tutorial and get some familiarity with it.
+> • *NOTE*: Don’t wait until we use this tool in class. We will spend zero time on what you can learn about this tool through tutorials or by asking a colleague.
+
+4. Learn to configure passwordless SSH
+> • Learn and practice hot to configure passwordless SSH - https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/
+
+5. Pick a cluster console administration tool
+> • The main goal for this tool is to allow running commands on many nodes of a cluster in parallel.
+> • There are many alternatives available and it's down to personal preference. You can pick and choose:
+> - csshX - it’s lightweight and sufficient for managing a small number of nodes - https://github.com/brockgr/csshx
+> - iTerm2 - it supports multiple windows and a broadcast input feature - http://iterm2.com
+> - pssh - parallel ssh - https://www.cyberciti.biz/cloud-computing/how-to-use-pssh-parallel-ssh-program-on-linux-unix/
