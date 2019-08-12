@@ -1,6 +1,6 @@
 = FCE Install/Operations Boot Camp
 
-June 10-14, 2019 - Palo Alto, California
+August 12-16, 2019 - Palo Alto, California
 
 * <<introductions_overview, Introductions & Overview>>
 * <<audience_assumptions, Audience Assumptions>>
