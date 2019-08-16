@@ -1,6 +1,6 @@
 = Challenges - FCE New Hire Boot Camp
 
-March 15, 2019
+August 16, 2019
 
 * Overview
 ** Build a CM-managed CDH cluster and test it
@@ -25,23 +25,23 @@ March 15, 2019
 * Make sure your GitHub labels have been configured
 * Assign the Issue to yourself and label it `started`
 * Add the following Linux accounts to **all** nodes
-** User `dave` with a UID of `1984`
-** User `buster` with a UID of `1942`
-** Create the group `north` and add `dave` to it
-** Create the group `south` and add `buster` to it
+** User `nicholas` with a UID of `1979`
+** User `jesse` with a UID of `1999`
+** Create the group `herbal` and add `nicholas` to it
+** Create the group `life` and add `jesse` to it
 * In the file `07-challenges/labs/0_setup.adoc`:
 ** List the cloud provider you are using (AWS, GCE, Azure, CloudCat, other)
 ** List your instances by IP address and DNS name (don't use `/etc/hosts` for this)
 ** List the Linux release you are using
 ** List the file system capacity for the first node
 ** List the command and output for `yum repolist enabled`
-** List the `/etc/passwd` entries for `dave` and `buster`
+** List the `/etc/passwd` entries for `nicholas` and `jesse`
 *** Do not list the entire file
-** List the `/etc/group` entries for `north` and `south`
+** List the `/etc/group` entries for `herbal` and `life`
 *** Do not list the entire file
 ** List the output of the following commands:
-*** `getent group north`
-*** `getent passwd south`
+*** `getent group herbal`
+*** `getent passwd life`
 * Push these updates to GitHub
 * Label your Issue `review`
 * Assign the Issue to an instructor
@@ -73,7 +73,7 @@ March 15, 2019
 
 * Create the Issue `Install CM`
 * Assign yourself and label it `started`
-* Install Cloudera Manager **6.1.1** on the last node listed in `0_setup.adoc`
+* Install Cloudera Manager **6.2.0** on the last node listed in `0_setup.adoc`
 * List the command and output for `ls /etc/yum.repos.d` in `07-challenges/labs/2_cm.adoc`
 ** Copy `cloudera-manager.repo` to `07-challenges/labs/2_cloudera-manager.repo.adoc`
 * Connect Cloudera Manager Server to its database
@@ -87,14 +87,14 @@ March 15, 2019
 * Push these changes to GitHub and label the Issue `review`
 * Assign the issue to an instructor
 
-== Challenge 3 - Install the lastest **CDH 5.16.1** version
+== Challenge 3 - Install the lastest **CDH 6.1.0** version
 
 * Create the Issue `Install CDH`
 * Assign yourself and label it `started`
-* **READ THIS**: Note that you're **NOT** installing CDH 6.1.1
-* Deploy Core set services + HBase
+* **READ THIS**: Note that you're **NOT** installing CDH 6.2.x
+* Deploy Core set services + Kudu
 ** Rename your cluster after your GitHub handle
-* Create user directories in HDFS for `dave` and `buster`
+* Create user directories in HDFS for `nicholas` and `jesse`
 ** Ensure the owner and group for each directory is the corresponding user and group
 * Add the following to `3_cm.adoc`:
 ** The command and output for `hdfs dfs -ls /user`
@@ -111,7 +111,7 @@ March 15, 2019
 
 * Create the Issue `Test HDFS`
 * Assign yourself and label it `started`
-* As user `dave`, use `teragen` to generate a 6,6200,000-record dataset
+* As user `nicholas`, use `teragen` to generate a 6,6200,000-record dataset
 ** Write the output to 4 files
 ** Set the block size to 32 MB
 ** Set the mapper container size to 768 MiB
@@ -120,8 +120,8 @@ March 15, 2019
 * Put the following in `07-challenges/labs/4_teragen.adoc`
 ** The full `teragen` command and output
 ** The result of the `time` command
-** The command and output of `hdfs dfs -ls /user/dave/tgen`
-** The command and output of `hadoop fsck -blocks /user/dave`
+** The command and output of `hdfs dfs -ls /user/nicholas/tgen`
+** The command and output of `hadoop fsck -blocks /user/nicholas`
 * Push this work to GitHub and label the Issue `review`
 * Assign the issue to an instructor
 
@@ -131,7 +131,7 @@ March 15, 2019
 * Assign the issue to yourself and label it `started`
 * Change the memory allocation for YARN to maximally use the resources in the cluster for both Spark and MapReduce jobs
 
-* Run the `terasort` program as user `buster` with the output target `/user/buster/tsort`
+* Run the `terasort` program as user `jesse` with the output target `/user/jesse/tsort`
 ** Use the `time` command to prove that the number of mappers chosen produces the ideal time for executing teragen.
 ** Copy the execution times and tuning parameters changed into `07-challenges/labs/5_terasort.adoc`
 * Push this work to GitHub and label the Issue `review`
@@ -142,11 +142,12 @@ March 15, 2019
 * Create the Issue `Install Sentry`
 ** Label it `started`
 * Use Cloudera Manager to install and enable Sentry
+** Note for this lab you do not need to enable kerberos
 * Configure both Hive & Impala to use Sentry
 * Create a role for `HttpViewer` that can read the `web_logs` database
-** Assign the `north` group to this role
+** Assign the `herbal` group to this role
 * Create a role for `ServiceViewer` that can read the `customers` databases
-** Assign the `south` group to this role
+** Assign the `life` group to this role
 * Use `beeline` to select ten records from `web_logs`
 * Use `beeswax` to select ten records from `customers`
 * Capture each outcome as a screenshot, `6_beeline.png` and `6_beeswax.png`
@@ -158,6 +159,3 @@ March 15, 2019
 
 * Commit any outstanding changes from your repo to GitHub
 * Notify `araujo@cloudera.com` and `alex.ciobanu@cloudera.com` once you have stopped pushing to your repo
-* In-class candidates only:
-** Please fill out link:https://goo.gl/forms/1PvoLdzGjOVh1leb2[this survey form]
-** Add your final comments to `labs/7_feedback_final.adoc` -- remember to commit them!
