@@ -274,6 +274,106 @@ Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
 Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
 
 
+== DiSABLE Transparent Hugepage support
+
+pssh -v -h ~/clhost  -A -i -l root "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:46:54 [SUCCESS] 172.31.116.203
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:46:54 [SUCCESS] 172.31.116.204
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[3] 10:46:54 [SUCCESS] 172.31.116.206
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[4] 10:46:54 [SUCCESS] 172.31.116.207
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[5] 10:46:54 [SUCCESS] 172.31.116.202
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+
+
+== Network interfaces
+pssh -v -h ~/clhost  -A -i -l root "ip link show"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:56:06 [SUCCESS] 172.31.116.203
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:74:cb brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:56:06 [SUCCESS] 172.31.116.206
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:74:ce brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[3] 10:56:06 [SUCCESS] 172.31.116.202
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:74:ca brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+[4] 10:56:06 [SUCCESS] 172.31.116.204
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:74:cc brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[5] 10:56:06 [SUCCESS] 172.31.116.207
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:74:cf brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+
+== Resolve hosts
+cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+172.31.116.202 harshalinstalllab-5.gce.cloudera.com harshalinstalllab-5  # Added by Google
+169.254.169.254 metadata.google.internal  # Added by Google
+172.31.116.203 harshalinstalllab-3.gce.cloudera.com harshalinstalllab-3	 
+172.31.116.204 harshalinstalllab-1.gce.cloudera.com harshalinstalllab-1
+172.31.116.206 harshalinstalllab-4.gce.cloudera.com harshalinstalllab-4
+172.31.116.207 harshalinstalllab-2.gce.cloudera.com harshalinstalllab-2
+
+
+scp /etc/hosts root@harshalinstalllab-1:/etc/hosts
+The authenticity of host 'harshalinstalllab-1 (172.31.116.204)' can't be established.
+ECDSA key fingerprint is SHA256:9I/UpmR9XqpCE5n9zKJvoBy7HEcc/AfrguAt/4ioZWo.
+ECDSA key fingerprint is MD5:57:41:d9:ee:fe:1e:c0:a0:71:fe:65:64:84:34:66:6d.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalinstalllab-1' (ECDSA) to the list of known hosts.
+root@harshalinstalllab-1's password: 
+hosts                                                                                                                                                                                  100%  599   425.5KB/s   00:00    
+[root@harshalinstalllab-5 transparent_hugepage]# scp /etc/hosts root@harshalinstalllab-2:/etc/hosts
+The authenticity of host 'harshalinstalllab-2 (172.31.116.207)' can't be established.
+ECDSA key fingerprint is SHA256:4N7lCY3Ge+m6DAGS9SeUUL8oCUCj4YPXuHas79HeX+Q.
+ECDSA key fingerprint is MD5:72:a3:6b:05:af:6a:27:3f:89:97:09:c5:e2:bb:4b:9c.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalinstalllab-2' (ECDSA) to the list of known hosts.
+root@harshalinstalllab-2's password: 
+hosts                                                                                                                                                                                  100%  599    35.1KB/s   00:00    
+[root@harshalinstalllab-5 transparent_hugepage]# scp /etc/hosts root@harshalinstalllab-3:/etc/hosts
+The authenticity of host 'harshalinstalllab-3 (172.31.116.203)' can't be established.
+ECDSA key fingerprint is SHA256:v4vCYb8hKLd5R925Ei3zKYVl5bxi8TCliUvoGvip6Yc.
+ECDSA key fingerprint is MD5:97:84:bd:c3:51:4d:00:5e:ff:36:fd:62:bb:03:c2:25.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalinstalllab-3' (ECDSA) to the list of known hosts.
+root@harshalinstalllab-3's password: 
+hosts                                                                                                                                                                                  100%  599   389.6KB/s   00:00    
+[root@harshalinstalllab-5 transparent_hugepage]# scp /etc/hosts root@harshalinstalllab-4:/etc/hosts
+The authenticity of host 'harshalinstalllab-4 (172.31.116.206)' can't be established.
+ECDSA key fingerprint is SHA256:X3lskD73cL6fEOZsLj/Cd9js2aQ8lfiMtVTSHC9TwEM.
+ECDSA key fingerprint is MD5:b5:d5:d6:0c:0f:d8:c3:73:4e:0c:98:4a:b9:aa:43:95.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalinstalllab-4' (ECDSA) to the list of known hosts.
+root@harshalinstalllab-4's password: 
+hosts                                                                                                                                                                                  100%  599    52.9KB/s   00:00    
+
+
 
 
 
