@@ -375,6 +375,221 @@ hosts                                                                           
 
 
 
+== NSCD RUNNING
+pssh -v -h ~/clhost -l root -A -i "service nscd status"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 11:20:07 [SUCCESS] 172.31.116.203
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:31 PST; 2h 11min ago
+ Main PID: 1491 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1491 /usr/sbin/nscd
+
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/group` (8)
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/passwd` (7)
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/group` (8)
+Dec 02 09:08:33 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:44 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/resolv.conf` (5)
+Dec 02 09:08:44 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:50 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 02 11:06:13 harshalinstalllab-3.gce.cloudera.com nscd[1491]: 1491 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+Redirecting to /bin/systemctl status nscd.service
+[2] 11:20:07 [SUCCESS] 172.31.116.206
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:51 PST; 2h 11min ago
+ Main PID: 1491 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1491 /usr/sbin/nscd
+
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/group` (8)
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/passwd` (7)
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/group` (8)
+Dec 02 09:08:52 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:09:04 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring file `/etc/resolv.conf` (5)
+Dec 02 09:09:04 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitoring directory `/etc` (2)
+Dec 02 09:09:10 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 02 11:06:26 harshalinstalllab-4.gce.cloudera.com nscd[1491]: 1491 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+Redirecting to /bin/systemctl status nscd.service
+[3] 11:20:07 [SUCCESS] 172.31.116.202
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:31 PST; 2h 11min ago
+ Main PID: 1490 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1490 /usr/sbin/nscd
+
+Dec 02 09:08:50 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 02 11:04:24 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was moved, removing watch
+Dec 02 11:04:24 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was created, adding watch
+Dec 02 11:04:24 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was written to
+Dec 02 11:04:28 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was moved, removing watch
+Dec 02 11:04:28 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was created, adding watch
+Dec 02 11:04:28 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was written to
+Dec 02 11:04:30 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was moved, removing watch
+Dec 02 11:04:30 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was created, adding watch
+Dec 02 11:04:30 harshalinstalllab-5.gce.cloudera.com nscd[1490]: 1490 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+Redirecting to /bin/systemctl status nscd.service
+[4] 11:20:07 [SUCCESS] 172.31.116.207
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:51 PST; 2h 11min ago
+ Main PID: 1485 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1485 /usr/sbin/nscd
+
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring file `/etc/group` (8)
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring directory `/etc` (2)
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring file `/etc/passwd` (7)
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring directory `/etc` (2)
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring file `/etc/group` (8)
+Dec 02 09:08:52 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring directory `/etc` (2)
+Dec 02 09:09:04 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring file `/etc/resolv.conf` (5)
+Dec 02 09:09:04 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitoring directory `/etc` (2)
+Dec 02 09:09:10 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 02 11:06:00 harshalinstalllab-2.gce.cloudera.com nscd[1485]: 1485 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+Redirecting to /bin/systemctl status nscd.service
+[5] 11:20:07 [SUCCESS] 172.31.116.204
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:31 PST; 2h 11min ago
+ Main PID: 1486 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1486 /usr/sbin/nscd
+
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring file `/etc/group` (8)
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring directory `/etc` (2)
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring file `/etc/passwd` (7)
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring directory `/etc` (2)
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring file `/etc/group` (8)
+Dec 02 09:08:33 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring directory `/etc` (2)
+Dec 02 09:08:44 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring file `/etc/resolv.conf` (5)
+Dec 02 09:08:44 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitoring directory `/etc` (2)
+Dec 02 09:08:50 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 02 11:05:42 harshalinstalllab-1.gce.cloudera.com nscd[1486]: 1486 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+Redirecting to /bin/systemctl status nscd.service
+[root@harshalinstalllab-5 ~]# 
+
+
+== NTPD check
+
+pssh -v -h ~/clhost -l root -A -i "service ntpd status"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 11:22:22 [SUCCESS] 172.31.116.203
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:07 PST; 2h 14min ago
+ Main PID: 1331 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1331 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: Listen normally on 3 eth0 172.31.116.203 UDP 123
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: Listen normally on 4 lo ::1 UDP 123
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:74cb UDP 123
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: Listening on routing socket on fd #22 for interface updates
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 c016 06 restart
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 02 09:08:07 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 c011 01 freq_not_set
+Dec 02 09:08:14 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 c614 04 freq_mode
+Dec 02 09:31:03 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 0612 02 freq_set kernel 42.774 PPM
+Dec 02 09:31:03 harshalinstalllab-3.gce.cloudera.com ntpd[1331]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[2] 11:22:22 [SUCCESS] 172.31.116.204
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:07 PST; 2h 14min ago
+ Main PID: 1331 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1331 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: Listen normally on 3 eth0 172.31.116.204 UDP 123
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: Listen normally on 4 lo ::1 UDP 123
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:74cc UDP 123
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: Listening on routing socket on fd #22 for interface updates
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 c016 06 restart
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 02 09:08:07 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 c011 01 freq_not_set
+Dec 02 09:08:14 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 c614 04 freq_mode
+Dec 02 09:29:50 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 0612 02 freq_set kernel 61.752 PPM
+Dec 02 09:29:50 harshalinstalllab-1.gce.cloudera.com ntpd[1331]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[3] 11:22:22 [SUCCESS] 172.31.116.202
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:07 PST; 2h 14min ago
+ Main PID: 1331 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1331 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: Listen normally on 3 eth0 172.31.116.202 UDP 123
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: Listen normally on 4 lo ::1 UDP 123
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:74ca UDP 123
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: Listening on routing socket on fd #22 for interface updates
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 c016 06 restart
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 02 09:08:07 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 c011 01 freq_not_set
+Dec 02 09:08:14 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 c614 04 freq_mode
+Dec 02 09:24:31 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 0612 02 freq_set kernel 55.255 PPM
+Dec 02 09:24:31 harshalinstalllab-5.gce.cloudera.com ntpd[1331]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[4] 11:22:22 [SUCCESS] 172.31.116.206
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:27 PST; 2h 13min ago
+ Main PID: 1333 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1333 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: Listen normally on 3 eth0 172.31.116.206 UDP 123
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: Listen normally on 4 lo ::1 UDP 123
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:74ce UDP 123
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: Listening on routing socket on fd #22 for interface updates
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 c016 06 restart
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 02 09:08:27 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 c011 01 freq_not_set
+Dec 02 09:08:34 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 c614 04 freq_mode
+Dec 02 09:23:50 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 0612 02 freq_set kernel 55.125 PPM
+Dec 02 09:23:50 harshalinstalllab-4.gce.cloudera.com ntpd[1333]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[5] 11:22:22 [SUCCESS] 172.31.116.207
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Mon 2019-12-02 09:08:26 PST; 2h 13min ago
+ Main PID: 1326 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1326 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 02 09:08:26 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: Listen normally on 3 eth0 172.31.116.207 UDP 123
+Dec 02 09:08:26 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: Listen normally on 4 lo ::1 UDP 123
+Dec 02 09:08:26 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:74cf UDP 123
+Dec 02 09:08:26 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: Listening on routing socket on fd #22 for interface updates
+Dec 02 09:08:27 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 c016 06 restart
+Dec 02 09:08:27 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 02 09:08:27 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 c011 01 freq_not_set
+Dec 02 09:08:33 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 c614 04 freq_mode
+Dec 02 09:24:47 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 0612 02 freq_set kernel 22.213 PPM
+Dec 02 09:24:47 harshalinstalllab-2.gce.cloudera.com ntpd[1326]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+Redirecting to /bin/systemctl status ntpd.service
+
 
 
 
