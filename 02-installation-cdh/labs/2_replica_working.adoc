@@ -1,0 +1,664 @@
+....
+== INSTALL MARIADB on harshalinstalllab-5.gce.cloudera.com	harshalinstalllab-5	172.31.116.202	https://www.googleapis.com/compute/v1/projects/gcp-eng/zones/us-central1-f/instances/harshalinstalllab-5
+
+
+sudo yum install mariadb-server
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: us.mirror.nsec.pt
+ * epel: mirror.steadfastnet.com
+ * extras: us.mirror.nsec.pt
+ * updates: us.mirror.nsec.pt
+Resolving Dependencies
+--> Running transaction check
+---> Package mariadb-server.x86_64 1:5.5.64-1.el7 will be installed
+--> Processing Dependency: mariadb-libs(x86-64) = 1:5.5.64-1.el7 for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: mariadb(x86-64) = 1:5.5.64-1.el7 for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: perl-DBI for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: perl-DBD-MySQL for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: perl(DBI) for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: libaio.so.1(LIBAIO_0.4)(64bit) for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: libaio.so.1(LIBAIO_0.1)(64bit) for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Processing Dependency: libaio.so.1()(64bit) for package: 1:mariadb-server-5.5.64-1.el7.x86_64
+--> Running transaction check
+---> Package libaio.x86_64 0:0.3.109-13.el7 will be installed
+---> Package mariadb.x86_64 1:5.5.64-1.el7 will be installed
+---> Package mariadb-libs.x86_64 1:5.5.60-1.el7_5 will be updated
+---> Package mariadb-libs.x86_64 1:5.5.64-1.el7 will be an update
+---> Package perl-DBD-MySQL.x86_64 0:4.023-6.el7 will be installed
+---> Package perl-DBI.x86_64 0:1.627-4.el7 will be installed
+--> Processing Dependency: perl(RPC::PlServer) >= 0.2001 for package: perl-DBI-1.627-4.el7.x86_64
+--> Processing Dependency: perl(RPC::PlClient) >= 0.2000 for package: perl-DBI-1.627-4.el7.x86_64
+--> Running transaction check
+---> Package perl-PlRPC.noarch 0:0.2020-14.el7 will be installed
+--> Processing Dependency: perl(Net::Daemon) >= 0.13 for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Processing Dependency: perl(Net::Daemon::Test) for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Processing Dependency: perl(Net::Daemon::Log) for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Running transaction check
+---> Package perl-Net-Daemon.noarch 0:0.48-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================================================================================
+ Package                                     Arch                               Version                                      Repository                        Size
+====================================================================================================================================================================
+Installing:
+ mariadb-server                              x86_64                             1:5.5.64-1.el7                               base                              11 M
+Installing for dependencies:
+ libaio                                      x86_64                             0.3.109-13.el7                               base                              24 k
+ mariadb                                     x86_64                             1:5.5.64-1.el7                               base                             8.7 M
+ perl-DBD-MySQL                              x86_64                             4.023-6.el7                                  base                             140 k
+ perl-DBI                                    x86_64                             1.627-4.el7                                  base                             802 k
+ perl-Net-Daemon                             noarch                             0.48-5.el7                                   base                              51 k
+ perl-PlRPC                                  noarch                             0.2020-14.el7                                base                              36 k
+Updating for dependencies:
+ mariadb-libs                                x86_64                             1:5.5.64-1.el7                               base                             759 k
+
+Transaction Summary
+====================================================================================================================================================================
+Install  1 Package  (+6 Dependent packages)
+Upgrade             ( 1 Dependent package)
+
+Total download size: 22 M
+Is this ok [y/d/N]: y
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+(1/8): libaio-0.3.109-13.el7.x86_64.rpm                                                                                                      |  24 kB  00:00:00     
+(2/8): mariadb-libs-5.5.64-1.el7.x86_64.rpm                                                                                                  | 759 kB  00:00:00     
+(3/8): mariadb-5.5.64-1.el7.x86_64.rpm                                                                                                       | 8.7 MB  00:00:00     
+(4/8): perl-DBD-MySQL-4.023-6.el7.x86_64.rpm                                                                                                 | 140 kB  00:00:00     
+(5/8): mariadb-server-5.5.64-1.el7.x86_64.rpm                                                                                                |  11 MB  00:00:00     
+(6/8): perl-DBI-1.627-4.el7.x86_64.rpm                                                                                                       | 802 kB  00:00:00     
+(7/8): perl-Net-Daemon-0.48-5.el7.noarch.rpm                                                                                                 |  51 kB  00:00:00     
+(8/8): perl-PlRPC-0.2020-14.el7.noarch.rpm                                                                                                   |  36 kB  00:00:00     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                27 MB/s |  22 MB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : 1:mariadb-libs-5.5.64-1.el7.x86_64                                                                                                               1/9 
+  Installing : 1:mariadb-5.5.64-1.el7.x86_64                                                                                                                    2/9 
+  Installing : libaio-0.3.109-13.el7.x86_64                                                                                                                     3/9 
+  Installing : perl-Net-Daemon-0.48-5.el7.noarch                                                                                                                4/9 
+  Installing : perl-PlRPC-0.2020-14.el7.noarch                                                                                                                  5/9 
+  Installing : perl-DBI-1.627-4.el7.x86_64                                                                                                                      6/9 
+  Installing : perl-DBD-MySQL-4.023-6.el7.x86_64                                                                                                                7/9 
+  Installing : 1:mariadb-server-5.5.64-1.el7.x86_64                                                                                                             8/9 
+  Cleanup    : 1:mariadb-libs-5.5.60-1.el7_5.x86_64                                                                                                             9/9 
+  Verifying  : 1:mariadb-libs-5.5.64-1.el7.x86_64                                                                                                               1/9 
+  Verifying  : perl-Net-Daemon-0.48-5.el7.noarch                                                                                                                2/9 
+  Verifying  : 1:mariadb-5.5.64-1.el7.x86_64                                                                                                                    3/9 
+  Verifying  : perl-DBD-MySQL-4.023-6.el7.x86_64                                                                                                                4/9 
+  Verifying  : 1:mariadb-server-5.5.64-1.el7.x86_64                                                                                                             5/9 
+  Verifying  : perl-DBI-1.627-4.el7.x86_64                                                                                                                      6/9 
+  Verifying  : libaio-0.3.109-13.el7.x86_64                                                                                                                     7/9 
+  Verifying  : perl-PlRPC-0.2020-14.el7.noarch                                                                                                                  8/9 
+  Verifying  : 1:mariadb-libs-5.5.60-1.el7_5.x86_64                                                                                                             9/9 
+
+Installed:
+  mariadb-server.x86_64 1:5.5.64-1.el7                                                                                                                              
+
+Dependency Installed:
+  libaio.x86_64 0:0.3.109-13.el7            mariadb.x86_64 1:5.5.64-1.el7           perl-DBD-MySQL.x86_64 0:4.023-6.el7       perl-DBI.x86_64 0:1.627-4.el7      
+  perl-Net-Daemon.noarch 0:0.48-5.el7       perl-PlRPC.noarch 0:0.2020-14.el7      
+
+Dependency Updated:
+  mariadb-libs.x86_64 1:5.5.64-1.el7                                                                                                                                
+
+Complete!
+[root@harshalinstalllab-5 ~]# systemctl stop mariadb
+[root@harshalinstalllab-5 ~]# cd /etc
+[root@harshalinstalllab-5 etc]# ls
+DIR_COLORS               chkconfig.d    filesystems  issue           modules-load.d        postfix         rsyslog.d       sysctl.d
+DIR_COLORS.256color      chrony.conf    firewalld    issue.net       motd                  ppp             rwtab           system-release
+DIR_COLORS.lightbgcolor  chrony.keys    fonts        kernel          mtab                  prelink.conf.d  rwtab.d         system-release-cpe
+GREP_COLORS              cron.d         foomatic     krb5.conf       my.cnf                printcap        sasl2           systemd
+GeoIP.conf               cron.daily     fstab        krb5.conf.d     my.cnf.d              profile         securetty       terminfo
+GeoIP.conf.default       cron.deny      gcrypt       ld.so.cache     networks              profile.d       security        tmpfiles.d
+NetworkManager           cron.hourly    ghostscript  ld.so.conf      nscd.conf             protocols       selinux         tuned
+Trolltech.conf           cron.monthly   gnupg        ld.so.conf.d    nsswitch.conf         python          services        udev
+X11                      cron.weekly    groff        libaudit.conf   nsswitch.conf.bak     qemu-ga         sestatus.conf   vconsole.conf
+acpi                     crontab        group        libnl           nsswitch.conf.rpmnew  rc.d            shadow          vimrc
+adjtime                  crypttab       group-       libuser.conf    ntp                   rc.local        shadow-         virc
+aliases                  csh.cshrc      grub.d       locale.conf     ntp.conf              rc0.d           shells          wgetrc
+aliases.db               csh.login      grub2.cfg    localtime       ntp.conf.orig         rc1.d           skel            wpa_supplicant
+alternatives             dbus-1         gshadow      login.defs      openldap              rc2.d           ssh             xdg
+anacrontab               default        gshadow-     logrotate.conf  opt                   rc3.d           ssl             xinetd.d
+asound.conf              depmod.d       gss          logrotate.d     os-release            rc4.d           statetab        yum
+at.deny                  dhclient.conf  host.conf    lsb-release.d   pam.d                 rc5.d           statetab.d      yum.conf
+audisp                   dhcp           hostname     machine-id      passwd                rc6.d           subgid          yum.repos.d
+audit                    dracut.conf    hosts        magic           passwd-               redhat-lsb      subuid
+bash_completion.d        dracut.conf.d  hosts.allow  mail.rc         pkcs11                redhat-release  sudo-ldap.conf
+bashrc                   e2fsck.conf    hosts.deny   mailcap         pki                   resolv.conf     sudo.conf
+binfmt.d                 environment    init.d       man_db.conf     plymouth              rpc             sudoers
+boto.cfg                 ethertypes     inittab      mime.types      pm                    rpm             sudoers.d
+centos-release           exports        inputrc      mke2fs.conf     polkit-1              rsyncd.conf     sysconfig
+centos-release-upstream  favicon.png    iproute2     modprobe.d      popt.d                rsyslog.conf    sysctl.conf
+[root@harshalinstalllab-5 etc]# vi my.cnf
+[root@harshalinstalllab-5 etc]# sudo systemctl enable mariadb
+Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+[root@harshalinstalllab-5 etc]# sudo systemctl start mariadb
+[root@harshalinstalllab-5 etc]# /usr/bin/mysql_secure_installation
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user.  If you've just installed MariaDB, and
+you haven't set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none): 
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n] Y
+New password: 
+Re-enter new password: 
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] Y
+ ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] N
+ ... skipping.
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] Y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] Y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+[root@harshalinstalllab-5 etc]# cd ~
+[root@harshalinstalllab-5 ~]# wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+--2019-12-02 11:54:25--  https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+Resolving dev.mysql.com (dev.mysql.com)... 137.254.60.11
+Connecting to dev.mysql.com (dev.mysql.com)|137.254.60.11|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn.mysql.com//archives/mysql-connector-java-5.1/mysql-connector-java-5.1.46.tar.gz [following]
+--2019-12-02 11:54:25--  https://cdn.mysql.com//archives/mysql-connector-java-5.1/mysql-connector-java-5.1.46.tar.gz
+Resolving cdn.mysql.com (cdn.mysql.com)... 23.1.245.43
+Connecting to cdn.mysql.com (cdn.mysql.com)|23.1.245.43|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4434926 (4.2M) [application/x-tar-gz]
+Saving to: 'mysql-connector-java-5.1.46.tar.gz'
+
+100%[==========================================================================================================================>] 4,434,926   15.2MB/s   in 0.3s   
+
+2019-12-02 11:54:26 (15.2 MB/s) - 'mysql-connector-java-5.1.46.tar.gz' saved [4434926/4434926]
+
+[root@harshalinstalllab-5 ~]# tar zxvf mysql-connector-java-5.1.46.tar.gz
+mysql-connector-java-5.1.46/
+mysql-connector-java-5.1.46/src/
+mysql-connector-java-5.1.46/src/com/
+mysql-connector-java-5.1.46/src/com/mysql/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/hibernate/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/exceptions/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/c3p0/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/jboss/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/interceptors/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jmx/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/profiler/
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/
+mysql-connector-java-5.1.46/src/demo/
+mysql-connector-java-5.1.46/src/demo/fabric/
+mysql-connector-java-5.1.46/src/demo/fabric/resources/
+mysql-connector-java-5.1.46/src/demo/fabric/resources/com/
+mysql-connector-java-5.1.46/src/demo/fabric/resources/com/mysql/
+mysql-connector-java-5.1.46/src/demo/fabric/resources/com/mysql/fabric/
+mysql-connector-java-5.1.46/src/demo/fabric/resources/com/mysql/fabric/demo/
+mysql-connector-java-5.1.46/src/doc/
+mysql-connector-java-5.1.46/src/doc/sources/
+mysql-connector-java-5.1.46/src/lib/
+mysql-connector-java-5.1.46/src/org/
+mysql-connector-java-5.1.46/src/org/gjt/
+mysql-connector-java-5.1.46/src/org/gjt/mm/
+mysql-connector-java-5.1.46/src/org/gjt/mm/mysql/
+mysql-connector-java-5.1.46/src/testsuite/
+mysql-connector-java-5.1.46/src/testsuite/fabric/
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/
+mysql-connector-java-5.1.46/src/testsuite/perf/
+mysql-connector-java-5.1.46/src/testsuite/regression/
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc4/
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc42/
+mysql-connector-java-5.1.46/src/testsuite/simple/
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc4/
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc42/
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/
+mysql-connector-java-5.1.46/CHANGES
+mysql-connector-java-5.1.46/COPYING
+mysql-connector-java-5.1.46/README
+mysql-connector-java-5.1.46/README.txt
+mysql-connector-java-5.1.46/build.xml
+mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar
+mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar
+mysql-connector-java-5.1.46/src/com/mysql/fabric/FabricCommunicationException.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/FabricConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/FabricStateResponse.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/HashShardMapping.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/RangeShardMapping.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/Response.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/Server.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ServerGroup.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ServerMode.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ServerRole.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ShardIndex.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ShardMapping.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ShardMappingFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ShardTable.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/ShardingType.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/hibernate/FabricMultiTenantConnectionProvider.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/ErrorReportingExceptionInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/FabricMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/FabricMySQLConnectionProperties.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/FabricMySQLConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/FabricMySQLDataSource.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/FabricMySQLDriver.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/JDBC4FabricMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/jdbc/JDBC4FabricMySQLConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/AuthenticatedXmlRpcMethodCaller.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/DigestAuthentication.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/InternalXmlRpcMethodCaller.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/ResultSetParser.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/XmlRpcClient.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/proto/xmlrpc/XmlRpcMethodCaller.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/Client.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Array.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Data.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Fault.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Member.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/MethodCall.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/MethodResponse.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Param.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Params.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/ResponseParser.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Struct.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/base/Value.java
+mysql-connector-java-5.1.46/src/com/mysql/fabric/xmlrpc/exceptions/MySQLFabricException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/AbandonedConnectionCleanupThread.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/AssertionFailedException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/AuthenticationPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/BalanceStrategy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/BestResponseTimeBalanceStrategy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Blob.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/BlobFromLocator.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Buffer.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/BufferRow.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ByteArrayRow.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CacheAdapter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CacheAdapterFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CachedResultSetMetaData.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CallableStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CharsetMapping.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Charsets.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Clob.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CommunicationsException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/CompressedInputStream.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Connection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionFeatureNotAvailableException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionGroup.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionGroupManager.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionImpl.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionLifecycleInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionProperties.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionPropertiesImpl.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ConnectionPropertiesTransform.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Constants.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/DatabaseMetaData.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/DatabaseMetaDataUsingInfoSchema.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/DocsConnectionPropsHelper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Driver.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/EscapeProcessor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/EscapeProcessorResult.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/EscapeTokenizer.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ExceptionInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ExportControlled.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Extension.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/FailoverConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Field.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/IterateBlock.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42CallableStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42Helper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42PreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42ResultSet.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42ServerPreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC42UpdatableResultSet.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4CallableStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4ClientInfoProvider.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4ClientInfoProviderSP.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4CommentClientInfoProvider.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4Connection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4DatabaseMetaData.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4DatabaseMetaDataUsingInfoSchema.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4LoadBalancedMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4MultiHostMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4MySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4MysqlSQLXML.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4NClob.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4PreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4PreparedStatementHelper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4ReplicationMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4ResultSet.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4ServerPreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/JDBC4UpdatableResultSet.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LicenseConfiguration.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LoadBalanceExceptionChecker.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LoadBalancedAutoCommitInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LoadBalancedConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LoadBalancedConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LoadBalancedMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/LocalizedErrorMessages.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Messages.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MiniAdmin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MultiHostConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MultiHostMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlDataTruncation.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlDefs.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlErrorNumbers.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlIO.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlParameterMetadata.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/MysqlSavepoint.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NamedPipeSocketFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NdbLoadBalanceExceptionChecker.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NetworkResources.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NoSubInterceptorWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NonRegisteringDriver.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NonRegisteringReplicationDriver.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NotImplemented.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/NotUpdatable.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/OperationNotSupportedException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/OutputStreamWatcher.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/PacketTooBigException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ParameterBindings.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/PerConnectionLRUFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/PerVmServerConfigCacheFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/PingTarget.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/PreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ProfilerEventHandlerFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/RandomBalanceStrategy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReflectiveStatementInterceptorAdapter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationConnectionGroup.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationConnectionGroupManager.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationConnectionProxy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationDriver.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ReplicationMySQLConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ResultSetImpl.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ResultSetInternalMethods.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ResultSetMetaData.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ResultSetRow.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/RowData.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/RowDataCursor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/RowDataDynamic.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/RowDataStatic.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SQLError.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Security.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SequentialBalanceStrategy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ServerAffinityStrategy.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/ServerPreparedStatement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SingleByteCharsetConverter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SocketFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SocketMetadata.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/SocksProxySocketFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StandardLoadBalanceExceptionChecker.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StandardSocketFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Statement.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StatementImpl.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StatementInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StatementInterceptorV2.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StreamingNotifiable.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/StringUtils.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/TimeUtil.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/TimeZoneMapping.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/UpdatableResultSet.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Util.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/V1toV2StatementInterceptorAdapter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/WatchableOutputStream.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/WatchableWriter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/Wrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/WriterWatcher.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/CachingSha2PasswordPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/MysqlClearPasswordPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/MysqlNativePasswordPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/MysqlOldPasswordPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/authentication/Sha256PasswordPlugin.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/3-0-Compat.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/5-0-Compat.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/clusterBase.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/coldFusion.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/fullDebug.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/maxPerformance.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/configs/solarisMaxPerformance.properties
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/DeadlockTimeoutRollbackMarker.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLDataException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLIntegrityConstraintViolationException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLInvalidAuthorizationSpecException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLNonTransientConnectionException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLNonTransientException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLQueryInterruptedException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLStatementCancelledException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLSyntaxErrorException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLTimeoutException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLTransactionRollbackException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLTransientConnectionException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/MySQLTransientException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/CommunicationsException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLDataException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLIntegrityConstraintViolationException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLInvalidAuthorizationSpecException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLNonTransientConnectionException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLNonTransientException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLQueryInterruptedException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLSyntaxErrorException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLTimeoutException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLTransactionRollbackException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLTransientConnectionException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/exceptions/jdbc4/MySQLTransientException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/c3p0/MysqlConnectionTester.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/jboss/ExtendedMysqlExceptionSorter.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/integration/jboss/MysqlValidConnectionChecker.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/interceptors/ResultSetScannerInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/interceptors/ServerStatusDiffInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/interceptors/SessionAssociationInterceptor.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/CallableStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/ConnectionWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC42CallableStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC42PreparedStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4CallableStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4ConnectionWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4MysqlPooledConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4MysqlXAConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4PreparedStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4StatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/JDBC4SuspendableXAConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlConnectionPoolDataSource.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlDataSource.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlDataSourceFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlPooledConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlXAConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlXADataSource.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlXAException.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/MysqlXid.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/PreparedStatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/StatementWrapper.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/SuspendableXAConnection.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jdbc2/optional/WrapperBase.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jmx/LoadBalanceConnectionGroupManager.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jmx/LoadBalanceConnectionGroupManagerMBean.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jmx/ReplicationGroupManager.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/jmx/ReplicationGroupManagerMBean.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/Jdk14Logger.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/Log.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/LogFactory.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/LogUtils.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/NullLogger.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/Slf4JLogger.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/log/StandardLogger.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/profiler/LoggingProfilerEventHandler.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/profiler/ProfilerEvent.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/profiler/ProfilerEventHandler.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/Base64Decoder.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/BaseBugReport.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/ErrorMappingsDocGenerator.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/LRUCache.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/PropertiesDocGenerator.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/ReadAheadInputStream.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/ResultSetUtil.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/ServerController.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/TimezoneDump.java
+mysql-connector-java-5.1.46/src/com/mysql/jdbc/util/VersionFSHierarchyMaker.java
+mysql-connector-java-5.1.46/src/demo/fabric/Client1_Fabric.java
+mysql-connector-java-5.1.46/src/demo/fabric/Employee.java
+mysql-connector-java-5.1.46/src/demo/fabric/EmployeesDataSource.java
+mysql-connector-java-5.1.46/src/demo/fabric/EmployeesJdbc.java
+mysql-connector-java-5.1.46/src/demo/fabric/HibernateFabric.java
+mysql-connector-java-5.1.46/src/demo/fabric/resources/com/mysql/fabric/demo/employee.hbm.xml
+mysql-connector-java-5.1.46/src/doc/sources/pom.xml
+mysql-connector-java-5.1.46/src/lib/c3p0-0.9.1-pre6.jar
+mysql-connector-java-5.1.46/src/lib/c3p0-0.9.1-pre6.src.zip
+mysql-connector-java-5.1.46/src/lib/jboss-common-jdbc-wrapper-src.jar
+mysql-connector-java-5.1.46/src/lib/jboss-common-jdbc-wrapper.jar
+mysql-connector-java-5.1.46/src/lib/slf4j-api-1.6.1.jar
+mysql-connector-java-5.1.46/src/org/gjt/mm/mysql/Driver.java
+mysql-connector-java-5.1.46/src/testsuite/BaseStatementInterceptor.java
+mysql-connector-java-5.1.46/src/testsuite/BaseTestCase.java
+mysql-connector-java-5.1.46/src/testsuite/UnreliableSocketFactory.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/BaseFabricTestCase.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/SetupFabricTestsuite.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/TestAdminCommands.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/TestDumpCommands.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/TestResultSetParser.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/TestShardMapping.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/TestXmlRpcCore.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/TestBasicConnection.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/TestFabricMySQLConnectionSharding.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/TestHABasics.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/TestHashSharding.java
+mysql-connector-java-5.1.46/src/testsuite/fabric/jdbc/TestRegressions.java
+mysql-connector-java-5.1.46/src/testsuite/perf/BasePerfTest.java
+mysql-connector-java-5.1.46/src/testsuite/perf/LoadStorePerfTest.java
+mysql-connector-java-5.1.46/src/testsuite/perf/RetrievalPerfTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/BlobRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/CachedRowsetTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/CallableStatementRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/CharsetRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/ConnectionRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/DataSourceRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/EscapeProcessorRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/MetaDataRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/MicroPerformanceRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/NumbersRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/PooledConnectionRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/ResultSetRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/StatementRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/StressRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/StringRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/SubqueriesRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/SyntaxRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/UtilsRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc4/ConnectionRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc4/ExceptionSubclassesTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc4/MetaDataRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc4/StatementRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc42/ConnectionRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc42/ResultSetRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/regression/jdbc42/StatementRegressionTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/BlobTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/CallableStatementTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/CharsetTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/ConnectionTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/DataSourceTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/DateTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/EscapeProcessingTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/MetadataTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/MiniAdminTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/MultiHostConnectionTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/NumbersTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/ReadOnlyCallableStatementTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/ResultSetTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/SSLTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/ServerControllerTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/SimpleTransformer.java
+mysql-connector-java-5.1.46/src/testsuite/simple/SplitDBdotNameTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/StatementsTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/StringUtilsTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/TestBug57662Logger.java
+mysql-connector-java-5.1.46/src/testsuite/simple/TestLifecycleInterceptor.java
+mysql-connector-java-5.1.46/src/testsuite/simple/TransactionTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/TraversalTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/UpdatabilityTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/UtilsTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/XATest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc4/StatementsTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc42/ConnectionTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc42/ResultSetTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/jdbc42/StatementsTest.java
+mysql-connector-java-5.1.46/src/testsuite/simple/tb2-data.txt.gz
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/ca-cert.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/ca-key.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/ca-truststore
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/certs_howto.txt
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/client-cert.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/client-key.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/client-keystore
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/mykey.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/mykey.pub
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/server-cert.pem
+mysql-connector-java-5.1.46/src/testsuite/ssl-test-certs/server-key.pem
+[root@harshalinstalllab-5 ~]# sudo mkdir -p /usr/share/java/
+[root@harshalinstalllab-5 ~]# cd mysql-connector-java-5.1.46
+[root@harshalinstalllab-5 mysql-connector-java-5.1.46]# sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
+[root@harshalinstalllab-5 mysql-connector-java-5.1.46]# 
+
+
+
+
