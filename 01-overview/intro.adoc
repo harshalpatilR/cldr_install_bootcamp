@@ -1,6 +1,6 @@
 = FCE Install/Operations Boot Camp
 
-August 12-16, 2019 - Palo Alto, California
+December 02- 06, 2019 - Tysons Corner Virginia
 
 * <<introductions_overview, Introductions & Overview>>
 * <<audience_assumptions, Audience Assumptions>>
