@@ -1,0 +1,288 @@
+....
+== Cloudcat
+== GCP cluster IPs
+172.31.116.203
+172.31.116.202
+172.31.116.204
+172.31.116.206
+172.31.116.207
+
+== login to one node
+ssh root@172.31.116.202
+password cloudera
+
+Centos 7.5 OS
+
+== Install PSSH
+
+yum install python-pip
+pip install pssh
+
+== Test PSSH
+
+pssh -l root -h ~/clhost "time"
+[1] 09:44:18 [FAILURE] 172.31.116.204 Exited with error code 255
+[2] 09:44:18 [FAILURE] 172.31.116.203 Exited with error code 255
+[3] 09:44:18 [FAILURE] 172.31.116.206 Exited with error code 255
+[4] 09:44:18 [FAILURE] 172.31.116.202 Exited with error code 255
+[5] 09:44:18 [FAILURE] 172.31.116.207 Exited with error code 255
+
+pssh -v -h ~/clhost -A -i "-O StrictHostKeyChecking=no" -l root "touch abc.txt"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:15:48 [SUCCESS] 172.31.116.202
+Stderr: Warning: Permanently added '172.31.116.202' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.116.202's password: "
+[2] 10:15:48 [SUCCESS] 172.31.116.206
+Stderr: Warning: Permanently added '172.31.116.206' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.116.206's password: "
+[3] 10:15:48 [SUCCESS] 172.31.116.204
+Stderr: Warning: Permanently added '172.31.116.204' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.116.204's password: "
+[4] 10:15:48 [SUCCESS] 172.31.116.207
+Stderr: Warning: Permanently added '172.31.116.207' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.116.207's password: "
+[5] 10:15:48 [SUCCESS] 172.31.116.203
+
+== Use PSSH to set VM Swapiness
+
+ pssh -v -h ~/clhost -l root -A -i "cat /proc/sys/vm/swappiness"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:17:31 [SUCCESS] 172.31.116.206
+0
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[2] 10:17:31 [SUCCESS] 172.31.116.203
+0
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[3] 10:17:31 [SUCCESS] 172.31.116.202
+0
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+[4] 10:17:31 [SUCCESS] 172.31.116.204
+0
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[5] 10:17:31 [SUCCESS] 172.31.116.207
+0
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[root@harshalinstalllab-5 ~]# pssh -v -h ~/clhost -l root -A -i "sysctl vm.swappiness=1"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:19:06 [SUCCESS] 172.31.116.203
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:19:06 [SUCCESS] 172.31.116.204
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[3] 10:19:06 [SUCCESS] 172.31.116.202
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+[4] 10:19:06 [SUCCESS] 172.31.116.207
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[5] 10:19:06 [SUCCESS] 172.31.116.206
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[root@harshalinstalllab-5 ~]# pssh -v -h ~/clhost -l root -A -i "cat /proc/sys/vm/swappiness"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:19:21 [SUCCESS] 172.31.116.203
+1
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:19:21 [SUCCESS] 172.31.116.206
+1
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[3] 10:19:21 [SUCCESS] 172.31.116.204
+1
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[4] 10:19:21 [SUCCESS] 172.31.116.207
+1
+
+== CHECK ext volumes
+
+pssh -v -h ~/clhost -l root -A -i "cat /proc/mounts"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:33:21 [SUCCESS] 172.31.116.203
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+devtmpfs /dev devtmpfs rw,nosuid,size=6577644k,nr_inodes=1644411,mode=755 0 0
+securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0
+tmpfs /sys/fs/cgroup tmpfs ro,nosuid,nodev,noexec,mode=755 0 0
+cgroup /sys/fs/cgroup/systemd cgroup rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd 0 0
+pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup/freezer cgroup rw,nosuid,nodev,noexec,relatime,freezer 0 0
+cgroup /sys/fs/cgroup/memory cgroup rw,nosuid,nodev,noexec,relatime,memory 0 0
+cgroup /sys/fs/cgroup/pids cgroup rw,nosuid,nodev,noexec,relatime,pids 0 0
+cgroup /sys/fs/cgroup/perf_event cgroup rw,nosuid,nodev,noexec,relatime,perf_event 0 0
+cgroup /sys/fs/cgroup/net_cls,net_prio cgroup rw,nosuid,nodev,noexec,relatime,net_prio,net_cls 0 0
+cgroup /sys/fs/cgroup/cpu,cpuacct cgroup rw,nosuid,nodev,noexec,relatime,cpuacct,cpu 0 0
+cgroup /sys/fs/cgroup/cpuset cgroup rw,nosuid,nodev,noexec,relatime,cpuset 0 0
+cgroup /sys/fs/cgroup/hugetlb cgroup rw,nosuid,nodev,noexec,relatime,hugetlb 0 0
+cgroup /sys/fs/cgroup/devices cgroup rw,nosuid,nodev,noexec,relatime,devices 0 0
+cgroup /sys/fs/cgroup/blkio cgroup rw,nosuid,nodev,noexec,relatime,blkio 0 0
+configfs /sys/kernel/config configfs rw,relatime 0 0
+/dev/sda1 / xfs rw,relatime,attr2,inode64,noquota 0 0
+systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=24,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=8977 0 0
+mqueue /dev/mqueue mqueue rw,relatime 0 0
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+hugetlbfs /dev/hugepages hugetlbfs rw,relatime 0 0
+tmpfs /run/user/0 tmpfs rw,nosuid,nodev,relatime,size=1317080k,mode=700 0 0
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:33:21 [SUCCESS] 172.31.116.204
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+devtmpfs /dev devtmpfs rw,nosuid,size=6577648k,nr_inodes=1644412,mode=755 0 0
+securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0
+tmpfs /sys/fs/cgroup tmpfs ro,nosuid,nodev,noexec,mode=755 0 0
+cgroup /sys/fs/cgroup/systemd cgroup rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd 0 0
+pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup/perf_event cgroup rw,nosuid,nodev,noexec,relatime,perf_event 0 0
+cgroup /sys/fs/cgroup/blkio cgroup rw,nosuid,nodev,noexec,relatime,blkio 0 0
+cgroup /sys/fs/cgroup/cpuset cgroup rw,nosuid,nodev,noexec,relatime,cpuset 0 0
+cgroup /sys/fs/cgroup/pids cgroup rw,nosuid,nodev,noexec,relatime,pids 0 0
+cgroup /sys/fs/cgroup/devices cgroup rw,nosuid,nodev,noexec,relatime,devices 0 0
+cgroup /sys/fs/cgroup/memory cgroup rw,nosuid,nodev,noexec,relatime,memory 0 0
+cgroup /sys/fs/cgroup/cpu,cpuacct cgroup rw,nosuid,nodev,noexec,relatime,cpuacct,cpu 0 0
+cgroup /sys/fs/cgroup/freezer cgroup rw,nosuid,nodev,noexec,relatime,freezer 0 0
+cgroup /sys/fs/cgroup/net_cls,net_prio cgroup rw,nosuid,nodev,noexec,relatime,net_prio,net_cls 0 0
+cgroup /sys/fs/cgroup/hugetlb cgroup rw,nosuid,nodev,noexec,relatime,hugetlb 0 0
+configfs /sys/kernel/config configfs rw,relatime 0 0
+/dev/sda1 / xfs rw,relatime,attr2,inode64,noquota 0 0
+systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=31,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=9039 0 0
+hugetlbfs /dev/hugepages hugetlbfs rw,relatime 0 0
+mqueue /dev/mqueue mqueue rw,relatime 0 0
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+tmpfs /run/user/0 tmpfs rw,nosuid,nodev,relatime,size=1317080k,mode=700 0 0
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[3] 10:33:21 [SUCCESS] 172.31.116.207
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+devtmpfs /dev devtmpfs rw,nosuid,size=6577644k,nr_inodes=1644411,mode=755 0 0
+securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0
+tmpfs /sys/fs/cgroup tmpfs ro,nosuid,nodev,noexec,mode=755 0 0
+cgroup /sys/fs/cgroup/systemd cgroup rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd 0 0
+pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup/memory cgroup rw,nosuid,nodev,noexec,relatime,memory 0 0
+cgroup /sys/fs/cgroup/cpu,cpuacct cgroup rw,nosuid,nodev,noexec,relatime,cpuacct,cpu 0 0
+cgroup /sys/fs/cgroup/freezer cgroup rw,nosuid,nodev,noexec,relatime,freezer 0 0
+cgroup /sys/fs/cgroup/devices cgroup rw,nosuid,nodev,noexec,relatime,devices 0 0
+cgroup /sys/fs/cgroup/net_cls,net_prio cgroup rw,nosuid,nodev,noexec,relatime,net_prio,net_cls 0 0
+cgroup /sys/fs/cgroup/hugetlb cgroup rw,nosuid,nodev,noexec,relatime,hugetlb 0 0
+cgroup /sys/fs/cgroup/blkio cgroup rw,nosuid,nodev,noexec,relatime,blkio 0 0
+cgroup /sys/fs/cgroup/pids cgroup rw,nosuid,nodev,noexec,relatime,pids 0 0
+cgroup /sys/fs/cgroup/cpuset cgroup rw,nosuid,nodev,noexec,relatime,cpuset 0 0
+cgroup /sys/fs/cgroup/perf_event cgroup rw,nosuid,nodev,noexec,relatime,perf_event 0 0
+configfs /sys/kernel/config configfs rw,relatime 0 0
+/dev/sda1 / xfs rw,relatime,attr2,inode64,noquota 0 0
+systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=32,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11750 0 0
+hugetlbfs /dev/hugepages hugetlbfs rw,relatime 0 0
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+mqueue /dev/mqueue mqueue rw,relatime 0 0
+tmpfs /run/user/0 tmpfs rw,nosuid,nodev,relatime,size=1317080k,mode=700 0 0
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[4] 10:33:21 [SUCCESS] 172.31.116.206
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+devtmpfs /dev devtmpfs rw,nosuid,size=6577648k,nr_inodes=1644412,mode=755 0 0
+securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0
+tmpfs /sys/fs/cgroup tmpfs ro,nosuid,nodev,noexec,mode=755 0 0
+cgroup /sys/fs/cgroup/systemd cgroup rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd 0 0
+pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup/memory cgroup rw,nosuid,nodev,noexec,relatime,memory 0 0
+cgroup /sys/fs/cgroup/pids cgroup rw,nosuid,nodev,noexec,relatime,pids 0 0
+cgroup /sys/fs/cgroup/devices cgroup rw,nosuid,nodev,noexec,relatime,devices 0 0
+cgroup /sys/fs/cgroup/freezer cgroup rw,nosuid,nodev,noexec,relatime,freezer 0 0
+cgroup /sys/fs/cgroup/hugetlb cgroup rw,nosuid,nodev,noexec,relatime,hugetlb 0 0
+cgroup /sys/fs/cgroup/perf_event cgroup rw,nosuid,nodev,noexec,relatime,perf_event 0 0
+cgroup /sys/fs/cgroup/net_cls,net_prio cgroup rw,nosuid,nodev,noexec,relatime,net_prio,net_cls 0 0
+cgroup /sys/fs/cgroup/cpuset cgroup rw,nosuid,nodev,noexec,relatime,cpuset 0 0
+cgroup /sys/fs/cgroup/blkio cgroup rw,nosuid,nodev,noexec,relatime,blkio 0 0
+cgroup /sys/fs/cgroup/cpu,cpuacct cgroup rw,nosuid,nodev,noexec,relatime,cpuacct,cpu 0 0
+configfs /sys/kernel/config configfs rw,relatime 0 0
+/dev/sda1 / xfs rw,relatime,attr2,inode64,noquota 0 0
+systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=32,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11798 0 0
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+mqueue /dev/mqueue mqueue rw,relatime 0 0
+hugetlbfs /dev/hugepages hugetlbfs rw,relatime 0 0
+tmpfs /run/user/0 tmpfs rw,nosuid,nodev,relatime,size=1317080k,mode=700 0 0
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[5] 10:33:21 [SUCCESS] 172.31.116.202
+rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
+devtmpfs /dev devtmpfs rw,nosuid,size=6577648k,nr_inodes=1644412,mode=755 0 0
+securityfs /sys/kernel/security securityfs rw,nosuid,nodev,noexec,relatime 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,mode=755 0 0
+tmpfs /sys/fs/cgroup tmpfs ro,nosuid,nodev,noexec,mode=755 0 0
+cgroup /sys/fs/cgroup/systemd cgroup rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd 0 0
+pstore /sys/fs/pstore pstore rw,nosuid,nodev,noexec,relatime 0 0
+cgroup /sys/fs/cgroup/net_cls,net_prio cgroup rw,nosuid,nodev,noexec,relatime,net_prio,net_cls 0 0
+cgroup /sys/fs/cgroup/cpu,cpuacct cgroup rw,nosuid,nodev,noexec,relatime,cpuacct,cpu 0 0
+cgroup /sys/fs/cgroup/hugetlb cgroup rw,nosuid,nodev,noexec,relatime,hugetlb 0 0
+cgroup /sys/fs/cgroup/pids cgroup rw,nosuid,nodev,noexec,relatime,pids 0 0
+cgroup /sys/fs/cgroup/freezer cgroup rw,nosuid,nodev,noexec,relatime,freezer 0 0
+cgroup /sys/fs/cgroup/cpuset cgroup rw,nosuid,nodev,noexec,relatime,cpuset 0 0
+cgroup /sys/fs/cgroup/perf_event cgroup rw,nosuid,nodev,noexec,relatime,perf_event 0 0
+cgroup /sys/fs/cgroup/devices cgroup rw,nosuid,nodev,noexec,relatime,devices 0 0
+cgroup /sys/fs/cgroup/memory cgroup rw,nosuid,nodev,noexec,relatime,memory 0 0
+cgroup /sys/fs/cgroup/blkio cgroup rw,nosuid,nodev,noexec,relatime,blkio 0 0
+configfs /sys/kernel/config configfs rw,relatime 0 0
+/dev/sda1 / xfs rw,relatime,attr2,inode64,noquota 0 0
+systemd-1 /proc/sys/fs/binfmt_misc autofs rw,relatime,fd=22,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=11589 0 0
+debugfs /sys/kernel/debug debugfs rw,relatime 0 0
+hugetlbfs /dev/hugepages hugetlbfs rw,relatime 0 0
+mqueue /dev/mqueue mqueue rw,relatime 0 0
+tmpfs /run/user/0 tmpfs rw,nosuid,nodev,relatime,size=1317080k,mode=700 0 0
+
+== NO ext based volumes
+pssh -v -h ~/clhost -l root -A -i "cat /proc/mounts | grep ext"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 10:34:40 [FAILURE] 172.31.116.203 Exited with error code 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 10:34:40 [FAILURE] 172.31.116.206 Exited with error code 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[3] 10:34:40 [FAILURE] 172.31.116.207 Exited with error code 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[4] 10:34:40 [FAILURE] 172.31.116.204 Exited with error code 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[5] 10:34:40 [FAILURE] 172.31.116.202 Exited with error code 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+
+
+
+
+
+
+
+
+
+
+
+
+
+....
