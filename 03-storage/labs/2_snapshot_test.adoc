@@ -1,0 +1,39 @@
+=== snapshot creation and file recovery
+
+[root@harshalinstalllab-1 ~]# ls
+abc.txt  install-bootcamp-master.zip  jdk-8u202-linux-x64.tar.gz  mysql-connector-java-5.1.46  mysql-connector-java-5.1.46.tar.gz  passwd
+[root@harshalinstalllab-1 ~]# cp *zip /tmp/.
+[root@harshalinstalllab-1 ~]# su hdfs
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -put ./tmp/*zip /user/harshal/precious/.
+put: `./tmp/*zip': No such file or directory
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -put /tmp/*zip /user/harshal/precious/.
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/precious
+Found 1 items
+-rw-r--r--   3 hdfs harshal    2355845 2019-12-03 14:07 /user/harshal/precious/install-bootcamp-master.zip
+[hdfs@harshalinstalllab-1 root]$ hdfs dfsadmin -allowSnapshot /user/harshal/precious
+Allowing snaphot on /user/harshal/precious succeeded
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -createSnapshot /user/harshal/precious sebc-hdfs-test
+Created snapshot /user/harshal/precious/.snapshot/sebc-hdfs-test
+[hdfs@harshalinstalllab-1 root]$ ls
+ls: cannot open directory .: Permission denied
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -rm /user/harshal/precious/*zip
+19/12/03 14:11:19 INFO fs.TrashPolicyDefault: Moved: 'hdfs://harshalinstalllab-1.gce.cloudera.com:8020/user/harshal/precious/install-bootcamp-master.zip' to trash at: hdfs://harshalinstalllab-1.gce.cloudera.com:8020/user/hdfs/.Trash/Current/user/harshal/precious/install-bootcamp-master.zip
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -rmdir /user/harshal/precious/
+rmdir: The directory /user/harshal/precious cannot be deleted since /user/harshal/precious is snapshottable and already has snapshots
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls sebc-hdfs-test
+ls: `sebc-hdfs-test': No such file or directory
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/sebc-hdfs-test
+ls: `/user/harshal/sebc-hdfs-test': No such file or directory
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/.sebc-hdfs-test
+ls: `/user/harshal/.sebc-hdfs-test': No such file or directory
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/precious/.snapshot
+Found 1 items
+drwxr-xr-x   - harshal harshal          0 2019-12-03 14:10 /user/harshal/precious/.snapshot/sebc-hdfs-test
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/precious/.snapshot/sebc-*
+Found 1 items
+-rw-r--r--   3 hdfs harshal    2355845 2019-12-03 14:07 /user/harshal/precious/.snapshot/sebc-hdfs-test/install-bootcamp-master.zip
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -cp /user/harshal/precious/.snapshot/sebc-*/*zip /user/harshal/precious/.
+[hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/precious
+Found 1 items
+-rw-r--r--   3 hdfs harshal    2355845 2019-12-03 14:20 /user/harshal/precious/install-bootcamp-master.zip
+
