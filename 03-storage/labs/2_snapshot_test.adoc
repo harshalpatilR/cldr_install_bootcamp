@@ -1,3 +1,5 @@
+....
+
 === snapshot creation and file recovery
 
 [root@harshalinstalllab-1 ~]# ls
@@ -36,4 +38,4 @@ Found 1 items
 [hdfs@harshalinstalllab-1 root]$ hdfs dfs -ls /user/harshal/precious
 Found 1 items
 -rw-r--r--   3 hdfs harshal    2355845 2019-12-03 14:20 /user/harshal/precious/install-bootcamp-master.zip
-
+....
