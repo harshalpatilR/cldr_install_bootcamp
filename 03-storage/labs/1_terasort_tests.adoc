@@ -1,5 +1,49 @@
 ....
 == user creation for Harshal
+(base) MacBook-Pro-6:labs harshalpatil$ ssh root@172.31.116.204
+root@172.31.116.204's password: 
+Last login: Mon Dec  2 17:18:56 2019 from 10.96.92.195
+-bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+[root@harshalinstalllab-1 ~]# user add harshal
+-bash: user: command not found
+[root@harshalinstalllab-1 ~]# useradd harshal
+
+[root@harshalinstalllab-1 ~]# passwd harshal
+Changing password for user harshal.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+
+[root@harshalinstalllab-5 ~]# pssh -v -h ~/clhost -l root -A -i "adduser harshal"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 11:32:51 [FAILURE] 172.31.116.204 Exited with error code 9
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+adduser: user 'harshal' already exists
+[2] 11:32:51 [SUCCESS] 172.31.116.202
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+[3] 11:32:51 [SUCCESS] 172.31.116.203
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[4] 11:32:52 [SUCCESS] 172.31.116.206
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[5] 11:32:52 [SUCCESS] 172.31.116.207
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[root@harshalinstalllab-5 ~]# pssh -v -h ~/clhost -l root -A -i "echo cloudera > passwd harshal"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 11:33:27 [SUCCESS] 172.31.116.203
+Stderr: pssh-askpass received prompt: "root@172.31.116.203's password: "
+[2] 11:33:27 [SUCCESS] 172.31.116.204
+Stderr: pssh-askpass received prompt: "root@172.31.116.204's password: "
+[3] 11:33:27 [SUCCESS] 172.31.116.206
+Stderr: pssh-askpass received prompt: "root@172.31.116.206's password: "
+[4] 11:33:27 [SUCCESS] 172.31.116.207
+Stderr: pssh-askpass received prompt: "root@172.31.116.207's password: "
+[5] 11:33:27 [SUCCESS] 172.31.116.202
+Stderr: pssh-askpass received prompt: "root@172.31.116.202's password: "
+[root@harshalinstalllab-5 ~]# exit
 
 
 
