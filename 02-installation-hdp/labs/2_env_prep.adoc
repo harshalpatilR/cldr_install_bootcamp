@@ -1,0 +1,100 @@
+
+== MARIA DB
+
+[root@hdpharshal-1 ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 318
+Server version: 5.5.64-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| ambari             |
+| druid              |
+| hive               |
+| mysql              |
+| oozie              |
+| performance_schema |
+| ranger             |
+| rangerkms          |
+| superset           |
++--------------------+
+10 rows in set (0.00 sec)
+
+==
+used SSH private key based on setup from cloudcat
+https://github.mtv.cloudera.com/raw/QE/deploy/master/cdep/data/id_rsa
+
+==
+[root@hdpharshal-1 ambari-server]# selinuxenabled; echo $?
+1
+
+[root@hdpharshal-1 ambari-server]# cat /etc/selinux/config
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected. 
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted 
+
+[root@hdpharshal-1 ambari-server]# pssh -v -h ~/clhost -l root -A -i "systemctl disable firewalld"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 12:31:46 [SUCCESS] 172.31.117.142
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[2] 12:31:46 [SUCCESS] 172.31.115.74
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[3] 12:31:46 [SUCCESS] 172.31.115.72
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[4] 12:31:46 [SUCCESS] 172.31.115.48
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[5] 12:31:46 [SUCCESS] 172.31.115.31
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[root@hdpharshal-1 ambari-server]# pssh -v -h ~/clhost -l root -A -i "service firewalld stop"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 12:32:32 [SUCCESS] 172.31.115.72
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+Redirecting to /bin/systemctl stop firewalld.service
+[2] 12:32:32 [SUCCESS] 172.31.117.142
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+Redirecting to /bin/systemctl stop firewalld.service
+[3] 12:32:32 [SUCCESS] 172.31.115.74
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+Redirecting to /bin/systemctl stop firewalld.service
+[4] 12:32:32 [SUCCESS] 172.31.115.48
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+Redirecting to /bin/systemctl stop firewalld.service
+[5] 12:32:32 [SUCCESS] 172.31.115.31
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+Redirecting to /bin/systemctl stop firewalld.service
+[root@hdpharshal-1 ambari-server]# 
+
+
+
