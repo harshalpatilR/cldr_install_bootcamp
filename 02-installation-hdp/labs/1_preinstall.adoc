@@ -1,0 +1,498 @@
+....
+== PSSH install
+
+[root@hdpharshal-1 ~]# yum install pssh
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.ash.fastserv.com
+ * epel: mirror.grid.uchicago.edu
+ * extras: mirror.ash.fastserv.com
+ * updates: mirror.ash.fastserv.com
+Resolving Dependencies
+--> Running transaction check
+---> Package pssh.noarch 0:2.3.1-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================================================
+ Package                      Arch                           Version                             Repository                    Size
+====================================================================================================================================
+Installing:
+ pssh                         noarch                         2.3.1-5.el7                         epel                          49 k
+
+Transaction Summary
+====================================================================================================================================
+Install  1 Package
+
+Total download size: 49 k
+Installed size: 115 k
+Is this ok [y/d/N]: y
+Downloading packages:
+pssh-2.3.1-5.el7.noarch.rpm                                                                                  |  49 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : pssh-2.3.1-5.el7.noarch                                                                                          1/1 
+  Verifying  : pssh-2.3.1-5.el7.noarch                                                                                          1/1 
+
+Installed:
+  pssh.noarch 0:2.3.1-5.el7                                                                                                         
+
+
+== VM Swapiness
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost -A -i "-O StrictHostKeyChecking=no" -l root "touch abc.txt"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:53:01 [SUCCESS] 172.31.115.74
+Stderr: Warning: Permanently added '172.31.115.74' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.74's password: "
+[2] 07:53:01 [SUCCESS] 172.31.115.48
+Stderr: Warning: Permanently added '172.31.115.48' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.48's password: "
+[3] 07:53:01 [SUCCESS] 172.31.115.72
+Stderr: Warning: Permanently added '172.31.115.72' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.72's password: "
+[4] 07:53:01 [SUCCESS] 172.31.117.142
+Stderr: Warning: Permanently added '172.31.117.142' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.117.142's password: "
+[5] 07:53:01 [SUCCESS] 172.31.115.31
+Stderr: Warning: Permanently added '172.31.115.31' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.31's password: "
+
+
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost -l root -A -i "cat /proc/sys/vm/swappiness"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:53:35 [SUCCESS] 172.31.117.142
+0
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 07:53:35 [SUCCESS] 172.31.115.74
+0
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[3] 07:53:35 [SUCCESS] 172.31.115.72
+0
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[4] 07:53:35 [SUCCESS] 172.31.115.48
+0
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[5] 07:53:35 [SUCCESS] 172.31.115.31
+0
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost -l root -A -i "sysctl vm.swappiness=1"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:53:59 [SUCCESS] 172.31.117.142
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 07:53:59 [SUCCESS] 172.31.115.74
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[3] 07:53:59 [SUCCESS] 172.31.115.72
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[4] 07:53:59 [SUCCESS] 172.31.115.31
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+[5] 07:53:59 [SUCCESS] 172.31.115.48
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+
+[root@hdpharshal-1 ~]#  pssh -v -h ~/clhost -l root -A -i "cat /proc/sys/vm/swappiness"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:54:22 [SUCCESS] 172.31.117.142
+1
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 07:54:22 [SUCCESS] 172.31.115.72
+1
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[3] 07:54:22 [SUCCESS] 172.31.115.48
+1
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[4] 07:54:22 [SUCCESS] 172.31.115.74
+1
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[5] 07:54:22 [SUCCESS] 172.31.115.31
+1
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+
+
+== Huge page support
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost  -A -i -l root "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:55:02 [SUCCESS] 172.31.117.142
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 07:55:02 [SUCCESS] 172.31.115.72
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[3] 07:55:02 [SUCCESS] 172.31.115.74
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[4] 07:55:02 [SUCCESS] 172.31.115.48
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[5] 07:55:02 [SUCCESS] 172.31.115.31
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost  -A -i -l root "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:55:20 [SUCCESS] 172.31.115.72
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[2] 07:55:20 [SUCCESS] 172.31.115.74
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[3] 07:55:20 [SUCCESS] 172.31.117.142
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[4] 07:55:20 [SUCCESS] 172.31.115.48
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[5] 07:55:20 [SUCCESS] 172.31.115.31
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+
+
+
+== IPV6 check and disable
+[root@hdpharshal-1 transparent_hugepage]# pssh -v -h ~/clhost  -A -i -l root "ip link show"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 07:56:43 [SUCCESS] 172.31.117.142
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:75:8e brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 07:56:43 [SUCCESS] 172.31.115.72
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:73:48 brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[3] 07:56:43 [SUCCESS] 172.31.115.48
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:73:30 brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[4] 07:56:43 [SUCCESS] 172.31.115.74
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:73:4a brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[5] 07:56:43 [SUCCESS] 172.31.115.31
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 42:01:ac:1f:73:1f brd ff:ff:ff:ff:ff:ff
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+
+
+
+[root@hdpharshal-1 transparent_hugepage]# pssh -v -h clhost -A -i -l root "sysctl -w net.ipv6.conf.all.disable_ipv6=1"
+Could not open hosts file: No such file or directory
+[root@hdpharshal-1 transparent_hugepage]# cd /
+[root@hdpharshal-1 /]# pssh -v -h clhost -A -i -l root "sysctl -w net.ipv6.conf.all.disable_ipv6=1"
+Could not open hosts file: No such file or directory
+[root@hdpharshal-1 /]# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@hdpharshal-1 /]# cd ~
+[root@hdpharshal-1 ~]# ls
+abc.txt  clhost
+[root@hdpharshal-1 ~]# pssh -v -h clhost -A -i -l root "sysctl -w net.ipv6.conf.all.disable_ipv6=1"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 08:02:12 [SUCCESS] 172.31.115.72
+net.ipv6.conf.all.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[2] 08:02:12 [SUCCESS] 172.31.117.142
+net.ipv6.conf.all.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[3] 08:02:12 [SUCCESS] 172.31.115.31
+net.ipv6.conf.all.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+[4] 08:02:12 [SUCCESS] 172.31.115.74
+net.ipv6.conf.all.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[5] 08:02:12 [SUCCESS] 172.31.115.48
+net.ipv6.conf.all.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+
+
+[root@hdpharshal-1 ~]# pssh -v -h clhost -A -i -l root "sysctl -w net.ipv6.conf.default.disable_ipv6=1"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 08:04:35 [SUCCESS] 172.31.117.142
+net.ipv6.conf.default.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+[2] 08:04:35 [SUCCESS] 172.31.115.72
+net.ipv6.conf.default.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+[3] 08:04:35 [SUCCESS] 172.31.115.48
+net.ipv6.conf.default.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+[4] 08:04:35 [SUCCESS] 172.31.115.74
+net.ipv6.conf.default.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+[5] 08:04:35 [SUCCESS] 172.31.115.31
+net.ipv6.conf.default.disable_ipv6 = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+
+
+
+== Hosts 
+[root@hdpharshal-1 ~]# scp /etc/hosts root@hdpharshal-2:/etc/hosts
+The authenticity of host 'hdpharshal-2 (172.31.115.48)' can't be established.
+ECDSA key fingerprint is SHA256:y5NJuzW9kis88ppAcqtfzYDZbWoEjEwbwNNYihCh/w0.
+ECDSA key fingerprint is MD5:c8:57:d0:02:f8:49:ad:1e:7c:9c:61:1b:f4:24:26:22.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hdpharshal-2' (ECDSA) to the list of known hosts.
+root@hdpharshal-2's password: 
+hosts                                                                                             100%  524    35.6KB/s   00:00    
+[root@hdpharshal-1 ~]# scp /etc/hosts root@hdpharshal-3:/etc/hosts
+The authenticity of host 'hdpharshal-3 (172.31.117.142)' can't be established.
+ECDSA key fingerprint is SHA256:laz8hYavGhXoBn9+cTXxe0h8BxepRQrXvBjLL6dX58k.
+ECDSA key fingerprint is MD5:30:58:6d:4c:9d:bc:44:9b:86:ed:06:4d:52:de:4e:20.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hdpharshal-3' (ECDSA) to the list of known hosts.
+root@hdpharshal-3's password: 
+hosts                                                                                             100%  524   370.3KB/s   00:00    
+[root@hdpharshal-1 ~]# scp /etc/hosts root@hdpharshal-4:/etc/hosts
+The authenticity of host 'hdpharshal-4 (172.31.115.72)' can't be established.
+ECDSA key fingerprint is SHA256:8heAR7OnVCeKTX59qspJTWXS6xFisSHg+YEupYBjPiU.
+ECDSA key fingerprint is MD5:23:5f:f5:68:94:49:15:14:bf:4f:ac:d1:fe:11:7e:7a.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hdpharshal-4' (ECDSA) to the list of known hosts.
+root@hdpharshal-4's password: 
+hosts                                                                                             100%  524   402.7KB/s   00:00    
+[root@hdpharshal-1 ~]# scp /etc/hosts root@hdpharshal-5:/etc/hosts
+The authenticity of host 'hdpharshal-5 (172.31.115.31)' can't be established.
+ECDSA key fingerprint is SHA256:OFuTKzJzuWMphsGO0o74b6R1wXooBcuXwbmAMNRWAc4.
+ECDSA key fingerprint is MD5:ab:0a:30:2e:8d:e8:8e:b2:f7:61:b9:77:19:40:31:40.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'hdpharshal-5' (ECDSA) to the list of known hosts.
+root@hdpharshal-5's password: 
+hosts                                                                                             100%  524   328.3KB/s   00:00    
+
+
+== nscd and ntpd 
+
+
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost -l root -A -i "service nscd status"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 08:14:13 [SUCCESS] 172.31.117.142
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:44:26 PST; 29min ago
+ Main PID: 1475 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1475 /usr/sbin/nscd
+
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/group` (8)
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/passwd` (7)
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/group` (8)
+Dec 04 07:44:27 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:38 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/resolv.conf` (5)
+Dec 04 07:44:38 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:45 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 04 08:11:09 hdpharshal-3.gce.cloudera.com nscd[1475]: 1475 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+Redirecting to /bin/systemctl status nscd.service
+[2] 08:14:13 [SUCCESS] 172.31.115.72
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:56 PST; 30min ago
+ Main PID: 1473 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1473 /usr/sbin/nscd
+
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring file `/etc/group` (8)
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring directory `/etc` (2)
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring file `/etc/passwd` (7)
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring directory `/etc` (2)
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring file `/etc/group` (8)
+Dec 04 07:43:58 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring directory `/etc` (2)
+Dec 04 07:44:09 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring file `/etc/resolv.conf` (5)
+Dec 04 07:44:09 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitoring directory `/etc` (2)
+Dec 04 07:44:15 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 04 08:11:25 hdpharshal-4.gce.cloudera.com nscd[1473]: 1473 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+Redirecting to /bin/systemctl status nscd.service
+[3] 08:14:13 [SUCCESS] 172.31.115.74
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:44:04 PST; 30min ago
+ Main PID: 1471 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1471 /usr/sbin/nscd
+
+Dec 04 07:44:06 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitoring directory `/etc` (2)
+Dec 04 07:44:17 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitoring file `/etc/resolv.conf` (5)
+Dec 04 07:44:17 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitoring directory `/etc` (2)
+Dec 04 07:44:23 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 04 08:09:05 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was moved, removing watch
+Dec 04 08:09:05 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was created, adding watch
+Dec 04 08:09:05 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was written to
+Dec 04 08:09:45 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was moved, removing watch
+Dec 04 08:09:45 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was created, adding watch
+Dec 04 08:09:45 hdpharshal-1.gce.cloudera.com nscd[1471]: 1471 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+Redirecting to /bin/systemctl status nscd.service
+[4] 08:14:13 [SUCCESS] 172.31.115.31
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:44:18 PST; 29min ago
+ Main PID: 1472 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1472 /usr/sbin/nscd
+
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring file `/etc/group` (8)
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring directory `/etc` (2)
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring file `/etc/passwd` (7)
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring directory `/etc` (2)
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring file `/etc/group` (8)
+Dec 04 07:44:19 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring directory `/etc` (2)
+Dec 04 07:44:31 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring file `/etc/resolv.conf` (5)
+Dec 04 07:44:31 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitoring directory `/etc` (2)
+Dec 04 07:44:37 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 04 08:12:59 hdpharshal-5.gce.cloudera.com nscd[1472]: 1472 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+Redirecting to /bin/systemctl status nscd.service
+[5] 08:14:13 [SUCCESS] 172.31.115.48
+● nscd.service - Name Service Cache Daemon
+   Loaded: loaded (/usr/lib/systemd/system/nscd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:44:01 PST; 30min ago
+ Main PID: 1475 (nscd)
+   CGroup: /system.slice/nscd.service
+           └─1475 /usr/sbin/nscd
+
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/group` (8)
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/passwd` (7)
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/group` (8)
+Dec 04 07:44:03 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:14 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring file `/etc/resolv.conf` (5)
+Dec 04 07:44:14 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitoring directory `/etc` (2)
+Dec 04 07:44:20 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 checking for monitored file `/etc/netgroup': No such file or directory
+Dec 04 08:10:48 hdpharshal-2.gce.cloudera.com nscd[1475]: 1475 monitored file `/etc/hosts` was written to
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+Redirecting to /bin/systemctl status nscd.service
+[root@hdpharshal-1 ~]# pssh -v -h ~/clhost -l root -A -i "service ntpd status"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 08:15:26 [SUCCESS] 172.31.117.142
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:39 PST; 31min ago
+ Main PID: 1336 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1336 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 04 07:43:39 hdpharshal-3.gce.cloudera.com ntpd[1336]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:758e UDP 123
+Dec 04 07:43:39 hdpharshal-3.gce.cloudera.com ntpd[1336]: Listening on routing socket on fd #22 for interface updates
+Dec 04 07:43:39 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 c016 06 restart
+Dec 04 07:43:39 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 04 07:43:39 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 c011 01 freq_not_set
+Dec 04 07:43:46 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 c614 04 freq_mode
+Dec 04 07:59:01 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 0612 02 freq_set kernel 70.731 PPM
+Dec 04 07:59:01 hdpharshal-3.gce.cloudera.com ntpd[1336]: 0.0.0.0 0615 05 clock_sync
+Dec 04 08:02:13 hdpharshal-3.gce.cloudera.com ntpd[1336]: Deleting interface #5 eth0, fe80::4001:acff:fe1f:758e#123, interface stats: received=0, sent=0, dropped=0, active_time=1114 secs
+Dec 04 08:02:13 hdpharshal-3.gce.cloudera.com ntpd[1336]: Deleting interface #4 lo, ::1#123, interface stats: received=0, sent=0, dropped=0, active_time=1114 secs
+Stderr: pssh-askpass received prompt: "root@172.31.117.142's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[2] 08:15:26 [SUCCESS] 172.31.115.48
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:36 PST; 31min ago
+ Main PID: 1330 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1330 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 04 07:43:36 hdpharshal-2.gce.cloudera.com ntpd[1330]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:7330 UDP 123
+Dec 04 07:43:36 hdpharshal-2.gce.cloudera.com ntpd[1330]: Listening on routing socket on fd #22 for interface updates
+Dec 04 07:43:37 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 c016 06 restart
+Dec 04 07:43:37 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 04 07:43:37 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 c011 01 freq_not_set
+Dec 04 07:43:43 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 c614 04 freq_mode
+Dec 04 08:02:09 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 0612 02 freq_set kernel 62.347 PPM
+Dec 04 08:02:09 hdpharshal-2.gce.cloudera.com ntpd[1330]: 0.0.0.0 0615 05 clock_sync
+Dec 04 08:02:13 hdpharshal-2.gce.cloudera.com ntpd[1330]: Deleting interface #5 eth0, fe80::4001:acff:fe1f:7330#123, interface stats: received=0, sent=0, dropped=0, active_time=1117 secs
+Dec 04 08:02:13 hdpharshal-2.gce.cloudera.com ntpd[1330]: Deleting interface #4 lo, ::1#123, interface stats: received=0, sent=0, dropped=0, active_time=1117 secs
+Stderr: pssh-askpass received prompt: "root@172.31.115.48's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[3] 08:15:26 [SUCCESS] 172.31.115.74
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:42 PST; 31min ago
+ Main PID: 1328 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1328 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 04 07:43:43 hdpharshal-1.gce.cloudera.com ntpd[1328]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:734a UDP 123
+Dec 04 07:43:43 hdpharshal-1.gce.cloudera.com ntpd[1328]: Listening on routing socket on fd #22 for interface updates
+Dec 04 07:43:43 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 c016 06 restart
+Dec 04 07:43:43 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 04 07:43:43 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 c011 01 freq_not_set
+Dec 04 07:43:50 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 c614 04 freq_mode
+Dec 04 08:01:21 hdpharshal-1.gce.cloudera.com ntpd[1328]: Deleting interface #5 eth0, fe80::4001:acff:fe1f:734a#123, interface stats: received=0, sent=0, dropped=0, active_time=1059 secs
+Dec 04 08:01:21 hdpharshal-1.gce.cloudera.com ntpd[1328]: Deleting interface #4 lo, ::1#123, interface stats: received=0, sent=0, dropped=0, active_time=1059 secs
+Dec 04 08:02:20 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 0612 02 freq_set kernel 45.020 PPM
+Dec 04 08:02:20 hdpharshal-1.gce.cloudera.com ntpd[1328]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.115.74's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[4] 08:15:26 [SUCCESS] 172.31.115.72
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:33 PST; 31min ago
+ Main PID: 1332 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1332 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 04 07:43:33 hdpharshal-4.gce.cloudera.com ntpd[1332]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:7348 UDP 123
+Dec 04 07:43:33 hdpharshal-4.gce.cloudera.com ntpd[1332]: Listening on routing socket on fd #22 for interface updates
+Dec 04 07:43:33 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 c016 06 restart
+Dec 04 07:43:33 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 04 07:43:33 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 c011 01 freq_not_set
+Dec 04 07:43:40 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 c614 04 freq_mode
+Dec 04 08:02:13 hdpharshal-4.gce.cloudera.com ntpd[1332]: Deleting interface #5 eth0, fe80::4001:acff:fe1f:7348#123, interface stats: received=0, sent=0, dropped=0, active_time=1120 secs
+Dec 04 08:02:13 hdpharshal-4.gce.cloudera.com ntpd[1332]: Deleting interface #4 lo, ::1#123, interface stats: received=0, sent=0, dropped=0, active_time=1120 secs
+Dec 04 08:04:27 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 0612 02 freq_set kernel 64.350 PPM
+Dec 04 08:04:27 hdpharshal-4.gce.cloudera.com ntpd[1332]: 0.0.0.0 0615 05 clock_sync
+Stderr: pssh-askpass received prompt: "root@172.31.115.72's password: "
+Redirecting to /bin/systemctl status ntpd.service
+[5] 08:15:26 [SUCCESS] 172.31.115.31
+● ntpd.service - Network Time Service
+   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Wed 2019-12-04 07:43:52 PST; 31min ago
+ Main PID: 1333 (ntpd)
+   CGroup: /system.slice/ntpd.service
+           └─1333 /usr/sbin/ntpd -u ntp:ntp -g
+
+Dec 04 07:43:53 hdpharshal-5.gce.cloudera.com ntpd[1333]: Listen normally on 5 eth0 fe80::4001:acff:fe1f:731f UDP 123
+Dec 04 07:43:53 hdpharshal-5.gce.cloudera.com ntpd[1333]: Listening on routing socket on fd #22 for interface updates
+Dec 04 07:43:53 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 c016 06 restart
+Dec 04 07:43:53 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 c012 02 freq_set kernel 0.000 PPM
+Dec 04 07:43:53 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 c011 01 freq_not_set
+Dec 04 07:44:00 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 c614 04 freq_mode
+Dec 04 07:59:11 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 0612 02 freq_set kernel 86.251 PPM
+Dec 04 07:59:11 hdpharshal-5.gce.cloudera.com ntpd[1333]: 0.0.0.0 0615 05 clock_sync
+Dec 04 08:02:13 hdpharshal-5.gce.cloudera.com ntpd[1333]: Deleting interface #5 eth0, fe80::4001:acff:fe1f:731f#123, interface stats: received=0, sent=0, dropped=0, active_time=1101 secs
+Dec 04 08:02:13 hdpharshal-5.gce.cloudera.com ntpd[1333]: Deleting interface #4 lo, ::1#123, interface stats: received=0, sent=0, dropped=0, active_time=1101 secs
+Stderr: pssh-askpass received prompt: "root@172.31.115.31's password: "
+Redirecting to /bin/systemctl status ntpd.service
+
+
+
