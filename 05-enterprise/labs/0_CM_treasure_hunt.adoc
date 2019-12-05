@@ -1,0 +1,33 @@
+....
+
+== UBER task optimization
+Whether to enable ubertask optimization, which runs "sufficiently small" jobs sequentially within a single JVM. "Small" is defined by the mapreduce.job.ubertask.maxmaps, mapreduce.job.ubertask.maxreduces, and mapreduce.job.ubertask.maxbytes settings.
+
+Idea is to avoid overhead for resource negotiations if the job can be run sequentially in the same JVM as application master.
+
+== Kerberos security realm value
+Kerberos Security Realm configured -> HADOOP.COM
+shown in Settings: Kerberos_Security_Realm
+
+== Kerberos Setting
+Zookeeper, HDFS, YARN -> Kerberos Authentication
+Zookeeper, Oozie, Hue, Hive, Yarm, Cloudera Mgmt Svcs -> Kerberos Principle
+
+== Upgrade CM Agents
+http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/upgrade
+see option to upgrade agents
+
+==tsquery statement to generate CPU utilization chart for HIVE
+under chart builder - click on HIVE cpu chart
+
+SELECT cpu_system_rate + cpu_user_rate WHERE entityName = "hive-HIVEMETASTORE-250d6d2d3cb6c51047ac048ddcad26a0" AND category = ROLE
+
+== HIVE roles
+Gateway 
+HIVE metastore store
+HiveServer2
+ 
+== integration with Kerberos steps
+Not entirely sure about that - BUT Kerberos principle and Realm must be entered for sure.
+
+
