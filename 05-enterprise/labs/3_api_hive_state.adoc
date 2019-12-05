@@ -1,0 +1,1064 @@
+....
+== API call on ./api/v2/cm/deployment
+
+(base) MacBook-Pro-6:labs harshalpatil$ curl -u harshal:cloudera 'http://harshalinstalllab-5.gce.cloudera.com:7180/api/v2/cm/deployment'
+{
+  "timestamp" : "2019-12-05T17:57:26.398Z",
+  "clusters" : [ {
+    "name" : "Cluster 1",
+    "version" : "CDH5",
+    "services" : [ {
+      "name" : "zookeeper",
+      "type" : "ZOOKEEPER",
+      "config" : {
+        "roleTypeConfigs" : [ {
+          "roleType" : "SERVER",
+          "items" : [ {
+            "name" : "zookeeper_server_java_heapsize",
+            "value" : "489684992"
+          } ]
+        } ],
+        "items" : [ ]
+      },
+      "roles" : [ {
+        "name" : "zookeeper-SERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "SERVER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "14nisps43uk2u8oukgym4rk55"
+          }, {
+            "name" : "serverId",
+            "value" : "1"
+          } ]
+        }
+      }, {
+        "name" : "zookeeper-SERVER-5faf6697e9a7aac47cc206e7adc7a217",
+        "type" : "SERVER",
+        "hostRef" : {
+          "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "ci4ugucls0l2xumskzq1fak3a"
+          }, {
+            "name" : "serverId",
+            "value" : "2"
+          } ]
+        }
+      }, {
+        "name" : "zookeeper-SERVER-f4125d906f1fd2ef01fe0b6d4a380230",
+        "type" : "SERVER",
+        "hostRef" : {
+          "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "anmyw1dtsq0woug0ay9vmoogi"
+          }, {
+            "name" : "serverId",
+            "value" : "3"
+          } ]
+        }
+      } ],
+      "displayName" : "ZooKeeper"
+    }, {
+      "name" : "oozie",
+      "type" : "OOZIE",
+      "config" : {
+        "roleTypeConfigs" : [ {
+          "roleType" : "OOZIE_SERVER",
+          "items" : [ {
+            "name" : "oozie_database_host",
+            "value" : "harshalinstalllab-5.gce.cloudera.com"
+          }, {
+            "name" : "oozie_database_password",
+            "value" : "pass"
+          }, {
+            "name" : "oozie_database_type",
+            "value" : "mysql"
+          }, {
+            "name" : "oozie_database_user",
+            "value" : "root"
+          }, {
+            "name" : "oozie_java_heapsize",
+            "value" : "489684992"
+          } ]
+        } ],
+        "items" : [ {
+          "name" : "hive_service",
+          "value" : "hive"
+        }, {
+          "name" : "mapreduce_yarn_service",
+          "value" : "yarn"
+        }, {
+          "name" : "zookeeper_service",
+          "value" : "zookeeper"
+        } ]
+      },
+      "roles" : [ {
+        "name" : "oozie-OOZIE_SERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "OOZIE_SERVER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "8au5yaczfcceltg552r71wfow"
+          } ]
+        }
+      } ],
+      "displayName" : "Oozie"
+    }, {
+      "name" : "hue",
+      "type" : "HUE",
+      "config" : {
+        "roleTypeConfigs" : [ ],
+        "items" : [ {
+          "name" : "database_host",
+          "value" : "harshalinstalllab-5.gce.cloudera.com"
+        }, {
+          "name" : "database_password",
+          "value" : "pass"
+        }, {
+          "name" : "database_type",
+          "value" : "mysql"
+        }, {
+          "name" : "database_user",
+          "value" : "root"
+        }, {
+          "name" : "hive_service",
+          "value" : "hive"
+        }, {
+          "name" : "hue_webhdfs",
+          "value" : "hdfs-NAMENODE-250d6d2d3cb6c51047ac048ddcad26a0"
+        }, {
+          "name" : "oozie_service",
+          "value" : "oozie"
+        }, {
+          "name" : "zookeeper_service",
+          "value" : "zookeeper"
+        } ]
+      },
+      "roles" : [ {
+        "name" : "hue-HUE_LOAD_BALANCER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "HUE_LOAD_BALANCER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "30kea7bnpo281bbve946f6drc"
+          } ]
+        }
+      }, {
+        "name" : "hue-HUE_SERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "HUE_SERVER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "navmetadataserver_cmdb_password",
+            "value" : "dd41e968-b72b-4aae-ab94-b3485549bc5c"
+          }, {
+            "name" : "role_jceks_password",
+            "value" : "3r4e1bb4uw2l327mz3z7sumdi"
+          }, {
+            "name" : "secret_key",
+            "value" : "ntdtvhE5psdYN1kLQrXD2cv2QwjrlE"
+          } ]
+        }
+      } ],
+      "displayName" : "Hue"
+    }, {
+      "name" : "hdfs",
+      "type" : "HDFS",
+      "config" : {
+        "roleTypeConfigs" : [ {
+          "roleType" : "BALANCER",
+          "items" : [ {
+            "name" : "balancer_java_heapsize",
+            "value" : "489684992"
+          } ]
+        }, {
+          "roleType" : "DATANODE",
+          "items" : [ {
+            "name" : "dfs_data_dir_list",
+            "value" : "/dfs/dn"
+          }, {
+            "name" : "dfs_datanode_du_reserved",
+            "value" : "10736126771"
+          }, {
+            "name" : "dfs_datanode_max_locked_memory",
+            "value" : "3998220288"
+          } ]
+        }, {
+          "roleType" : "GATEWAY",
+          "items" : [ {
+            "name" : "dfs_client_use_trash",
+            "value" : "true"
+          } ]
+        }, {
+          "roleType" : "JOURNALNODE",
+          "items" : [ {
+            "name" : "dfs_journalnode_edits_dir",
+            "value" : "/namenode"
+          } ]
+        }, {
+          "roleType" : "NAMENODE",
+          "items" : [ {
+            "name" : "dfs_name_dir_list",
+            "value" : "/dfs/nn"
+          }, {
+            "name" : "dfs_namenode_servicerpc_address",
+            "value" : "8022"
+          }, {
+            "name" : "namenode_java_heapsize",
+            "value" : "489684992"
+          } ]
+        }, {
+          "roleType" : "SECONDARYNAMENODE",
+          "items" : [ {
+            "name" : "fs_checkpoint_dir_list",
+            "value" : "/dfs/snn"
+          }, {
+            "name" : "secondary_namenode_java_heapsize",
+            "value" : "489684992"
+          } ]
+        } ],
+        "items" : [ {
+          "name" : "dfs_ha_fencing_cloudera_manager_secret_key",
+          "value" : "CyKLDCrjHkQqH1MPLFDGHmNby0rV1d"
+        }, {
+          "name" : "fc_authorization_secret_key",
+          "value" : "Ir5hGu6XNabmMCtjfZGi2clXyTcnAR"
+        }, {
+          "name" : "http_auth_signature_secret",
+          "value" : "oPoGGLze2L3BlEM2F4NpiCrdZ8k6ZB"
+        }, {
+          "name" : "rm_dirty",
+          "value" : "true"
+        }, {
+          "name" : "zookeeper_service",
+          "value" : "zookeeper"
+        } ]
+      },
+      "roles" : [ {
+        "name" : "hdfs-BALANCER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "BALANCER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hdfs-DATANODE-5faf6697e9a7aac47cc206e7adc7a217",
+        "type" : "DATANODE",
+        "hostRef" : {
+          "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "71jsijj11oy5r50oadb9rp6o8"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-DATANODE-94b8be2ac5a3e7877d1228c24107aecb",
+        "type" : "DATANODE",
+        "hostRef" : {
+          "hostId" : "5c07bcd3-3d7e-4b74-a3c4-b836c1c484e7"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "71xgcmcmbaemv8ohoh86c1yi7"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-DATANODE-f4125d906f1fd2ef01fe0b6d4a380230",
+        "type" : "DATANODE",
+        "hostRef" : {
+          "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "c2yjabcjns8isnjsyk3sta332"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-DATANODE-f82db06ccb854be81b914c2772b0bd5a",
+        "type" : "DATANODE",
+        "hostRef" : {
+          "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "6xjdzj5u7xyn5idn9esxrkkr7"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-FAILOVERCONTROLLER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "FAILOVERCONTROLLER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "6z0ztxkcefi1q76mug2luaal7"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-FAILOVERCONTROLLER-f82db06ccb854be81b914c2772b0bd5a",
+        "type" : "FAILOVERCONTROLLER",
+        "hostRef" : {
+          "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "6259qf1dr6q3wbg1m6iuqcc52"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-JOURNALNODE-5faf6697e9a7aac47cc206e7adc7a217",
+        "type" : "JOURNALNODE",
+        "hostRef" : {
+          "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "5f10l78wsrttlrmu0p6dvg3jq"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-JOURNALNODE-94b8be2ac5a3e7877d1228c24107aecb",
+        "type" : "JOURNALNODE",
+        "hostRef" : {
+          "hostId" : "5c07bcd3-3d7e-4b74-a3c4-b836c1c484e7"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "ctghkf9u47jw52m95673m7m5d"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-JOURNALNODE-f4125d906f1fd2ef01fe0b6d4a380230",
+        "type" : "JOURNALNODE",
+        "hostRef" : {
+          "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "etwde6b6fhygrpqomasni1s10"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-NAMENODE-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "NAMENODE",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "autofailover_enabled",
+            "value" : "true"
+          }, {
+            "name" : "dfs_federation_namenode_nameservice",
+            "value" : "nameservice1"
+          }, {
+            "name" : "dfs_namenode_quorum_journal_name",
+            "value" : "nameservice1"
+          }, {
+            "name" : "namenode_id",
+            "value" : "96"
+          }, {
+            "name" : "role_jceks_password",
+            "value" : "eyb0ilyp1u4qyvdzkvu51yt47"
+          } ]
+        }
+      }, {
+        "name" : "hdfs-NAMENODE-f82db06ccb854be81b914c2772b0bd5a",
+        "type" : "NAMENODE",
+        "hostRef" : {
+          "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "autofailover_enabled",
+            "value" : "true"
+          }, {
+            "name" : "dfs_federation_namenode_nameservice",
+            "value" : "nameservice1"
+          }, {
+            "name" : "dfs_namenode_quorum_journal_name",
+            "value" : "nameservice1"
+          }, {
+            "name" : "namenode_id",
+            "value" : "113"
+          }, {
+            "name" : "role_jceks_password",
+            "value" : "bxu3yh0h1or07yul67agqk1ol"
+          } ]
+        }
+      } ],
+      "displayName" : "HDFS"
+    }, {
+      "name" : "yarn",
+      "type" : "YARN",
+      "config" : {
+        "roleTypeConfigs" : [ {
+          "roleType" : "GATEWAY",
+          "items" : [ {
+            "name" : "mapred_reduce_tasks",
+            "value" : "4"
+          }, {
+            "name" : "mapred_submit_replication",
+            "value" : "3"
+          } ]
+        }, {
+          "roleType" : "JOBHISTORY",
+          "items" : [ {
+            "name" : "mr2_jobhistory_java_heapsize",
+            "value" : "489684992"
+          } ]
+        }, {
+          "roleType" : "NODEMANAGER",
+          "items" : [ {
+            "name" : "yarn_nodemanager_heartbeat_interval_ms",
+            "value" : "100"
+          }, {
+            "name" : "yarn_nodemanager_local_dirs",
+            "value" : "/yarn/nm"
+          }, {
+            "name" : "yarn_nodemanager_log_dirs",
+            "value" : "/yarn/container-logs"
+          }, {
+            "name" : "yarn_nodemanager_resource_cpu_vcores",
+            "value" : "2"
+          }, {
+            "name" : "yarn_nodemanager_resource_memory_mb",
+            "value" : "3813"
+          } ]
+        }, {
+          "roleType" : "RESOURCEMANAGER",
+          "items" : [ {
+            "name" : "resource_manager_java_heapsize",
+            "value" : "489684992"
+          }, {
+            "name" : "yarn_scheduler_maximum_allocation_mb",
+            "value" : "3813"
+          }, {
+            "name" : "yarn_scheduler_maximum_allocation_vcores",
+            "value" : "2"
+          } ]
+        } ],
+        "items" : [ {
+          "name" : "hdfs_service",
+          "value" : "hdfs"
+        }, {
+          "name" : "rm_dirty",
+          "value" : "true"
+        }, {
+          "name" : "zk_authorization_secret_key",
+          "value" : "W5TXSzUTbcGKmujNL7oepoDkFbvEoB"
+        }, {
+          "name" : "zookeeper_service",
+          "value" : "zookeeper"
+        } ]
+      },
+      "roles" : [ {
+        "name" : "yarn-JOBHISTORY-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "JOBHISTORY",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "2xzpqjgkkikhjdffq9on32dph"
+          } ]
+        }
+      }, {
+        "name" : "yarn-NODEMANAGER-5faf6697e9a7aac47cc206e7adc7a217",
+        "type" : "NODEMANAGER",
+        "hostRef" : {
+          "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "e4t16cw9s7pzb6ewpuwx81n8y"
+          } ]
+        }
+      }, {
+        "name" : "yarn-NODEMANAGER-94b8be2ac5a3e7877d1228c24107aecb",
+        "type" : "NODEMANAGER",
+        "hostRef" : {
+          "hostId" : "5c07bcd3-3d7e-4b74-a3c4-b836c1c484e7"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "2apeyq33ilbj0t1fx7yr84ofn"
+          } ]
+        }
+      }, {
+        "name" : "yarn-NODEMANAGER-f4125d906f1fd2ef01fe0b6d4a380230",
+        "type" : "NODEMANAGER",
+        "hostRef" : {
+          "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "c53ts4hh98ecnckg6mut21atg"
+          } ]
+        }
+      }, {
+        "name" : "yarn-NODEMANAGER-f82db06ccb854be81b914c2772b0bd5a",
+        "type" : "NODEMANAGER",
+        "hostRef" : {
+          "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "5ynxetu8uwhs5nbxskgst5vty"
+          } ]
+        }
+      }, {
+        "name" : "yarn-RESOURCEMANAGER-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "RESOURCEMANAGER",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "rm_id",
+            "value" : "103"
+          }, {
+            "name" : "role_jceks_password",
+            "value" : "6janfwhmiu5lduxovh6iy9z9"
+          } ]
+        }
+      } ],
+      "displayName" : "YARN (MR2 Included)"
+    }, {
+      "name" : "hive",
+      "type" : "HIVE",
+      "config" : {
+        "roleTypeConfigs" : [ {
+          "roleType" : "HIVEMETASTORE",
+          "items" : [ {
+            "name" : "hive_metastore_java_heapsize",
+            "value" : "489684992"
+          } ]
+        }, {
+          "roleType" : "HIVESERVER2",
+          "items" : [ {
+            "name" : "hiveserver2_java_heapsize",
+            "value" : "489684992"
+          }, {
+            "name" : "hiveserver2_spark_driver_memory",
+            "value" : "966367641"
+          }, {
+            "name" : "hiveserver2_spark_executor_cores",
+            "value" : "2"
+          }, {
+            "name" : "hiveserver2_spark_executor_memory",
+            "value" : "3398487244"
+          }, {
+            "name" : "hiveserver2_spark_yarn_driver_memory_overhead",
+            "value" : "102"
+          }, {
+            "name" : "hiveserver2_spark_yarn_executor_memory_overhead",
+            "value" : "571"
+          } ]
+        } ],
+        "items" : [ {
+          "name" : "hive_metastore_database_host",
+          "value" : "harshalinstalllab-5.gce.cloudera.com"
+        }, {
+          "name" : "hive_metastore_database_password",
+          "value" : "pass"
+        }, {
+          "name" : "hive_metastore_database_user",
+          "value" : "root"
+        }, {
+          "name" : "mapreduce_yarn_service",
+          "value" : "yarn"
+        }, {
+          "name" : "zookeeper_service",
+          "value" : "zookeeper"
+        } ]
+      },
+      "roles" : [ {
+        "name" : "hive-GATEWAY-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "GATEWAY",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hive-GATEWAY-5faf6697e9a7aac47cc206e7adc7a217",
+        "type" : "GATEWAY",
+        "hostRef" : {
+          "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hive-GATEWAY-94b8be2ac5a3e7877d1228c24107aecb",
+        "type" : "GATEWAY",
+        "hostRef" : {
+          "hostId" : "5c07bcd3-3d7e-4b74-a3c4-b836c1c484e7"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hive-GATEWAY-f4125d906f1fd2ef01fe0b6d4a380230",
+        "type" : "GATEWAY",
+        "hostRef" : {
+          "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hive-GATEWAY-f82db06ccb854be81b914c2772b0bd5a",
+        "type" : "GATEWAY",
+        "hostRef" : {
+          "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1"
+        },
+        "config" : {
+          "items" : [ ]
+        }
+      }, {
+        "name" : "hive-HIVEMETASTORE-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "HIVEMETASTORE",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "1upiayrq8qfwgb0vzujhxrid9"
+          } ]
+        }
+      }, {
+        "name" : "hive-HIVESERVER2-250d6d2d3cb6c51047ac048ddcad26a0",
+        "type" : "HIVESERVER2",
+        "hostRef" : {
+          "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+        },
+        "config" : {
+          "items" : [ {
+            "name" : "role_jceks_password",
+            "value" : "6s1adggi1rbfmd8d8f30vw2ct"
+          } ]
+        }
+      } ],
+      "displayName" : "Hive"
+    } ]
+  } ],
+  "hosts" : [ {
+    "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea",
+    "ipAddress" : "172.31.116.204",
+    "hostname" : "harshalinstalllab-1.gce.cloudera.com",
+    "rackId" : "/default",
+    "config" : {
+      "items" : [ ]
+    }
+  }, {
+    "hostId" : "f89b1b91-7299-43e2-973b-97b1f77f4829",
+    "ipAddress" : "172.31.116.207",
+    "hostname" : "harshalinstalllab-2.gce.cloudera.com",
+    "rackId" : "/default",
+    "config" : {
+      "items" : [ ]
+    }
+  }, {
+    "hostId" : "f903225a-1795-49d0-81c7-06bb1d7bbac1",
+    "ipAddress" : "172.31.116.203",
+    "hostname" : "harshalinstalllab-3.gce.cloudera.com",
+    "rackId" : "/default",
+    "config" : {
+      "items" : [ ]
+    }
+  }, {
+    "hostId" : "5c07bcd3-3d7e-4b74-a3c4-b836c1c484e7",
+    "ipAddress" : "172.31.116.206",
+    "hostname" : "harshalinstalllab-4.gce.cloudera.com",
+    "rackId" : "/default",
+    "config" : {
+      "items" : [ ]
+    }
+  }, {
+    "hostId" : "2b4350e7-9f14-42c4-82c5-f5d0f74e9445",
+    "ipAddress" : "172.31.116.202",
+    "hostname" : "harshalinstalllab-5.gce.cloudera.com",
+    "rackId" : "/default",
+    "config" : {
+      "items" : [ ]
+    }
+  } ],
+  "users" : [ {
+    "name" : "__cloudera_internal_user__hue-HUE_SERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+    "roles" : [ "ROLE_NAVIGATOR_ADMIN" ],
+    "pwHash" : "dd17575bb5559b73274377ace8291c60cc8ea149a205e843fe0ef06da6a5bfbe",
+    "pwSalt" : -3104702736571547959,
+    "pwLogin" : true
+  }, {
+    "name" : "__cloudera_internal_user__mgmt-EVENTSERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+    "roles" : [ "ROLE_USER" ],
+    "pwHash" : "0f28f8582152a9e4627a9953bf63b173b2e95a6d903d2df9d94947ce73fac1dd",
+    "pwSalt" : 2699543163318846440,
+    "pwLogin" : true
+  }, {
+    "name" : "__cloudera_internal_user__mgmt-HOSTMONITOR-250d6d2d3cb6c51047ac048ddcad26a0",
+    "roles" : [ "ROLE_USER" ],
+    "pwHash" : "a907619286f32afc8de36e36b14cf9687b379961a513077954d989c930d12a38",
+    "pwSalt" : 6936196884074236150,
+    "pwLogin" : true
+  }, {
+    "name" : "__cloudera_internal_user__mgmt-REPORTSMANAGER-250d6d2d3cb6c51047ac048ddcad26a0",
+    "roles" : [ "ROLE_USER" ],
+    "pwHash" : "c7c997de91ad03a4ca49ce4b145704b0f0fd5faf31735534f3a4f8eeb2099bbe",
+    "pwSalt" : 8695327458806072005,
+    "pwLogin" : true
+  }, {
+    "name" : "__cloudera_internal_user__mgmt-SERVICEMONITOR-250d6d2d3cb6c51047ac048ddcad26a0",
+    "roles" : [ "ROLE_USER" ],
+    "pwHash" : "51213c41f7ed36c9f91bb1458f72ecc25d7cc3f3f29b5ffc3748413225e4b776",
+    "pwSalt" : -2400478489401500928,
+    "pwLogin" : true
+  }, {
+    "name" : "admin",
+    "roles" : [ "ROLE_LIMITED" ],
+    "pwHash" : "0457ac82a721e6da729ae38c5fee85e0be49497bb8796050751e73629469b40a",
+    "pwSalt" : 7939660908130883034,
+    "pwLogin" : true
+  }, {
+    "name" : "harshal",
+    "roles" : [ "ROLE_ADMIN" ],
+    "pwHash" : "a30c069ad4a0d97632685cdfa2b2f94c10d1f443ce74a6c68f4502b1590e6130",
+    "pwSalt" : -5537409822209338369,
+    "pwLogin" : true
+  }, {
+    "name" : "minotaur",
+    "roles" : [ "ROLE_CONFIGURATOR" ],
+    "pwHash" : "e15dd68f334538343b42ea58ffbb413fa179a0109b0698b9991e0babb07fd5a3",
+    "pwSalt" : 5374749231331107894,
+    "pwLogin" : true
+  } ],
+  "versionInfo" : {
+    "version" : "5.15.2",
+    "buildUser" : "jenkins",
+    "buildTimestamp" : "20181111-0722",
+    "gitHash" : "bb8bf45c81fd454610b53e4945ceb482361f7568",
+    "snapshot" : false
+  },
+  "managementService" : {
+    "name" : "mgmt",
+    "type" : "MGMT",
+    "config" : {
+      "roleTypeConfigs" : [ {
+        "roleType" : "EVENTSERVER",
+        "items" : [ {
+          "name" : "event_server_heapsize",
+          "value" : "489684992"
+        } ]
+      }, {
+        "roleType" : "HOSTMONITOR",
+        "items" : [ {
+          "name" : "firehose_heapsize",
+          "value" : "489684992"
+        }, {
+          "name" : "firehose_non_java_memory_bytes",
+          "value" : "805306368"
+        } ]
+      }, {
+        "roleType" : "REPORTSMANAGER",
+        "items" : [ {
+          "name" : "headlamp_database_host",
+          "value" : "harshalinstalllab-5.gce.cloudera.com"
+        }, {
+          "name" : "headlamp_database_name",
+          "value" : "rman"
+        }, {
+          "name" : "headlamp_database_password",
+          "value" : "pass"
+        }, {
+          "name" : "headlamp_database_user",
+          "value" : "root"
+        }, {
+          "name" : "headlamp_heapsize",
+          "value" : "489684992"
+        } ]
+      }, {
+        "roleType" : "SERVICEMONITOR",
+        "items" : [ {
+          "name" : "firehose_heapsize",
+          "value" : "489684992"
+        }, {
+          "name" : "firehose_non_java_memory_bytes",
+          "value" : "805306368"
+        } ]
+      } ],
+      "items" : [ ]
+    },
+    "roles" : [ {
+      "name" : "mgmt-ALERTPUBLISHER-250d6d2d3cb6c51047ac048ddcad26a0",
+      "type" : "ALERTPUBLISHER",
+      "hostRef" : {
+        "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+      },
+      "config" : {
+        "items" : [ {
+          "name" : "role_jceks_password",
+          "value" : "6l4roionse77m0g674mn95df0"
+        } ]
+      }
+    }, {
+      "name" : "mgmt-EVENTSERVER-250d6d2d3cb6c51047ac048ddcad26a0",
+      "type" : "EVENTSERVER",
+      "hostRef" : {
+        "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+      },
+      "config" : {
+        "items" : [ {
+          "name" : "role_jceks_password",
+          "value" : "9kmh7oaaollttezaaaxo8x15a"
+        } ]
+      }
+    }, {
+      "name" : "mgmt-HOSTMONITOR-250d6d2d3cb6c51047ac048ddcad26a0",
+      "type" : "HOSTMONITOR",
+      "hostRef" : {
+        "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+      },
+      "config" : {
+        "items" : [ {
+          "name" : "role_jceks_password",
+          "value" : "7bqkv9ppsja5bt893rcmavt6w"
+        } ]
+      }
+    }, {
+      "name" : "mgmt-REPORTSMANAGER-250d6d2d3cb6c51047ac048ddcad26a0",
+      "type" : "REPORTSMANAGER",
+      "hostRef" : {
+        "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+      },
+      "config" : {
+        "items" : [ {
+          "name" : "role_jceks_password",
+          "value" : "20wd76es47pqn5jwiaocwalfm"
+        } ]
+      }
+    }, {
+      "name" : "mgmt-SERVICEMONITOR-250d6d2d3cb6c51047ac048ddcad26a0",
+      "type" : "SERVICEMONITOR",
+      "hostRef" : {
+        "hostId" : "c8040df5-d6af-4598-bfe5-f0dbd79d95ea"
+      },
+      "config" : {
+        "items" : [ {
+          "name" : "role_jceks_password",
+          "value" : "7peohc6z6vhpg0vzr0lqy7jac"
+        } ]
+      }
+    } ],
+    "displayName" : "Cloudera Management Service"
+  },
+  "managerSettings" : {
+    "items" : [ {
+      "name" : "CLUSTER_STATS_START",
+      "value" : "10/26/2012 10:10"
+    }, {
+      "name" : "PUBLIC_CLOUD_STATUS",
+      "value" : "NOT_ON_PUBLIC_CLOUD"
+    }, {
+      "name" : "REMOTE_PARCEL_REPO_URLS",
+      "value" : "https://archive.cloudera.com/cdh5/parcels/{latest_supported}/,https://archive.cloudera.com/cdh4/parcels/latest/,https://archive.cloudera.com/impala/parcels/latest/,https://archive.cloudera.com/search/parcels/latest/,https://archive.cloudera.com/accumulo/parcels/1.4/,https://archive.cloudera.com/accumulo-c5/parcels/latest/,https://archive.cloudera.com/kafka/parcels/latest/,http://archive.cloudera.com/kudu/parcels/latest/,https://archive.cloudera.com/spark/parcels/latest/,https://archive.cloudera.com/sqoop-connectors/parcels/latest/"
+    } ]
+  }
+(base) MacBook-Pro-6:labs harshalpatil$ 
+
+== SERVICE ENQUIRY
+
+(base) MacBook-Pro-6:labs harshalpatil$ curl -u harshal:cloudera 'http://harshalinstalllab-5.gce.cloudera.com:7180/api/v1/clusters/Cluster%201/services'
+{
+  "items" : [ {
+    "name" : "zookeeper",
+    "type" : "ZOOKEEPER",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/zookeeper",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "ZOOKEEPER_CANARY_HEALTH",
+      "summary" : "GOOD"
+    }, {
+      "name" : "ZOOKEEPER_SERVERS_HEALTHY",
+      "summary" : "GOOD"
+    } ],
+    "configStale" : false
+  }, {
+    "name" : "oozie",
+    "type" : "OOZIE",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/oozie",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "OOZIE_OOZIE_SERVERS_HEALTHY",
+      "summary" : "GOOD"
+    } ],
+    "configStale" : false
+  }, {
+    "name" : "hue",
+    "type" : "HUE",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/hue",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "HUE_HUE_SERVERS_HEALTHY",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HUE_LOAD_BALANCER_HEALTHY",
+      "summary" : "GOOD"
+    } ],
+    "configStale" : false
+  }, {
+    "name" : "hdfs",
+    "type" : "HDFS",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/hdfs",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "HDFS_BLOCKS_WITH_CORRUPT_REPLICAS",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_CANARY_HEALTH",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_DATA_NODES_HEALTHY",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_FAILOVER_CONTROLLERS_HEALTHY",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_FREE_SPACE_REMAINING",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_HA_NAMENODE_HEALTH",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_MISSING_BLOCKS",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HDFS_UNDER_REPLICATED_BLOCKS",
+      "summary" : "GOOD"
+    } ],
+    "configStale" : false
+  }, {
+    "name" : "yarn",
+    "type" : "YARN",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/yarn",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "YARN_JOBHISTORY_HEALTH",
+      "summary" : "GOOD"
+    }, {
+      "name" : "YARN_NODE_MANAGERS_HEALTHY",
+      "summary" : "GOOD"
+    }, {
+      "name" : "YARN_RESOURCEMANAGERS_HEALTH",
+      "summary" : "GOOD"
+    }, {
+      "name" : "YARN_USAGE_AGGREGATION_HEALTH",
+      "summary" : "DISABLED"
+    } ],
+    "configStale" : false
+  }, {
+    "name" : "hive",
+    "type" : "HIVE",
+    "clusterRef" : {
+      "clusterName" : "cluster"
+    },
+    "serviceUrl" : "http://harshalinstalllab-5.gce.cloudera.com:7180/cmf/serviceRedirect/hive",
+    "serviceState" : "STARTED",
+    "healthSummary" : "GOOD",
+    "healthChecks" : [ {
+      "name" : "HIVE_HIVEMETASTORES_HEALTHY",
+      "summary" : "GOOD"
+    }, {
+      "name" : "HIVE_HIVESERVER2S_HEALTHY",
+      "summary" : "GOOD"
+    } ],
+    "configStale" : false
+  } ]
+}(base) MacBook-Pro-6:labs harshalpatil$ 
+
+== HIVE SERVICE STOP and START
+
+(base) MacBook-Pro-6:labs harshalpatil$ curl -X POST -u harshal:cloudera 'http://harshalinstalllab-5.gce.cloudera.com:7180/api/v1/clusters/Cluster%201/services/hive/commands/stop'
+{
+  "id" : 232,
+  "name" : "Stop",
+  "startTime" : "2019-12-05T18:19:46.426Z",
+  "active" : true,
+  "serviceRef" : {
+    "clusterName" : "cluster",
+    "serviceName" : "hive"
+  }
+
+(base) MacBook-Pro-6:labs harshalpatil$ curl -X POST -u harshal:cloudera 'http://harshalinstalllab-5.gce.cloudera.com:7180/api/v1/clusters/Cluster%201/services/hive/commands/start'
+{
+  "id" : 236,
+  "name" : "Start",
+  "startTime" : "2019-12-05T18:20:48.030Z",
+  "active" : true,
+  "serviceRef" : {
+    "clusterName" : "cluster",
+    "serviceName" : "hive"
+  }
+
+....
+
+
+
