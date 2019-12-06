@@ -1,0 +1,164 @@
+....
+
+== MARIA DB
+
+[root@harshalchg-2 ~]# cat /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.2/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+
+
+[root@harshalchg-2 ~]# yum install mariadb-server
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: us.mirror.nsec.pt
+ * epel: mirror.steadfastnet.com
+ * extras: us.mirror.nsec.pt
+ * updates: us.mirror.nsec.pt
+mariadb                                                                                                                            | 2.9 kB  00:00:00     
+mariadb/primary_db                                                                                                                 |  53 kB  00:00:00     
+Package mariadb-server is obsoleted by MariaDB-server, trying to install MariaDB-server-10.2.29-1.el7.centos.x86_64 instead
+Resolving Dependencies
+--> Running transaction check
+---> Package MariaDB-server.x86_64 0:10.2.29-1.el7.centos will be installed
+--> Processing Dependency: MariaDB-client for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: libaio.so.1(LIBAIO_0.4)(64bit) for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: galera for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: MariaDB-common for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: libaio.so.1(LIBAIO_0.1)(64bit) for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: perl(DBI) for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Processing Dependency: libaio.so.1()(64bit) for package: MariaDB-server-10.2.29-1.el7.centos.x86_64
+--> Running transaction check
+---> Package MariaDB-client.x86_64 0:10.2.29-1.el7.centos will be installed
+---> Package MariaDB-common.x86_64 0:10.2.29-1.el7.centos will be installed
+--> Processing Dependency: MariaDB-compat for package: MariaDB-common-10.2.29-1.el7.centos.x86_64
+---> Package galera.x86_64 0:25.3.28-1.rhel7.el7.centos will be installed
+--> Processing Dependency: libboost_program_options.so.1.53.0()(64bit) for package: galera-25.3.28-1.rhel7.el7.centos.x86_64
+---> Package libaio.x86_64 0:0.3.109-13.el7 will be installed
+---> Package perl-DBI.x86_64 0:1.627-4.el7 will be installed
+--> Processing Dependency: perl(RPC::PlServer) >= 0.2001 for package: perl-DBI-1.627-4.el7.x86_64
+--> Processing Dependency: perl(RPC::PlClient) >= 0.2000 for package: perl-DBI-1.627-4.el7.x86_64
+--> Running transaction check
+---> Package MariaDB-compat.x86_64 0:10.2.29-1.el7.centos will be obsoleting
+---> Package boost-program-options.x86_64 0:1.53.0-27.el7 will be installed
+---> Package mariadb-libs.x86_64 1:5.5.60-1.el7_5 will be obsoleted
+---> Package perl-PlRPC.noarch 0:0.2020-14.el7 will be installed
+--> Processing Dependency: perl(Net::Daemon) >= 0.13 for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Processing Dependency: perl(Net::Daemon::Test) for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Processing Dependency: perl(Net::Daemon::Log) for package: perl-PlRPC-0.2020-14.el7.noarch
+--> Running transaction check
+---> Package perl-Net-Daemon.noarch 0:0.48-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==========================================================================================================================================================
+ Package                                   Arch                       Version                                           Repository                   Size
+==========================================================================================================================================================
+Installing:
+ MariaDB-compat                            x86_64                     10.2.29-1.el7.centos                              mariadb                     2.8 M
+     replacing  mariadb-libs.x86_64 1:5.5.60-1.el7_5
+ MariaDB-server                            x86_64                     10.2.29-1.el7.centos                              mariadb                      24 M
+Installing for dependencies:
+ MariaDB-client                            x86_64                     10.2.29-1.el7.centos                              mariadb                      11 M
+ MariaDB-common                            x86_64                     10.2.29-1.el7.centos                              mariadb                      81 k
+ boost-program-options                     x86_64                     1.53.0-27.el7                                     base                        156 k
+ galera                                    x86_64                     25.3.28-1.rhel7.el7.centos                        mariadb                     8.0 M
+ libaio                                    x86_64                     0.3.109-13.el7                                    base                         24 k
+ perl-DBI                                  x86_64                     1.627-4.el7                                       base                        802 k
+ perl-Net-Daemon                           noarch                     0.48-5.el7                                        base                         51 k
+ perl-PlRPC                                noarch                     0.2020-14.el7                                     base                         36 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install  2 Packages (+8 Dependent packages)
+
+Total download size: 47 M
+Is this ok [y/d/N]: y
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/mariadb/packages/MariaDB-common-10.2.29-1.el7.centos.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 1bb943db: NOKEY
+Public key for MariaDB-common-10.2.29-1.el7.centos.x86_64.rpm is not installed
+(1/10): MariaDB-common-10.2.29-1.el7.centos.x86_64.rpm                                                                             |  81 kB  00:00:00     
+(2/10): MariaDB-compat-10.2.29-1.el7.centos.x86_64.rpm                                                                             | 2.8 MB  00:00:00     
+(3/10): boost-program-options-1.53.0-27.el7.x86_64.rpm                                                                             | 156 kB  00:00:00     
+(4/10): MariaDB-client-10.2.29-1.el7.centos.x86_64.rpm                                                                             |  11 MB  00:00:02     
+(5/10): libaio-0.3.109-13.el7.x86_64.rpm                                                                                           |  24 kB  00:00:00     
+(6/10): perl-PlRPC-0.2020-14.el7.noarch.rpm                                                                                        |  36 kB  00:00:00     
+(7/10): MariaDB-server-10.2.29-1.el7.centos.x86_64.rpm                                                                             |  24 MB  00:00:01     
+(8/10): perl-Net-Daemon-0.48-5.el7.noarch.rpm                                                                                      |  51 kB  00:00:00     
+(9/10): perl-DBI-1.627-4.el7.x86_64.rpm                                                                                            | 802 kB  00:00:00     
+(10/10): galera-25.3.28-1.rhel7.el7.centos.x86_64.rpm                                                                              | 8.0 MB  00:00:01     
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                      12 MB/s |  47 MB  00:00:03     
+Retrieving key from https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+Importing GPG key 0x1BB943DB:
+ Userid     : "MariaDB Package Signing Key <package-signing-key@mariadb.org>"
+ Fingerprint: 1993 69e5 404b d5fc 7d2f e43b cbcb 082a 1bb9 43db
+ From       : https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : MariaDB-compat-10.2.29-1.el7.centos.x86_64                                                                                            1/11 
+  Installing : MariaDB-common-10.2.29-1.el7.centos.x86_64                                                                                            2/11 
+  Installing : libaio-0.3.109-13.el7.x86_64                                                                                                          3/11 
+  Installing : MariaDB-client-10.2.29-1.el7.centos.x86_64                                                                                            4/11 
+  Installing : boost-program-options-1.53.0-27.el7.x86_64                                                                                            5/11 
+  Installing : galera-25.3.28-1.rhel7.el7.centos.x86_64                                                                                              6/11 
+  Installing : perl-Net-Daemon-0.48-5.el7.noarch                                                                                                     7/11 
+  Installing : perl-PlRPC-0.2020-14.el7.noarch                                                                                                       8/11 
+  Installing : perl-DBI-1.627-4.el7.x86_64                                                                                                           9/11 
+  Installing : MariaDB-server-10.2.29-1.el7.centos.x86_64                                                                                           10/11 
+
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MariaDB root USER !
+To do so, start the server, then issue the following commands:
+
+'/usr/bin/mysqladmin' -u root password 'new-password'
+'/usr/bin/mysqladmin' -u root -h harshalchg-2.gce.cloudera.com password 'new-password'
+
+Alternatively you can run:
+'/usr/bin/mysql_secure_installation'
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the MariaDB Knowledgebase at http://mariadb.com/kb or the
+MySQL manual for more instructions.
+
+Please report any problems at http://mariadb.org/jira
+
+The latest information about MariaDB is available at http://mariadb.org/.
+You can find additional information about the MySQL part at:
+http://dev.mysql.com
+Consider joining MariaDB's strong and vibrant community:
+https://mariadb.org/get-involved/
+
+  Erasing    : 1:mariadb-libs-5.5.60-1.el7_5.x86_64                                                                                                 11/11 
+  Verifying  : galera-25.3.28-1.rhel7.el7.centos.x86_64                                                                                              1/11 
+  Verifying  : perl-Net-Daemon-0.48-5.el7.noarch                                                                                                     2/11 
+  Verifying  : MariaDB-server-10.2.29-1.el7.centos.x86_64                                                                                            3/11 
+  Verifying  : MariaDB-client-10.2.29-1.el7.centos.x86_64                                                                                            4/11 
+  Verifying  : MariaDB-common-10.2.29-1.el7.centos.x86_64                                                                                            5/11 
+  Verifying  : boost-program-options-1.53.0-27.el7.x86_64                                                                                            6/11 
+  Verifying  : perl-DBI-1.627-4.el7.x86_64                                                                                                           7/11 
+  Verifying  : libaio-0.3.109-13.el7.x86_64                                                                                                          8/11 
+  Verifying  : perl-PlRPC-0.2020-14.el7.noarch                                                                                                       9/11 
+  Verifying  : MariaDB-compat-10.2.29-1.el7.centos.x86_64                                                                                           10/11 
+  Verifying  : 1:mariadb-libs-5.5.60-1.el7_5.x86_64                                                                                                 11/11 
+
+Installed:
+  MariaDB-compat.x86_64 0:10.2.29-1.el7.centos                                MariaDB-server.x86_64 0:10.2.29-1.el7.centos                               
+
+Dependency Installed:
+  MariaDB-client.x86_64 0:10.2.29-1.el7.centos       MariaDB-common.x86_64 0:10.2.29-1.el7.centos       boost-program-options.x86_64 0:1.53.0-27.el7      
+  galera.x86_64 0:25.3.28-1.rhel7.el7.centos         libaio.x86_64 0:0.3.109-13.el7                     perl-DBI.x86_64 0:1.627-4.el7                     
+  perl-Net-Daemon.noarch 0:0.48-5.el7                perl-PlRPC.noarch 0:0.2020-14.el7                 
+
+
