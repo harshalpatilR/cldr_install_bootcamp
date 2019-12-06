@@ -1,0 +1,212 @@
+== MARIADB SETUP, JDBC and DATABASE CREATION
+
+[root@harshalchg-2 ~]# systemctl stop mariadb
+[root@harshalchg-2 ~]# vi /etc/my.cnf
+[root@harshalchg-2 ~]# systemctl enable mariadb
+Created symlink from /etc/systemd/system/mysql.service to /usr/lib/systemd/system/mariadb.service.
+Created symlink from /etc/systemd/system/mysqld.service to /usr/lib/systemd/system/mariadb.service.
+Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+[root@harshalchg-2 ~]# systemctl start mariadb
+[root@harshalchg-2 ~]# /usr/bin/mysql_secure_installation
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user.  If you've just installed MariaDB, and
+you haven't set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none): 
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n] y
+New password: 
+Re-enter new password: 
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] y
+ ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] N
+ ... skipping.
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+[root@harshalchg-2 ~]# wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+--2019-12-06 07:15:29--  https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+Resolving dev.mysql.com (dev.mysql.com)... 137.254.60.11
+Connecting to dev.mysql.com (dev.mysql.com)|137.254.60.11|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn.mysql.com//archives/mysql-connector-java-5.1/mysql-connector-java-5.1.46.tar.gz [following]
+--2019-12-06 07:15:29--  https://cdn.mysql.com//archives/mysql-connector-java-5.1/mysql-connector-java-5.1.46.tar.gz
+Resolving cdn.mysql.com (cdn.mysql.com)... 184.29.107.217
+Connecting to cdn.mysql.com (cdn.mysql.com)|184.29.107.217|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4434926 (4.2M) [application/x-tar-gz]
+Saving to: 'mysql-connector-java-5.1.46.tar.gz'
+
+100%[================================================================================================================>] 4,434,926   15.1MB/s   in 0.3s   
+
+2019-12-06 07:15:29 (15.1 MB/s) - 'mysql-connector-java-5.1.46.tar.gz' saved [4434926/4434926]
+
+[root@harshalchg-2 ~]# tar zxvf mysql-connector-java-5.1.46.tar.gz
+
+[root@harshalchg-2 mysql-connector-java-5.1.46]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 10.2.29-MariaDB-log MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [(none)]> CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE nav DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE navms DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON scm.* TO 'scm'@'%' IDENTIFIED BY 'scm';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON amon.* TO 'amon'@'%' IDENTIFIED BY 'amon';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON hue.* TO 'hue'@'%' IDENTIFIED BY 'hue';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON rman.* TO 'rman'@'%' IDENTIFIED BY 'rman';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON metastore.* TO 'hive'@'%' IDENTIFIED BY 'hive';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON sentry.* TO 'sentry'@'%' IDENTIFIED BY 'sentry';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON nav.* TO 'nav'@'%' IDENTIFIED BY 'nav';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON navms.* TO 'navms'@'%' IDENTIFIED BY 'navms';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON oozie.* TO 'oozie'@'%' IDENTIFIED BY 'oozie';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| amon               |
+| hue                |
+| information_schema |
+| metastore          |
+| mysql              |
+| nav                |
+| navms              |
+| oozie              |
+| performance_schema |
+| rman               |
+| scm                |
+| sentry             |
++--------------------+
+12 rows in set (0.00 sec)
+
+MariaDB [(none)]> SHOW GRANTS FOR '<user>'@'%';
+ERROR 1141 (42000): There is no such grant defined for user '<user>' on host '%'
+MariaDB [(none)]> SHOW GRANTS FOR 'scm'@'%';
++----------------------------------------------------------------------------------------------------+
+| Grants for scm@%                                                                                   |
++----------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'scm'@'%' IDENTIFIED BY PASSWORD '*45E6E3C68BDF1AC7EBB5C5A3BCBD5E9437B293BE' |
+| GRANT ALL PRIVILEGES ON `scm`.* TO 'scm'@'%'                                                       |
++----------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+MariaDB [(none)]> CREATE DATABASE nifi DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> GRANT ALL ON nifi.* TO 'nifi'@'%' IDENTIFIED BY 'nifi';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]>  SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| amon               |
+| hue                |
+| information_schema |
+| metastore          |
+| mysql              |
+| nav                |
+| navms              |
+| nifi               |
+| oozie              |
+| performance_schema |
+| rman               |
+| scm                |
+| sentry             |
++--------------------+
+13 rows in set (0.00 sec)
+
+
+
+
