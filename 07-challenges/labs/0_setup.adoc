@@ -233,6 +233,94 @@ bonnie:x:1984:2002::/home/bonnie:/bin/bash
 
 == MARIADB Install
 
+setup vm swampiness and transparent hugepage support
+resolve all hosts
+
+[root@harshalchg-1 etc]# pssh -v -h ~/clhost -l root -A -i "sysctl vm.swappiness=1"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:48:50 [SUCCESS] 172.31.115.50
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[2] 06:48:50 [SUCCESS] 172.31.112.18
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[3] 06:48:50 [SUCCESS] 172.31.115.32
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:48:50 [SUCCESS] 172.31.116.121
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[5] 06:48:50 [SUCCESS] 172.31.115.37
+vm.swappiness = 1
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[root@harshalchg-1 etc]# pssh -v -h ~/clhost  -A -i -l root "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:49:47 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:49:47 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[3] 06:49:47 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:49:47 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:49:47 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+
+
+[root@harshalchg-1 etc]# scp /etc/hosts root@harshalchg-2:/etc/hosts
+The authenticity of host 'harshalchg-2 (172.31.112.18)' can't be established.
+ECDSA key fingerprint is SHA256:swxupmru8Bbn0JUuuN8dTqHIMbRD9wz0LkYPXbyZGHk.
+ECDSA key fingerprint is MD5:0a:7a:73:eb:17:4f:f6:d0:3a:bf:23:dc:a3:d7:a6:68.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalchg-2' (ECDSA) to the list of known hosts.
+root@harshalchg-2's password: 
+Permission denied, please try again.
+root@harshalchg-2's password: 
+Permission denied, please try again.
+root@harshalchg-2's password: 
+hosts                                                                                                                   100%  582   479.3KB/s   00:00    
+[root@harshalchg-1 etc]# scp /etc/hosts root@harshalchg-3:/etc/hosts
+The authenticity of host 'harshalchg-3 (172.31.116.121)' can't be established.
+ECDSA key fingerprint is SHA256:8dMtX+TCr1Ime1vyYxa1PQwZLKzbi/J5rK95CALld18.
+ECDSA key fingerprint is MD5:9a:4f:36:15:c4:df:3c:29:e4:34:21:4f:83:25:8c:56.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalchg-3' (ECDSA) to the list of known hosts.
+root@harshalchg-3's password: 
+hosts                                                                                                                   100%  582   353.6KB/s   00:00    
+[root@harshalchg-1 etc]# scp /etc/hosts root@harshalchg-4:/etc/hosts
+The authenticity of host 'harshalchg-4 (172.31.115.32)' can't be established.
+ECDSA key fingerprint is SHA256:lvsxGTTDWru5u0v7+2Jfb1fKt1fLKIvWCWH6I7M7aQg.
+ECDSA key fingerprint is MD5:20:79:9f:cd:d2:97:e1:40:41:b7:4d:ef:c5:dd:c0:f3.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalchg-4' (ECDSA) to the list of known hosts.
+root@harshalchg-4's password: 
+hosts                                                                                                                   100%  582   404.7KB/s   00:00    
+[root@harshalchg-1 etc]# scp /etc/hosts root@harshalchg-5:/etc/hosts
+The authenticity of host 'harshalchg-5 (172.31.115.37)' can't be established.
+ECDSA key fingerprint is SHA256:572tEGDC+8wqlvlb/LMcDkq/LLkl0tDFrST2eLqQPlo.
+ECDSA key fingerprint is MD5:6a:a7:c9:a3:25:91:3f:51:9a:db:08:d3:48:36:ef:af.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'harshalchg-5' (ECDSA) to the list of known hosts.
+root@harshalchg-5's password: 
+hosts                                                                                                                   100%  582   266.6KB/s   00:00    
+
+
+[root@harshalchg-1 etc]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+172.31.115.50 harshalchg-1.gce.cloudera.com harshalchg-1  # Added by Google
+169.254.169.254 metadata.google.internal  # Added by Google
+172.31.112.18	harshalchg-2.gce.cloudera.com	harshalchg-2
+172.31.115.32	harshalchg-4.gce.cloudera.com	harshalchg-4
+172.31.115.37	harshalchg-5.gce.cloudera.com	harshalchg-5
+172.31.115.50	harshalchg-1.gce.cloudera.com	harshalchg-1
+172.31.116.121	harshalchg-3.gce.cloudera.com	harshalchg-3
+
+
 
 
 
