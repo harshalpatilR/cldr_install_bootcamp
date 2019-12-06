@@ -1,0 +1,244 @@
+....
+
+== user and group add
+
+[root@harshalchg-1 ~]# yum install pssh
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos4.zswap.net
+ * epel: ord.mirror.rackspace.com
+ * extras: centos4.zswap.net
+ * updates: centos4.zswap.net
+Resolving Dependencies
+--> Running transaction check
+---> Package pssh.noarch 0:2.3.1-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==========================================================================================================================================================
+ Package                           Arch                                Version                                    Repository                         Size
+==========================================================================================================================================================
+Installing:
+ pssh                              noarch                              2.3.1-5.el7                                epel                               49 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install  1 Package
+
+Total download size: 49 k
+Installed size: 115 k
+Is this ok [y/d/N]: y
+Downloading packages:
+pssh-2.3.1-5.el7.noarch.rpm                                                                                                        |  49 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : pssh-2.3.1-5.el7.noarch                                                                                                                1/1 
+  Verifying  : pssh-2.3.1-5.el7.noarch                                                                                                                1/1 
+
+Installed:
+  pssh.noarch 0:2.3.1-5.el7                                                                                                                               
+
+Complete!
+[root@harshalchg-1 ~]# pssh
+Usage: pssh [OPTIONS] command [...]
+
+pssh: error: Command not specified.
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "-O StrictHostKeyChecking=no" -l root "touch abc.txt"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:25:45 [SUCCESS] 172.31.115.50
+Stderr: Warning: Permanently added '172.31.115.50' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.50's password: "
+[2] 06:25:46 [SUCCESS] 172.31.112.18
+Stderr: Warning: Permanently added '172.31.112.18' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.112.18's password: "
+[3] 06:25:46 [SUCCESS] 172.31.116.121
+Stderr: Warning: Permanently added '172.31.116.121' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.116.121's password: "
+[4] 06:25:46 [SUCCESS] 172.31.115.37
+Stderr: Warning: Permanently added '172.31.115.37' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:25:46 [SUCCESS] 172.31.115.32
+Stderr: Warning: Permanently added '172.31.115.32' (ECDSA) to the list of known hosts.
+pssh-askpass received prompt: "root@172.31.115.32's password: "
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "useradd --uid 1984 bonnie"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:27:55 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:27:55 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[3] 06:27:55 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[4] 06:27:55 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[5] 06:27:55 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "useradd --uid 1985 clyde"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:28:38 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:28:38 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[3] 06:28:38 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:28:38 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:28:38 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[root@harshalchg-1 ~]# groupadd
+
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "groupadd rebel"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:30:26 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:30:26 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[3] 06:30:26 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:30:26 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:30:26 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "groupadd cause"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:30:46 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:30:46 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[3] 06:30:46 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:30:46 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[5] 06:30:46 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "usermod --gid rebel bonnie"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:32:49 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:32:49 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+[3] 06:32:49 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:32:49 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:32:49 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[root@harshalchg-1 ~]# pssh -v -h ~/clhost -A -i "usermod --gid cause clyde"
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password: 
+[1] 06:33:28 [SUCCESS] 172.31.112.18
+Stderr: pssh-askpass received prompt: "root@172.31.112.18's password: "
+[2] 06:33:28 [SUCCESS] 172.31.115.50
+Stderr: pssh-askpass received prompt: "root@172.31.115.50's password: "
+[3] 06:33:28 [SUCCESS] 172.31.115.32
+Stderr: pssh-askpass received prompt: "root@172.31.115.32's password: "
+[4] 06:33:28 [SUCCESS] 172.31.115.37
+Stderr: pssh-askpass received prompt: "root@172.31.115.37's password: "
+[5] 06:33:28 [SUCCESS] 172.31.116.121
+Stderr: pssh-askpass received prompt: "root@172.31.116.121's password: "
+
+[root@harshalchg-1 etc]# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+polkitd:x:999:998:User for polkitd:/:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:998:996::/var/lib/chrony:/sbin/nologin
+centos-user:x:1000:1001::/home/centos-user:/bin/bash
+systest:x:2000:2000::/home/systest:/bin/bash
+nscd:x:28:28:NSCD Daemon:/:/sbin/nologin
+jenkins:x:2001:2001:jenkins:/var/lib/jenkins:/bin/bash
+bonnie:x:1984:2002::/home/bonnie:/bin/bash
+clyde:x:1985:2003::/home/clyde:/bin/bash
+
+== Instances
+
+GCP
+		
+harshalchg-2.gce.cloudera.com	harshalchg-2	172.31.112.18
+harshalchg-4.gce.cloudera.com	harshalchg-4	172.31.115.32
+harshalchg-5.gce.cloudera.com	harshalchg-5	172.31.115.37
+harshalchg-1.gce.cloudera.com	harshalchg-1	172.31.115.50
+harshalchg-3.gce.cloudera.com	harshalchg-3	172.31.116.121
+
+Centos 7.5
+
+[root@harshalchg-1 etc]# df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda1      104844988 2000436 102844552   2% /
+devtmpfs         6577648       0   6577648   0% /dev
+tmpfs            6585388       0   6585388   0% /dev/shm
+tmpfs            6585388    8564   6576824   1% /run
+tmpfs            6585388       0   6585388   0% /sys/fs/cgroup
+tmpfs            1317080       0   1317080   0% /run/user/0
+
+[root@harshalchg-1 etc]# yum repolist enabled
+Failed to set locale, defaulting to C
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos4.zswap.net
+ * epel: ord.mirror.rackspace.com
+ * extras: centos4.zswap.net
+ * updates: centos4.zswap.net
+repo id                                                      repo name                                                                              status
+base/7/x86_64                                                CentOS-7 - Base                                                                        10097
+epel/x86_64                                                  Extra Packages for Enterprise Linux 7 - x86_64                                         13485
+extras/7/x86_64                                              CentOS-7 - Extras                                                                        305
+google-cloud-compute                                         Google Cloud Compute                                                                      11
+google-cloud-sdk                                             Google Cloud SDK                                                                        1032
+updates/7/x86_64                                             CentOS-7 - Updates                                                                       953
+repolist: 25883
+
+[root@harshalchg-1 etc]# cat /etc/passwd | grep bonnie
+bonnie:x:1984:2002::/home/bonnie:/bin/bash
+[root@harshalchg-1 etc]# cat /etc/passwd | grep clyde
+clyde:x:1985:2003::/home/clyde:/bin/bash
+
+[root@harshalchg-1 etc]# getent group rebel
+rebel:x:2002:
+
+[root@harshalchg-1 etc]# getent passwd bonnie
+bonnie:x:1984:2002::/home/bonnie:/bin/bash
+
+== MARIADB Install
+
+
+
+
+
+
+
+
+
+
