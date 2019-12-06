@@ -22,4 +22,105 @@ OpenJDK Runtime Environment 18.9 (build 11.0.5+10-LTS)
 OpenJDK 64-Bit Server VM 18.9 (build 11.0.5+10-LTS, mixed mode, sharing)
 
 
+== INSTALL CM 6.3.0
 
+[root@harshalchg-4 ~]# yum install cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server
+
+
+
+==========================================================================================================================================================
+ Package                                    Arch                     Version                                     Repository                          Size
+==========================================================================================================================================================
+Installing:
+ cloudera-manager-agent                     x86_64                   6.3.0-1281944.el7                           cloudera-manager                    10 M
+ cloudera-manager-daemons                   x86_64                   6.3.0-1281944.el7                           cloudera-manager                   1.1 G
+ cloudera-manager-server                    x86_64                   6.3.0-1281944.el7                           cloudera-manager                    11 k
+Installing for dependencies:
+ MySQL-python                               x86_64                   1.2.5-1.el7                                 base                                90 k
+ apr                                        x86_64                   1.4.8-5.el7                                 base                               103 k
+ apr-util                                   x86_64                   1.5.2-6.el7                                 base                                92 k
+ bind-export-libs                           x86_64                   32:9.11.4-9.P2.el7                          base                               1.1 M
+ bind-libs                                  x86_64                   32:9.11.4-9.P2.el7                          base                               154 k
+ bind-utils                                 x86_64                   32:9.11.4-9.P2.el7                          base                               258 k
+ cyrus-sasl-gssapi                          x86_64                   2.1.26-23.el7                               base                                41 k
+ cyrus-sasl-plain                           x86_64                   2.1.26-23.el7                               base                                39 k
+ fuse                                       x86_64                   2.9.2-11.el7                                base                                86 k
+ fuse-libs                                  x86_64                   2.9.2-11.el7                                base                                93 k
+ httpd                                      x86_64                   2.4.6-90.el7.centos                         base                               2.7 M
+ httpd-tools                                x86_64                   2.4.6-90.el7.centos                         base                                91 k
+ keyutils-libs-devel                        x86_64                   1.5.8-3.el7                                 base                                37 k
+ krb5-devel                                 x86_64                   1.15.1-37.el7_7.2                           updates                            272 k
+ libcom_err-devel                           x86_64                   1.42.9-16.el7                               base                                32 k
+ libkadm5                                   x86_64                   1.15.1-37.el7_7.2                           updates                            178 k
+ libselinux-devel                           x86_64                   2.5-14.1.el7                                base                               187 k
+ libsepol-devel                             x86_64                   2.5-10.el7                                  base                                77 k
+ libtirpc                                   x86_64                   0.2.4-0.16.el7                              base                                89 k
+ libverto-devel                             x86_64                   0.2.5-4.el7                                 base                                12 k
+ mod_ssl                                    x86_64                   1:2.4.6-90.el7.centos                       base                               112 k
+ openssl-devel                              x86_64                   1:1.0.2k-19.el7                             base                               1.5 M
+ pcre-devel                                 x86_64                   8.32-17.el7                                 base                               480 k
+ postgresql-libs                            x86_64                   9.2.24-1.el7_5                              base                               234 k
+ python-psycopg2                            x86_64                   2.5.1-4.el7                                 base                               132 k
+ rpcbind                                    x86_64                   0.2.0-48.el7                                base                                60 k
+ zlib-devel                                 x86_64                   1.2.7-18.el7                                base                                50 k
+Updating for dependencies:
+ bind-libs-lite                             x86_64                   32:9.11.4-9.P2.el7                          base                               1.1 M
+ bind-license                               noarch                   32:9.11.4-9.P2.el7                          base                                88 k
+ dhclient                                   x86_64                   12:4.2.5-77.el7.centos                      base                               285 k
+ dhcp-common                                x86_64                   12:4.2.5-77.el7.centos                      base                               176 k
+ dhcp-libs                                  x86_64                   12:4.2.5-77.el7.centos                      base                               133 k
+ e2fsprogs                                  x86_64                   1.42.9-16.el7                               base                               700 k
+ e2fsprogs-libs                             x86_64                   1.42.9-16.el7                               base                               167 k
+ krb5-libs                                  x86_64                   1.15.1-37.el7_7.2                           updates                            805 k
+ libcom_err                                 x86_64                   1.42.9-16.el7                               base                                41 k
+ libselinux                                 x86_64                   2.5-14.1.el7                                base                               162 k
+ libselinux-python                          x86_64                   2.5-14.1.el7                                base                               235 k
+ libselinux-utils                           x86_64                   2.5-14.1.el7                                base                               151 k
+ libsepol                                   x86_64                   2.5-10.el7                                  base                               297 k
+ libss                                      x86_64                   1.42.9-16.el7                               base                                46 k
+ openssl                                    x86_64                   1:1.0.2k-19.el7                             base                               493 k
+ openssl-libs                               x86_64                   1:1.0.2k-19.el7                             base                               1.2 M
+ zlib                                       x86_64                   1.2.7-18.el7                                base                                90 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install  3 Packages (+27 Dependent packages)
+Upgrade             ( 17 Dependent packages)
+
+
+== APPLY JIRA fix and run script 
+
+https://jira.cloudera.com/browse/OPSAPS-52340
+https://jira.cloudera.com/browse/OPSAPS-44883
+
+[root@harshalchg-4 ~]# /opt/cloudera/cm/schema/scm_prepare_database.sh -h harshalchg-2.gce.cloudera.com mysql scm scm 
+Enter SCM password: 
+JAVA_HOME=/usr/lib/jvm/jre-openjdk
+Verifying that we can write to /etc/cloudera-scm-server
+Creating SCM configuration file in /etc/cloudera-scm-server
+Executing:  /usr/lib/jvm/jre-openjdk/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/opt/cloudera/cm/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.
+[                          main] DbCommandExecutor              INFO  Successfully connected to database.
+All done, your SCM database is configured correctly!
+
+
+== Prepare DB
+
+with JIRA
+
+[root@harshalchg-4 cloudera-scm-server]# /opt/cloudera/cm/schema/scm_prepare_database.sh -h harshalchg-2.gce.cloudera.com mysql scm scm 
+Enter SCM password: 
+JAVA_HOME=/usr/lib/jvm/jre-openjdk
+Verifying that we can write to /etc/cloudera-scm-server
+Creating SCM configuration file in /etc/cloudera-scm-server
+Executing:  /usr/lib/jvm/jre-openjdk/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/opt/cloudera/cm/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.
+[                          main] DbCommandExecutor              INFO  Successfully connected to database.
+All done, your SCM database is configured correctly!
+
+
+
+
+
+
+
+
+....
